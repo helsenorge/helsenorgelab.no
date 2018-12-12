@@ -46,12 +46,12 @@ button, input, select, textarea {
 // sass-lint:enddisable
 
 a {
-    color: $color--primary;
+    color: $color--quarternary;
     text-decoration: none;
     transition: color $transition;
 
     &:hover {
-        color: darken($color--primary, 20%);
+        color: darken($color--secondary, 20%);
         cursor: pointer;
   }
 }

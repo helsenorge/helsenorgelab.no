@@ -20,6 +20,7 @@ html {
     font-family: $font--secondary;
     font-style: inherit;
     font-weight: inherit;
+    color: $color--secondary;
 }
 
 @mixin body-text() {

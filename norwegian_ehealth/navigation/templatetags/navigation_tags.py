@@ -26,6 +26,7 @@ def secondarynav(context):
 
 
 # Footer nav snippets
+"""
 @register.inclusion_tag('patterns/molecules/navigation/footernav.html', takes_context=True)
 def footernav(context):
     request = context['request']
@@ -33,7 +34,7 @@ def footernav(context):
         'footernav': NavigationSettings.for_site(request.site).footer_navigation,
         'request': request,
     }
-
+"""
 
 # Footer nav snippets
 @register.inclusion_tag('patterns/molecules/navigation/sidebar.html', takes_context=True)

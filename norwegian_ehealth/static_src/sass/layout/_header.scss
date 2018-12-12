@@ -1,9 +1,10 @@
 .header {
-    padding: 10px;
+    padding: 20px;
     background-color: $color--primary;
+    border-bottom: 2px solid $color--border;
 
     @include media-query(tablet-portrait) {
-        padding: 20px;
+        padding: 30px 20px 20px;
     }
 
     &__inner {
