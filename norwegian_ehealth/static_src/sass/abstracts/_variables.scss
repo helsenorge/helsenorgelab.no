@@ -21,8 +21,8 @@ $button-colours: (
 
 // --------------------------------- Fonts --------------------------------------
 
-$font--primary:         Sans-Serif;
-$font--secondary:       Sans-Serif;
+$font--primary:         "Open Sans";
+$font--secondary:       "Playfair Display";
 
 // Font weights
 $weight--bold:          700;
@@ -32,8 +32,8 @@ $weight--normal:        400;
 $weight--light:         200;
 
 // Font sizes
-$base-font-size: 16px;
-$base-line-height: 25px;
+$base-font-size: 18px;
+$base-line-height: 29px;
 $font-sizes: (
     default:    $base-font-size,
     xxl:        36px,
