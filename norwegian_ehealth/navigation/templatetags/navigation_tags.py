@@ -53,3 +53,11 @@ def footerlinks(context):
         'footerlinks': NavigationSettings.for_site(request.site).footer_links,
         'request': request,
     }
+
+@register.inclusion_tag('patterns/molecules/navigation/footerbottomtext.html', takes_context=True)
+def footerbottomtext(context):
+    request = context['request']
+    return {
+        'footerbottomtext': NavigationSettings.for_site(request.site).footer_bottom_text,
+        'request': request,
+    }

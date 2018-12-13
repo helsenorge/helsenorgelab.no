@@ -14,3 +14,6 @@ tags:
   footerlinks:
     "":
       template_name: "patterns/molecules/navigation/footerlinks.html"
+  footerbottomtext:
+    "":
+      template_name: "patterns/molecules/navigation/footerbottomtext.html"

@@ -170,8 +170,9 @@
         }
 
         @include media-query(tablet-portrait) {
+            @include font-size(xs);
             padding: 5px 0;
-            margin: 0 10px;
+            margin: 0 15px;
             color: $color--quarternary;
         }
 

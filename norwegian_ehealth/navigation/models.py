@@ -1,8 +1,8 @@
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
-from wagtail.core.fields import StreamField
+from wagtail.core.fields import StreamField, RichTextField
 
 
 class LinkBlock(blocks.StructBlock):
@@ -34,7 +34,13 @@ class NavigationSettings(BaseSetting, ClusterableModel):
         help_text="Single list of elements at the base of the page."
     )
 
+    footer_bottom_text = RichTextField(
+        blank=True,
+        help_text="Small print text at the bottom of all pages. Not required."
+    )
+
     panels = [
         StreamFieldPanel('primary_navigation'),
         StreamFieldPanel('footer_links'),
+        FieldPanel('footer_bottom_text'),
     ]
