@@ -36,6 +36,7 @@ def footernav(context):
     }
 """
 
+
 # Footer nav snippets
 @register.inclusion_tag('patterns/molecules/navigation/sidebar.html', takes_context=True)
 def sidebar(context):
@@ -53,6 +54,7 @@ def footerlinks(context):
         'footerlinks': NavigationSettings.for_site(request.site).footer_links,
         'request': request,
     }
+
 
 @register.inclusion_tag('patterns/molecules/navigation/footerbottomtext.html', takes_context=True)
 def footerbottomtext(context):
