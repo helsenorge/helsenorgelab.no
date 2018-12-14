@@ -35,6 +35,7 @@ class NavigationSettings(BaseSetting, ClusterableModel):
     )
 
     footer_bottom_text = RichTextField(
+        features=['bold', 'italic', 'link'],
         blank=True,
         help_text="Small print text at the bottom of all pages. Not required."
     )
