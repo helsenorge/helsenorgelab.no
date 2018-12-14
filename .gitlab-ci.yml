@@ -111,41 +111,42 @@ test:
 
 
 # Deploy to the dev server.
-deploy_dev:
+#deploy_dev:
   # Use Alpine image since it's lightweight. We only require SSH and Git for
   # this job.
-  image: alpine:3.7
-  stage: deploy
-  variables:
+#  image: alpine:3.7
+#  stage: deploy
+#  variables:
     # Name of your Dokku app.
     #   $ dokku apps
-    DOKKU_APP_INSTANCE: norwegian_ehealth-dev
+#    DOKKU_APP_INSTANCE: norwegian_ehealth-dev
 
     # Branch used by Dokku to deploy. You can verify the branch with:
     #   $ dokku git:report [your-app-name]
-    DOKKU_DEPLOY_BRANCH: develop
-  only:
-    - develop
-  before_script:
+#    DOKKU_DEPLOY_BRANCH: develop
+#  only:
+#    - develop
+#  before_script:
     # Git and SSH is required to push to Git via SSH.
-    - apk add --no-cache git openssh-client
+#    - apk add --no-cache git openssh-client
 
     # Create a directory used by the SSH agent.
-    - mkdir -p ~/.ssh
+#    - mkdir -p ~/.ssh
 
     # Start up SSH agent.
-    - eval $(ssh-agent -s)
+#    - eval $(ssh-agent -s)
 
     # Add our Dokku server as a known host so the push to Git succeeds.
-    - ssh-keyscan -H "$DOKKU_HOST" >> ~/.ssh/known_hosts
+#    - ssh-keyscan -H "$DOKKU_HOST" >> ~/.ssh/known_hosts
 
     # Add the private key set in your project settings on GitLab to the
     # SSH agent. You can obtain it from sysadmin.
-    - echo "$DOKKU_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-  script:
+#    - echo "$DOKKU_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#  script:
     # Push the HEAD of this job to the specified branch. It seems that the CI
     # does not run on a specific branch, so we need to use HEAD.
-    - git push $DOKKU_SSH_USER@$DOKKU_HOST:$DOKKU_APP_INSTANCE HEAD:$DOKKU_DEPLOY_BRANCH
+#    - git push $DOKKU_SSH_USER@$DOKKU_HOST:$DOKKU_APP_INSTANCE HEAD:$DOKKU_DEPLOY_BRANCH
+
 
 # Deploy to the staging server.
 deploy_staging:
@@ -156,12 +157,12 @@ deploy_staging:
   variables:
     # Name of your Dokku app.
     #   $ dokku apps
-    DOKKU_APP_INSTANCE: norwegian_ehealth-staging
+    DOKKU_APP_INSTANCE: norwegianehealth
 
 
     # Branch used by Dokku to deploy. You can verify the branch with:
     #   $ dokku git:report [your-app-name]
-    DOKKU_DEPLOY_BRANCH: staging
+    DOKKU_DEPLOY_BRANCH: develop
   only:
     - staging
   before_script:
@@ -195,7 +196,7 @@ deploy_production:
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
-    HEROKU_APP: norwegian_ehealth-production
+    HEROKU_APP: norwegianehealth-production
   only:
     - master
   when: manual
