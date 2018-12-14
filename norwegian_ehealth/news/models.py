@@ -4,8 +4,9 @@ from django.db import models
 from django.db.models.functions import Coalesce
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel,
-                                         PageChooserPanel, StreamFieldPanel)
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
+                                         MultiFieldPanel, PageChooserPanel,
+                                         StreamFieldPanel)
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
