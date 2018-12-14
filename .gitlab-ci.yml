@@ -196,7 +196,7 @@ deploy_production:
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
-    HEROKU_APP: norwegian_ehealth-production
+    HEROKU_APP: norwegianehealth-production
   only:
     - master
   when: manual
