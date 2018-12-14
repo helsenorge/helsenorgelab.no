@@ -74,6 +74,9 @@ class NewsPage(BasePage):
         InlinePanel('related_pages', label="Related pages"),
     ]
 
+    class Meta:
+        verbose_name = "Article"
+
     @property
     def display_date(self):
         if self.publication_date:
@@ -87,6 +90,9 @@ class NewsIndex(BasePage):
 
     subpage_types = ['NewsPage']
     parent_page_types = ['home.HomePage']
+
+    class Meta:
+        verbose_name = "Articles Index"
 
     def get_context(self, request, *args, **kwargs):
         news = NewsPage.objects.live().public().descendant_of(self).annotate(
