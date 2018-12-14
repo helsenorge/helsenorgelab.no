@@ -5,16 +5,21 @@ from django.db.models.functions import Coalesce
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
-                                         StreamFieldPanel)
+                                         PageChooserPanel, StreamFieldPanel)
 from wagtail.core.fields import StreamField
+from wagtail.core.models import Orderable
 from wagtail.search import index
 
-from norwegian_ehealth.utils.blocks import StoryBlock
+from norwegian_ehealth.utils.blocks import ImageChooserBlock, StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
 
 
 class NewsType(models.Model):
     title = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = "category"
+        verbose_name_plural = "categories"
 
     def __str__(self):
         return self.title
@@ -59,7 +64,15 @@ class NewsPage(BasePage):
         "news item appears to have been published."
     )
     introduction = models.TextField(blank=True)
+    featured_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
     body = StreamField(StoryBlock())
+    # TODO: add license for ticket #10
 
     search_fields = BasePage.search_fields + [
         index.SearchField('introduction'),
@@ -85,11 +98,31 @@ class NewsPage(BasePage):
             return self.first_published_at
 
 
+class Author(Orderable, models.Model):
+    author = models.ForeignKey('people.PersonPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    biography = models.TextField(blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['sort_order']
+
+    panels = [
+        PageChooserPanel('author'),
+        FieldPanel('biography'),
+    ]
+
+
 class NewsIndex(BasePage):
     template = 'patterns/pages/news/news_index.html'
 
     subpage_types = ['NewsPage']
     parent_page_types = ['home.HomePage']
+
+    introduction = models.TextField(blank=True)
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel('introduction'),
+    ]
 
     class Meta:
         verbose_name = "Articles Index"
