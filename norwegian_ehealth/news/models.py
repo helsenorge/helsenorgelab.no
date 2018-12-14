@@ -4,13 +4,14 @@ from django.db import models
 from django.db.models.functions import Coalesce
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel,
                                          PageChooserPanel, StreamFieldPanel)
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-from norwegian_ehealth.utils.blocks import ImageChooserBlock, StoryBlock
+from norwegian_ehealth.utils.blocks import StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
 
 
@@ -33,7 +34,8 @@ class NewsPageNewsType(models.Model):
     news_type = models.ForeignKey(
         'NewsType',
         related_name='+',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name='category',
     )
 
     panels = [
@@ -71,6 +73,7 @@ class NewsPage(BasePage):
         related_name='+',
         on_delete=models.SET_NULL
     )
+    image_caption = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     # TODO: add license for ticket #10
 
@@ -82,9 +85,18 @@ class NewsPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel('publication_date'),
         FieldPanel('introduction'),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('featured_image'),
+                FieldPanel('image_caption'),
+            ],
+            heading="Featured Image",
+        ),
         StreamFieldPanel('body'),
-        InlinePanel('news_types', label="News types"),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel('news_types', label="Categories"),
+        InlinePanel('authors', label="Authors"),
+        # TODO: comment related_pages back in if we have time with the front-end work for articles
+        # InlinePanel('related_pages', label="Related pages"),
     ]
 
     class Meta:
@@ -98,13 +110,18 @@ class NewsPage(BasePage):
             return self.first_published_at
 
 
-class Author(Orderable, models.Model):
-    author = models.ForeignKey('people.PersonPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    biography = models.TextField(blank=True)
-
-    class Meta:
-        abstract = True
-        ordering = ['sort_order']
+class NewsPageAuthor(Orderable):
+    page = ParentalKey(NewsPage, related_name='authors')
+    author = models.ForeignKey(
+        'people.PersonPage',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+    biography = models.CharField(
+        help_text="Biography that appears on this article page.",
+        max_length=255,
+        blank=True)
 
     panels = [
         PageChooserPanel('author'),
