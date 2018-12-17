@@ -1,0 +1,85 @@
+// --------------------------------- Colors -------------------------------------
+$color--primary:        #ffffff;
+$color--secondary:      #1C166C;  /* dark purple */
+$color--tertiary:       #F6F6F6;  /* dark white */
+$color--quarternary:    #2218AC;  /* bright purple */
+$color--border:         #E7E1DE;  /* tan */
+
+$color--white:          #F6F6F6;
+$color--black:          #606060;
+$color--border:         rgba($color--black, 0.2);
+
+$color--default:        $color--black;
+
+// Button colours
+$button-colours: (
+    primary:    (bg: $color--primary, color: #fff),
+    secondary:  (bg: $color--secondary, color: #000),
+    tertiary:   (bg: $color--tertiary, color: #000),
+);
+
+// --------------------------------- Fonts --------------------------------------
+
+$font--primary:         "Open Sans";
+$font--secondary:       "Playfair Display";
+
+// Font weights
+$weight--bold:          700;
+$weight--semibold:      600;
+$weight--medium:        500;
+$weight--normal:        400;
+$weight--light:         200;
+
+// Font sizes
+$base-font-size: 18px;
+$base-line-height: 29px;
+$font-sizes: (
+    default:    $base-font-size,
+    xxl:        68px,
+    xl:         60px,
+    l:          40px,
+    m:          30px,
+    s:          18px,
+    xs:         16px,
+    xxs:        12px
+);
+
+
+
+// --------------------------------- Breakpoints --------------------------------------
+// Ensure that all breakpoints are duplicated in the gutters array
+
+$breakpoints: (
+    'mob-portrait'      '(min-width: 320px)',
+    'mob-landscape'     '(min-width: 480px)',
+    'tablet-portrait'   '(min-width: 768px)',
+    'tablet-landscape'  '(min-width: 1024px)',
+    'desktop'           '(min-width: 1280px)',
+    'desktop-wide'      '(min-width: 2556px)'
+);
+
+// --------------------------------- Grid Dimensions --------------------------------------
+
+// Wrappers
+$site-width:            1280px;
+$wrapper--small:        790px;
+
+// Grid setup
+$grid:                  20px;
+
+// These should match the breakpoints array
+$gutters: (
+    'default':              ($grid),
+    'mob-portrait':         ($grid),
+    'mob-landscape':        ($grid),
+    'tablet-portrait':      ($grid),
+    'tablet-landscape':     ($grid * 1.25),
+    'desktop':              ($grid * 1.25),
+    'desktop-wide':         ($grid * 1.5)
+)
+    !default;
+
+
+// --------------------------------- Transitions --------------------------------------
+
+$transition:            0.25s ease-out;
