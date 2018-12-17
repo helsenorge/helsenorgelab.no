@@ -66,7 +66,10 @@ class NewsPage(BasePage):
         help_text="Use this field to override the date that the "
         "news item appears to have been published."
     )
-    introduction = models.TextField(blank=True)
+    introduction = models.TextField(
+        blank=True,
+        max_length=165,
+        )
     featured_image = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -74,7 +77,10 @@ class NewsPage(BasePage):
         related_name='+',
         on_delete=models.SET_NULL
     )
-    image_caption = models.TextField(blank=True)
+    image_caption = models.CharField(
+        blank=True,
+        max_length=250,
+        )
     body = StreamField(StoryBlock())
     # TODO: add license for ticket #10
 
@@ -112,17 +118,18 @@ class NewsPage(BasePage):
 
 
 class NewsPageAuthor(Orderable):
-    page = ParentalKey(NewsPage, related_name='authors')
+    page = ParentalKey(NewsPage,
+        related_name='authors')
     author = models.ForeignKey(
         'people.PersonPage',
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
     biography = models.CharField(
-        help_text="Biography that appears on this article page.",
+        help_text="Use this field to override the author's biography "
+        "on this article page.",
         max_length=255,
-        blank=True)
+        blank=True
+    )
 
     panels = [
         PageChooserPanel('author'),
