@@ -4,9 +4,42 @@
 {% block content %}
 <div class="wrapper wrapper--small">
 
+    {% block breadcrumbs %}
+        {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+    {% endblock %}
+
     <h1>{{ page.title }}</h1>
-    <p>{{ page.display_date }}</p>
-    <p>{{ page.introduction }}</p>
+
+    <p class="section section--publish-info">
+        <span class="publish-date">
+            Published on
+            {{ page.display_date|date:"l F j, Y" }}
+        </span>
+
+        {% if page.authors.all %}
+            {% for author in page.authors.all %}
+                <a href="{% pageurl author.author %}">
+                    {{ author.author.first_name }} {{ author.author.last_name }}
+                </a>
+            {% endfor %}
+        {% endif %}
+    </p>
+
+    <p class="section section--intro">
+        {{ page.introduction }}
+    </p>
+
+    {% if page.featured_image %}
+        <p class="section section--featured-image">
+            {% image page.featured_image fill-995x560 %}
+        </p>
+    {% endif %}
+
+    {% if page.image_caption %}
+        <p class="section section--image-caption">
+            {{ page.image_caption }}
+        </p>
+    {% endif %}
 
     <section class="main-body">
         {% include_block page.body %}
@@ -18,6 +51,8 @@
 
 </div>
 
+{% comment %}
 {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
+{% endcomment %}
 
 {% endblock %}
