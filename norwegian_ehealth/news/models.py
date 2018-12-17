@@ -103,7 +103,7 @@ class NewsPage(BasePage):
         InlinePanel('news_types', label="Categories"),
         InlinePanel('authors', label="Authors"),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
-        InlinePanel('related_pages', label="Related pages"),
+        # InlinePanel('related_pages', label="Related pages"),
     ]
 
     class Meta:
