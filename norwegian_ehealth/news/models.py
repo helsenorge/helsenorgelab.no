@@ -69,7 +69,7 @@ class NewsPage(BasePage):
     introduction = models.TextField(
         blank=True,
         max_length=165,
-        )
+    )
     featured_image = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -80,7 +80,7 @@ class NewsPage(BasePage):
     image_caption = models.CharField(
         blank=True,
         max_length=250,
-        )
+    )
     body = StreamField(StoryBlock())
     # TODO: add license for ticket #10
 
@@ -118,8 +118,10 @@ class NewsPage(BasePage):
 
 
 class NewsPageAuthor(Orderable):
-    page = ParentalKey(NewsPage,
-        related_name='authors')
+    page = ParentalKey(
+        NewsPage,
+        related_name='authors'
+    )
     author = models.ForeignKey(
         'people.PersonPage',
         on_delete=models.CASCADE
