@@ -29,10 +29,10 @@
         display: grid;
         margin: 30px 0;
         grid-gap: 10px;
-        grid-template-columns: repeat(auto-fit, minmax(calc(50% - 20px), 1fr));
+        grid-template-columns: 180px 520px;
 
         @include media-query(tablet-portrait) {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: 180px 520px;
         }
 
         > * {

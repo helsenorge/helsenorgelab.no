@@ -116,6 +116,11 @@ class NewsPage(BasePage):
         else:
             return self.first_published_at
 
+    @property
+    def news_index(self):
+        # Find closest ancestor which is a news index
+        return self.get_ancestors().type(NewsIndex).last()
+
 
 class NewsPageAuthor(Orderable):
     page = ParentalKey(

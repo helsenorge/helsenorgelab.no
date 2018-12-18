@@ -89,11 +89,6 @@
             text-align: left;
             border-bottom: 0;
 
-            &::after {
-                color: $color--tertiary;
-                content: '|';
-            }
-
             &:last-of-type {
                 &::after {
                     content: '';

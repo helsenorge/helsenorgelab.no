@@ -1,7 +1,7 @@
 .header {
     padding: 20px;
     background-color: $color--primary;
-    border-bottom: 2px solid $color--border;
+    border-bottom: 1px solid $color--border;
 
     @include media-query(tablet-portrait) {
         padding: 30px 20px 20px;

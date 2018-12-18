@@ -1,12 +1,13 @@
 // --------------------------------- Colors -------------------------------------
 $color--primary:        #ffffff;
-$color--secondary:      #1C166C;  /* dark purple */
+$color--secondary:      #1C166C;  /* dark blue-purple */
 $color--tertiary:       #F6F6F6;  /* dark white */
-$color--quarternary:    #2218AC;  /* bright purple */
+$color--quarternary:    #2F21F8;  /* bright blue-purple */
 $color--border:         #E7E1DE;  /* tan */
 
 $color--white:          #F6F6F6;
 $color--black:          #606060;
+$color--grey:           #E2E2E2;
 $color--border:         rgba($color--black, 0.2);
 
 $color--default:        $color--black;

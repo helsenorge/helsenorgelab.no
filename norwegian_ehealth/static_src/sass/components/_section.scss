@@ -7,6 +7,23 @@
         }
     }
 
+    &--author {
+        border: solid 1px $color--grey;
+        border-radius: 5px;
+        padding: 40px;
+        margin: 20px 0;
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    &--categories {
+        padding: 50px 0;
+        a {
+            @include font-size(xxs);
+        }
+    }
+
     &--featured-image {
         padding: 10px 0 0;
         .image-caption {
