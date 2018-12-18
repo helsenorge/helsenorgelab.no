@@ -53,6 +53,23 @@
         }
     }
 
+    &--pagination {
+        @include font-size(xxs);
+        align-items: center;
+        justify-content: center;
+
+        .pg {
+            border: solid 1px $color--grey-light;
+            padding: 5px 10px;
+
+            &.active {
+                background-color: $color--quarternary;
+                color: $color--white;
+            }
+        }
+    }
+
+
     &--breadcrumb {
         flex-direction: row;
         margin-bottom: 10px;

@@ -7,7 +7,8 @@ $color--border:         #E7E1DE;  /* tan */
 
 $color--white:          #F6F6F6;
 $color--black:          #606060;
-$color--grey:           #E2E2E2;
+$color--grey:           #979797;
+$color--grey-light:     #BCB8B8;
 $color--border:         rgba($color--black, 0.2);
 
 $color--default:        $color--black;
@@ -36,7 +37,7 @@ $base-font-size: 18px;
 $base-line-height: 29px;
 $font-sizes: (
     default:    $base-font-size,
-    xxl:        68px,
+    xxl:        100px,
     xl:         60px,
     l:          40px,
     m:          27px,

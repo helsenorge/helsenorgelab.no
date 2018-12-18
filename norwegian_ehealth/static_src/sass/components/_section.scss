@@ -5,6 +5,12 @@
         &:only-child {
             margin: 0 auto;
         }
+
+        .articles-header {
+            @include font-size(xxl);
+            margin: 0 0 1rem;
+            @include heading-text();
+        }
     }
 
     &--author {
@@ -43,6 +49,13 @@
         font-weight: $weight--light;
         color: $color--secondary;
         padding: 10px 0;
+    }
+
+    &--news-item {
+        padding-bottom: 20px;
+        img {
+            padding-top: 15px;
+        }
     }
 
     &--publish-info {
