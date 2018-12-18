@@ -162,7 +162,7 @@ deploy_staging:
 
     # Branch used by Dokku to deploy. You can verify the branch with:
     #   $ dokku git:report [your-app-name]
-    DOKKU_DEPLOY_BRANCH: develop
+    DOKKU_DEPLOY_BRANCH: staging
   only:
     - staging
   before_script:
