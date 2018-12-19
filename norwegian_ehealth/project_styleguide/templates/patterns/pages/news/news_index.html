@@ -37,7 +37,7 @@
                             <a href="{% pageurl n %}">
                             {% if n.listing_image %}
                                 {% image n.listing_image fill-277x156 %}
-                            {% elif page.featured_image %}
+                            {% elif n.featured_image %}
                                 {% image n.featured_image fill-277x156 %}
                             {% endif %}
                             </a>
