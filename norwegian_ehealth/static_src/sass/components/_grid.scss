@@ -1,5 +1,4 @@
-.grid,
-.grid-2 {
+.grid {
     display: flex;
     flex-wrap: wrap;
 
@@ -26,15 +25,14 @@
 }
 
 @supports (display: grid) {
-    .grid,
-    .grid-2 {
+    .grid {
         display: grid;
         margin: 30px 0;
         grid-gap: 10px;
-        grid-template-columns: 180px 520px;
+        grid-template-columns: repeat(auto-fit, minmax(calc(50% - 20px), 1fr));
 
         @include media-query(tablet-portrait) {
-            grid-template-columns: 180px 520px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         }
 
         > * {
@@ -53,13 +51,4 @@
             }
         }
 	}
-
-    /* overrides for a wider grid */
-    .grid-2 {
-        grid-template-columns: 270px 500px;
-
-        @include media-query(tablet-portrait) {
-            grid-template-columns: 270px 500px;
-        }
-    }
 }

@@ -9,8 +9,12 @@
     &__author {
         border: solid 1px $color--grey;
         border-radius: 5px;
-        padding: 40px;
+        padding: 10px;
         margin: 20px 0;
+
+        @include media-query(tablet-portrait) {
+            padding: 20px;
+        }
 
         img {
             border-radius: 50%;

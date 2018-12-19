@@ -54,12 +54,12 @@
 
     <div>
         {% for author in page.authors.all %}
-            <div class="articles__author grid">
-                <div class="grid-item">
+            <div class="articles__author grid-author">
+                <div class="grid-author__item">
                     {% image author.author.photo fill-140x140 %}
                 </div>
 
-                <div class="grid-item">
+                <div class="grid-author__item">
                     <h4>
                         <a href="{% pageurl author.author %}">
                             {{ author.author.first_name }} {{ author.author.last_name }}
