@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -33,7 +31,11 @@ class InformationPage(BasePage):
         InlinePanel('related_pages', label="Related pages"),
     ]
 
+    class Meta:
+        verbose_name = "Standard Page"
 
+
+"""
 class IndexPage(BasePage):
     template = 'patterns/pages/standardpages/index_page.html'
 
@@ -64,3 +66,4 @@ class IndexPage(BasePage):
         context['subpages'] = subpages
 
         return context
+"""
