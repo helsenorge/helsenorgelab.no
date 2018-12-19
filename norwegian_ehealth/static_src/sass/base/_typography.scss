@@ -61,6 +61,6 @@ blockquote {
 
 // Default sizes
 h1 { @include font-size(xl); }
-h2 { @include font-size(l); }
-h3, h4, h5, h6 { @include font-size(m); }
+h2 { @include font-size(m); }
+h3, h4, h5, h6 { @include font-size(s); }
 small { @include font-size(xxs); }

@@ -3,45 +3,67 @@
 
 {% block content %}
 <div class="wrapper wrapper--flex">
-    <section class="section section--main">
-        <h1>{{ page.title }}</h1>
+    <section class="section section--main articles">
+
+        <div class="articles__header">{{ page.title }}</div>
+
+        <div class="grid">
+            <div class="grid-item">
+                Filter by:
+            </div>
+            <div class="grid-item form-item">
+                <form method="GET">
+                    <select name="news_type" onchange="this.form.submit()">
+                        <option value="">Show me everything</option>
+                        {% for news_type in news_types %}
+                            <option value="{{ news_type.0 }}" {% if request.GET.news_type == news_type.0|slugify %}selected="selected"{% endif %}>{{ news_type.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        {% if page.introduction %}
+            <p class="articles__intro">
+                {{ page.introduction }}
+            </p>
+        {% endif %}
 
         {% if news %}
-            <ul role="list">
+            <div>
                 {% for n in news %}
-                    <li>
-                        <a href="{% pageurl n %}">
+                    <div class="articles__news-item grid-article-listing">
+                        <div class="grid-article-listing__item">
+                            <a href="{% pageurl n %}">
                             {% if n.listing_image %}
-                                {% image n.listing_image fill-450x300 %}
+                                {% image n.listing_image fill-277x156 %}
+                            {% elif n.featured_image %}
+                                {% image n.featured_image fill-277x156 %}
                             {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    {{ n.listing_title|default:n.title }}
-                                </h2>
-                                <span>{{ n.display_date }}</span>
-                                {% if n.listing_summary or n.introduction %}
-                                    <p>{{ n.listing_summary|default:n.introduction }}</p>
-                                {% endif %}
-                            </div>
-                        </a>
-                    </li>
+                            </a>
+                        </div>
+                        <div class="grid-article-listing__item">
+                            <h2 role="listitem">
+                                <a href="{% pageurl n %}">
+                                    {% firstof n.listing_title n.title %}
+                                </a>
+                            </h2>
+                            {% if n.listing_summary or n.introduction %}
+                                <p>{{ n.listing_summary|default:n.introduction }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
+
             {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
+
         {% else %}
+
             {# no items #}
+
         {% endif %}
     </section>
-    <aside class="sidebar sidebar--filters">
-        <form method="GET">
-            <select name="news_type">
-                <option value="">All</option>
-                {% for news_type in news_types %}
-                    <option value="{{ news_type.0 }}" {% if request.GET.news_type == news_type.0|slugify %}selected="selected"{% endif %}>{{ news_type.1 }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Filter">
-        </form>
-    </aside>
+
 </div>
 {% endblock %}

@@ -86,7 +86,9 @@
     select {
         width: 100%;
         padding: 10px;
-        border: 1px solid $color--default;
+        border: 1px solid $color--grey;
+        background-color: $color--white;
+        color: $color--secondary;
     }
 
     input[type='checkbox'] {

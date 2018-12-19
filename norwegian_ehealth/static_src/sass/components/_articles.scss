@@ -1,0 +1,84 @@
+.articles {
+
+    .main-body {
+        h2 {
+            @include font-size(ms);
+        }
+    }
+
+    &__header {
+        @include font-size(xxl);
+        @include heading-text();
+        margin: 0 0 1rem;
+    }
+
+
+    &__author {
+        border: solid 1px $color--grey;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0;
+
+        @include media-query(tablet-portrait) {
+            padding: 20px;
+        }
+
+        img {
+            border-radius: 50%;
+            display: block;
+            margin: auto;
+        }
+    }
+
+    &__categories {
+        padding: 50px 0;
+
+        a {
+            @include font-size(xxs);
+        }
+    }
+
+    &__featured-image {
+        padding: 10px 0 0;
+
+        .image-caption {
+            @include font-size(xs);
+        }
+    }
+
+    &__image-caption {
+        @include font-size(xxs);
+        line-height: 16px;
+        padding: 0 50px;
+    }
+
+    &__intro {
+        @include font-size(m);
+        line-height: 40px;
+        font-weight: $weight--light;
+        color: $color--secondary;
+        padding: 10px 0;
+    }
+
+    &__news-item {
+        padding-bottom: 20px;
+
+        img {
+            padding-top: 15px;
+        }
+    }
+
+    &__publish-info {
+        @include font-size(xxs);
+
+        .publish-date {
+            padding-right: 5px;
+        }
+
+        a {
+            font-weight: $weight--bold;
+            padding: 0 5px;
+        }
+    }
+
+}

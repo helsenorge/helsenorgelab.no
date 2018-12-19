@@ -58,10 +58,7 @@ rules:
     - convention: hyphenatedlowercase
   no-color-keywords: 0
   no-color-literals: 0
-  property-sort-order:
-    - 1
-    -
-      order: recess
+  property-sort-order: 0
   empty-args:
     - 1
     -

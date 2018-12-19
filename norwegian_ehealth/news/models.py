@@ -158,9 +158,12 @@ class NewsIndex(BasePage):
         news = NewsPage.objects.live().public().descendant_of(self).annotate(
             date=Coalesce('publication_date', 'first_published_at')
         ).order_by('-date')
+        extra_url_params = ''
 
-        if request.GET.get('news_type'):
-            news = news.filter(news_types__news_type=request.GET.get('news_type'))
+        news_type = request.GET.get('news_type')
+        if news_type:
+            news = news.filter(news_types__news_type=news_type)
+            extra_url_params = 'news_type=' + news_type
 
         # Pagination
         page = request.GET.get('page', 1)
@@ -178,6 +181,7 @@ class NewsIndex(BasePage):
             # Only show news types that have been used
             news_types=NewsPageNewsType.objects.all().values_list(
                 'news_type__pk', 'news_type__title'
-            ).distinct().order_by('news_type__title')
+            ).distinct().order_by('news_type__title'),
+            extra_url_params=extra_url_params,
         )
         return context

@@ -1,5 +1,5 @@
 Django==2.0.9
-wagtail==2.2.2
+wagtail==2.3
 psycopg2==2.7.5
 wagtail-django-recaptcha==1.0
 https://people.torchbox.com/~mikalai/pypi/django-pattern-library/django_pattern_library-0.1.11-py3-none-any.whl

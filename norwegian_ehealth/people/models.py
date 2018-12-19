@@ -77,7 +77,7 @@ class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
     subpage_types = []
-    parent_page_types = ['PersonIndexPage']
+    parent_page_types = ['home.HomePage']
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

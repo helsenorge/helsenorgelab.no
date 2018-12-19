@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'scout_apm.django',
 
     'norwegian_ehealth.documents',
-    'norwegian_ehealth.forms',
+    # 'norwegian_ehealth.forms',
     'norwegian_ehealth.home',
     'norwegian_ehealth.images',
     'norwegian_ehealth.navigation',
@@ -631,7 +631,7 @@ PASSWORD_REQUIRED_TEMPLATE = 'patterns/pages/wagtail/password_required.html'
 
 
 # Default size of the pagination used on the front-end.
-DEFAULT_PER_PAGE = 20
+DEFAULT_PER_PAGE = 10
 
 
 # Styleguide

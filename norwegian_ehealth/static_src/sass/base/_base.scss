@@ -51,7 +51,7 @@ a {
     transition: color $transition;
 
     &:hover {
-        color: darken($color--secondary, 20%);
+        color: lighten($color--quarternary, 20%);
         cursor: pointer;
   }
 }
