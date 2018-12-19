@@ -23,9 +23,11 @@
             </div>
         </div>
 
-        <p class="section section--intro">
-            {{ page.introduction }}
-        </p>
+        {% if page.introduction %}
+            <p class="section section--intro">
+                {{ page.introduction }}
+            </p>
+        {% endif %}
 
         {% if news %}
             <div>
@@ -41,7 +43,7 @@
                         <div class="grid-item">
                             <h2 role="listitem">
                                 <a href="{% pageurl n %}">
-                                {{ n.listing_title|default:n.title }}
+                                    {% firstof n.listing_title n.title %}
                                 </a>
                             </h2>
                             {% if n.listing_summary or n.introduction %}
