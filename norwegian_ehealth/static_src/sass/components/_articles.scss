@@ -1,0 +1,71 @@
+.articles {
+    .articles-header {
+        @include font-size(xxl);
+        @include heading-text();
+        margin: 0 0 1rem;
+    }
+
+
+    &--author {
+        border: solid 1px $color--grey;
+        border-radius: 5px;
+        padding: 40px;
+        margin: 20px 0;
+
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    &--categories {
+        padding: 50px 0;
+
+        a {
+            @include font-size(xxs);
+        }
+    }
+
+    &--featured-image {
+        padding: 10px 0 0;
+
+        .image-caption {
+            @include font-size(xs);
+        }
+    }
+
+    &--image-caption {
+        @include font-size(xxs);
+        line-height: 16px;
+        padding: 0 50px;
+    }
+
+    &--intro {
+        @include font-size(m);
+        line-height: 40px;
+        font-weight: $weight--light;
+        color: $color--secondary;
+        padding: 10px 0;
+    }
+
+    &--news-item {
+        padding-bottom: 20px;
+
+        img {
+            padding-top: 15px;
+        }
+    }
+
+    &--publish-info {
+        @include font-size(xxs);
+
+        .publish-date {
+            padding-right: 5px;
+        }
+
+        a {
+            font-weight: $weight--bold;
+            padding: 0 5px;
+        }
+    }
+
+}

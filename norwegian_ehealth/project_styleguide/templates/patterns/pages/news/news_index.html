@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="wrapper wrapper--flex">
-    <section class="section section--main">
+    <section class="section section--main articles">
 
         <div class="articles-header">{{ page.title }}</div>
 
-        <div class="section section--filter grid">
+        <div class="grid">
             <div class="grid-item">
                 Filter by:
             </div>
@@ -24,7 +24,7 @@
         </div>
 
         {% if page.introduction %}
-            <p class="section section--intro">
+            <p class="articles articles--intro">
                 {{ page.introduction }}
             </p>
         {% endif %}
@@ -32,7 +32,7 @@
         {% if news %}
             <div>
                 {% for n in news %}
-                    <div class="section section--news-item grid-2">
+                    <div class="articles articles--news-item grid-2">
                         <div class="grid-item">
                             <a href="{% pageurl n %}">
                             {% if n.listing_image %}
