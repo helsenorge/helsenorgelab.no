@@ -181,8 +181,8 @@
         }
 
         &--breadcrumb {
-            color: $color--quarternary;
             @include font-size(xxs);
+            color: $color--quarternary;
             margin: 0;
 
             &:hover {

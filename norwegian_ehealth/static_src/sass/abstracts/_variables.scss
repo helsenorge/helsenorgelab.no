@@ -1,14 +1,14 @@
 // --------------------------------- Colors -------------------------------------
-$color--primary:        #ffffff;
-$color--secondary:      #1C166C;  /* dark blue-purple */
-$color--tertiary:       #F6F6F6;  /* dark white */
-$color--quarternary:    #2F21F8;  /* bright blue-purple */
-$color--border:         #E7E1DE;  /* tan */
+$color--primary:        #fff;
+$color--secondary:      #1c166c;  /* dark blue-purple */
+$color--tertiary:       #f6f6f6;  /* dark white */
+$color--quarternary:    #2f21f8;  /* bright blue-purple */
+$color--border:         #e7e1de;  /* tan */
 
-$color--white:          #F6F6F6;
+$color--white:          #f6f6f6;
 $color--black:          #606060;
 $color--grey:           #979797;
-$color--grey-light:     #BCB8B8;
+$color--grey-light:     #bcb8b8;
 $color--border:         rgba($color--black, 0.2);
 
 $color--default:        $color--black;
@@ -22,8 +22,8 @@ $button-colours: (
 
 // --------------------------------- Fonts --------------------------------------
 
-$font--primary:         "Open Sans";
-$font--secondary:       "Playfair Display";
+$font--primary:         'Open Sans';
+$font--secondary:       'Playfair Display';
 
 // Font weights
 $weight--bold:          700;
