@@ -44,7 +44,7 @@
     }
 
     &__intro {
-        @include font-size(m);
+        @include font-size(ml);
         line-height: 40px;
         font-weight: $weight--light;
         color: $color--secondary;
