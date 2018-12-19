@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'scout_apm.django',
 
     'norwegian_ehealth.documents',
-    'norwegian_ehealth.forms',
+    # 'norwegian_ehealth.forms',
     'norwegian_ehealth.home',
     'norwegian_ehealth.images',
     'norwegian_ehealth.navigation',
