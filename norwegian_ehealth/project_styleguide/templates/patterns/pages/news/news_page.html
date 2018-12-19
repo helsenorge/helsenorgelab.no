@@ -10,7 +10,7 @@
 
     <h1>{{ page.title }}</h1>
 
-    <p class="articles articles--publish-info">
+    <p class="articles__publish-info">
         <span class="publish-date">
             Published on
             {{ page.display_date|date:"l F j, Y" }}
@@ -23,19 +23,19 @@
     </p>
 
     {% if page.introduction %}
-        <p class="articles articles--intro">
+        <p class="articles__intro">
             {{ page.introduction }}
         </p>
     {% endif %}
 
     {% if page.featured_image %}
-        <p class="articles articles--featured-image">
+        <p class="articles__featured-image">
             {% image page.featured_image fill-995x560 %}
         </p>
     {% endif %}
 
     {% if page.image_caption %}
-        <p class="articles articles--image-caption">
+        <p class="articles__image-caption">
             {{ page.image_caption }}
         </p>
     {% endif %}
@@ -44,7 +44,7 @@
         {% include_block page.body %}
     </section>
 
-    <div class="articles articles--categories">
+    <div class="articles__categories">
         {% for news_type in page.news_types.all %}
             <a href="{% pageurl page.get_parent %}?news_type={{ news_type.pk }}">
                 {{ news_type }}
@@ -54,7 +54,7 @@
 
     <div>
         {% for author in page.authors.all %}
-            <div class="articles articles--author grid">
+            <div class="articles__author grid">
                 <div class="grid-item">
                     {% image author.author.photo fill-140x140 %}
                 </div>

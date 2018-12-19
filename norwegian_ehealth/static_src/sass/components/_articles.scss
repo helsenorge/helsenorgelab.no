@@ -1,12 +1,12 @@
 .articles {
-    .articles-header {
+    &__header {
         @include font-size(xxl);
         @include heading-text();
         margin: 0 0 1rem;
     }
 
 
-    &--author {
+    &__author {
         border: solid 1px $color--grey;
         border-radius: 5px;
         padding: 40px;
@@ -17,7 +17,7 @@
         }
     }
 
-    &--categories {
+    &__categories {
         padding: 50px 0;
 
         a {
@@ -25,7 +25,7 @@
         }
     }
 
-    &--featured-image {
+    &__featured-image {
         padding: 10px 0 0;
 
         .image-caption {
@@ -33,13 +33,13 @@
         }
     }
 
-    &--image-caption {
+    &__image-caption {
         @include font-size(xxs);
         line-height: 16px;
         padding: 0 50px;
     }
 
-    &--intro {
+    &__intro {
         @include font-size(m);
         line-height: 40px;
         font-weight: $weight--light;
@@ -47,7 +47,7 @@
         padding: 10px 0;
     }
 
-    &--news-item {
+    &__news-item {
         padding-bottom: 20px;
 
         img {
@@ -55,7 +55,7 @@
         }
     }
 
-    &--publish-info {
+    &__publish-info {
         @include font-size(xxs);
 
         .publish-date {

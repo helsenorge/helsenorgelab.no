@@ -5,7 +5,7 @@
 <div class="wrapper wrapper--flex">
     <section class="section section--main articles">
 
-        <div class="articles-header">{{ page.title }}</div>
+        <div class="articles__header">{{ page.title }}</div>
 
         <div class="grid">
             <div class="grid-item">
@@ -24,7 +24,7 @@
         </div>
 
         {% if page.introduction %}
-            <p class="articles articles--intro">
+            <p class="articles__intro">
                 {{ page.introduction }}
             </p>
         {% endif %}
@@ -32,7 +32,7 @@
         {% if news %}
             <div>
                 {% for n in news %}
-                    <div class="articles articles--news-item grid-2">
+                    <div class="articles__news-item grid-2">
                         <div class="grid-item">
                             <a href="{% pageurl n %}">
                             {% if n.listing_image %}
