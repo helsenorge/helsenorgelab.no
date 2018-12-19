@@ -1,4 +1,11 @@
 .articles {
+
+    .main-body {
+        h2 {
+            @include font-size(ms);
+        }
+    }
+
     &__header {
         @include font-size(xxl);
         @include heading-text();
@@ -44,7 +51,7 @@
     }
 
     &__intro {
-        @include font-size(ml);
+        @include font-size(m);
         line-height: 40px;
         font-weight: $weight--light;
         color: $color--secondary;
