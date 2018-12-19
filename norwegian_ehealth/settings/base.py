@@ -631,7 +631,7 @@ PASSWORD_REQUIRED_TEMPLATE = 'patterns/pages/wagtail/password_required.html'
 
 
 # Default size of the pagination used on the front-end.
-DEFAULT_PER_PAGE = 3  # TODO bump back up to 10
+DEFAULT_PER_PAGE = 10
 
 
 # Styleguide
