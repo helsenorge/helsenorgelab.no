@@ -48,7 +48,9 @@
         {% for news_type in page.news_types.all %}
             <a href="{% pageurl page.get_parent %}?news_type={{ news_type.pk }}">
                 {{ news_type }}
-            </a>,
+            </a>
+            {% if not forloop.last %},{% endif %}
+
         {% endfor %}
     </div>
 
