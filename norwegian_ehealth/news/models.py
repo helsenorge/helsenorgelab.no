@@ -11,6 +11,7 @@ from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from norwegian_ehealth.utils.blocks import StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
@@ -82,7 +83,13 @@ class NewsPage(BasePage):
         max_length=250,
     )
     body = StreamField(StoryBlock())
-    # TODO: add license for ticket #10
+    license = models.ForeignKey(
+        'utils.LicenseSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = BasePage.search_fields + [
         index.SearchField('introduction'),
@@ -102,6 +109,7 @@ class NewsPage(BasePage):
         StreamFieldPanel('body'),
         InlinePanel('news_types', label="Categories"),
         InlinePanel('authors', label="Authors"),
+        SnippetChooserPanel('license'),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
         # InlinePanel('related_pages', label="Related pages"),
     ]

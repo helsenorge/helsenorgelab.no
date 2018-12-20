@@ -2,7 +2,6 @@ from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
 from norwegian_ehealth.news.models import NewsType
-# from norwegian_ehealth.people.models import PersonType
 
 
 class NewsTypeModelAdmin(ModelAdmin):

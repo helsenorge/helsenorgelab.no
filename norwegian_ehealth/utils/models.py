@@ -257,3 +257,21 @@ class BasePage(SocialFields, ListingFields, Page):
         + SocialFields.promote_panels
         + ListingFields.promote_panels
     )
+
+
+@register_snippet
+class LicenseSnippet(models.Model):
+    title = models.TextField(blank=False)
+    description = models.TextField(blank=True)
+    version = models.TextField(blank=True)
+    url = models.URLField(blank=True, max_length=255)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('description'),
+        FieldPanel('version'),
+        FieldPanel('url'),
+    ]
+
+    def __str__(self):
+        return self.title
