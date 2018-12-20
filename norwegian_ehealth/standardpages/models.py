@@ -10,6 +10,26 @@ from norwegian_ehealth.utils.blocks import StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
 
 
+class StandardPageCategory(models.Model):
+    page = ParentalKey(
+        'standardpages.InformationPage',
+        related_name='categories'
+    )
+    category = models.ForeignKey(
+        'utils.Category',
+        related_name='+',
+        on_delete=models.CASCADE,
+        verbose_name='category',
+    )
+
+    panels = [
+        FieldPanel('category')
+    ]
+
+    def __str__(self):
+        return self.category.title
+
+
 class InformationPageRelatedPage(RelatedPage):
     source_page = ParentalKey('InformationPage', related_name='related_pages')
 
@@ -28,7 +48,8 @@ class InformationPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel('categories', label="Categories"),
+        # InlinePanel('related_pages', label="Related pages"),
     ]
 
     class Meta:

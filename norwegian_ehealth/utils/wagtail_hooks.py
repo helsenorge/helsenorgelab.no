@@ -1,11 +1,11 @@
 from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
-from norwegian_ehealth.news.models import NewsType
+from norwegian_ehealth.utils.models import Category
 
 
-class NewsTypeModelAdmin(ModelAdmin):
-    model = NewsType
+class CategoryModelAdmin(ModelAdmin):
+    model = Category
     menu_icon = 'tag'
 
 
@@ -19,7 +19,7 @@ class PersonTypeModelAdmin(ModelAdmin):
 class TaxonomiesModelAdminGroup(ModelAdminGroup):
     menu_label = "Taxonomies"
     items = (
-        NewsTypeModelAdmin,
+        CategoryModelAdmin,
         # PersonTypeModelAdmin,
     )
     menu_icon = 'tag'
