@@ -8,10 +8,18 @@ from wagtail.images.models import AbstractImage, AbstractRendition, Image
 class CustomImage(AbstractImage):
     alt = models.CharField(max_length=255, blank=True)
     credit = models.CharField(max_length=255, blank=True)
+    license = models.ForeignKey(
+        'utils.LicenseSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     admin_form_fields = Image.admin_form_fields + (
         'alt',
         'credit',
+        'license',
     )
 
     # When you save the image, check if alt text has been set. If not, set it as the title.
