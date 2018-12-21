@@ -14,7 +14,7 @@ context:
     listing_title: Item title 2
     listing_summary: Some listing summary 2
     display_date: 1 Oct 1970
-  news_types:
+  categories:
   - ['press_release', "Press Release"]
   - ['media_coverage', "Media coverage"]
 

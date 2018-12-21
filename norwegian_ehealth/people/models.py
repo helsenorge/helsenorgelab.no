@@ -1,7 +1,4 @@
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
@@ -107,12 +104,13 @@ class PersonPage(BasePage):
             FieldPanel('email'),
             InlinePanel('phone_numbers', label='Phone numbers'),
         ], heading='Contact information'),
-        InlinePanel('person_types', label='Person types'),
+        # InlinePanel('person_types', label='Person types'),
         FieldPanel('introduction'),
         StreamFieldPanel('biography')
     ]
 
 
+"""
 class PersonIndexPage(BasePage):
     template = 'patterns/pages/people/person_index_page.html'
 
@@ -137,3 +135,4 @@ class PersonIndexPage(BasePage):
         context.update(people=people)
 
         return context
+"""

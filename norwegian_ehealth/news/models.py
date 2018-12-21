@@ -11,40 +11,30 @@ from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from norwegian_ehealth.utils.blocks import StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
 
 
-class NewsType(models.Model):
-    title = models.CharField(max_length=128)
-
-    class Meta:
-        verbose_name = "category"
-        verbose_name_plural = "categories"
-
-    def __str__(self):
-        return self.title
-
-
-class NewsPageNewsType(models.Model):
+class NewsPageCategory(models.Model):
     page = ParentalKey(
         'news.NewsPage',
-        related_name='news_types'
+        related_name='categories'
     )
-    news_type = models.ForeignKey(
-        'NewsType',
+    category = models.ForeignKey(
+        'utils.Category',
         related_name='+',
         on_delete=models.CASCADE,
         verbose_name='category',
     )
 
     panels = [
-        FieldPanel('news_type')
+        FieldPanel('category')
     ]
 
     def __str__(self):
-        return self.news_type.title
+        return self.category.title
 
 
 class NewsPageRelatedPage(RelatedPage):
@@ -82,7 +72,13 @@ class NewsPage(BasePage):
         max_length=250,
     )
     body = StreamField(StoryBlock())
-    # TODO: add license for ticket #10
+    license = models.ForeignKey(
+        'utils.LicenseSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = BasePage.search_fields + [
         index.SearchField('introduction'),
@@ -100,8 +96,9 @@ class NewsPage(BasePage):
             heading="Featured Image",
         ),
         StreamFieldPanel('body'),
-        InlinePanel('news_types', label="Categories"),
+        InlinePanel('categories', label="Categories"),
         InlinePanel('authors', label="Authors"),
+        SnippetChooserPanel('license'),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
         # InlinePanel('related_pages', label="Related pages"),
     ]
@@ -160,10 +157,10 @@ class NewsIndex(BasePage):
         ).order_by('-date')
         extra_url_params = ''
 
-        news_type = request.GET.get('news_type')
-        if news_type:
-            news = news.filter(news_types__news_type=news_type)
-            extra_url_params = 'news_type=' + news_type
+        category = request.GET.get('category')
+        if category:
+            news = news.filter(categories__category=category)
+            extra_url_params = 'category=' + category
 
         # Pagination
         page = request.GET.get('page', 1)
@@ -179,9 +176,9 @@ class NewsIndex(BasePage):
         context.update(
             news=news,
             # Only show news types that have been used
-            news_types=NewsPageNewsType.objects.all().values_list(
-                'news_type__pk', 'news_type__title'
-            ).distinct().order_by('news_type__title'),
+            categories=NewsPageCategory.objects.all().values_list(
+                'category__pk', 'category__title'
+            ).distinct().order_by('category__title'),
             extra_url_params=extra_url_params,
         )
         return context

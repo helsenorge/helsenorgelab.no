@@ -45,10 +45,12 @@
     </section>
 
     <div class="articles__categories">
-        {% for news_type in page.news_types.all %}
-            <a href="{% pageurl page.get_parent %}?news_type={{ news_type.pk }}">
-                {{ news_type }}
-            </a>,
+        {% for category in page.categories.all %}
+            <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                {{ category.category }}
+            </a>
+            {% if not forloop.last %},{% endif %}
+
         {% endfor %}
     </div>
 

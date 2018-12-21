@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="wrapper wrapper--flex">
-        <section class="section section--main">
+        <section class="section section--main articles">
 
             {% block breadcrumbs %}
                 {% include "patterns/molecules/navigation/breadcrumbs.html" %}
@@ -12,6 +12,16 @@
 
             <h1>{{ page.title }}</h1>
             <h5>{{ page.introduction }}</h5>
+
+            <div class="articles__categories">
+                {% for category in page.categories.all %}
+                    <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                        {{ category.category }}
+                    </a>
+                    {% if not forloop.last %},{% endif %}
+
+                {% endfor %}
+            </div>
 
             {% include_block page.body %}
             {% include "patterns/molecules/share/share.html" %}

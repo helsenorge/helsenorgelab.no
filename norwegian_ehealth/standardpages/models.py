@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -10,6 +8,26 @@ from wagtail.search import index
 
 from norwegian_ehealth.utils.blocks import StoryBlock
 from norwegian_ehealth.utils.models import BasePage, RelatedPage
+
+
+class StandardPageCategory(models.Model):
+    page = ParentalKey(
+        'standardpages.InformationPage',
+        related_name='categories'
+    )
+    category = models.ForeignKey(
+        'utils.Category',
+        related_name='+',
+        on_delete=models.CASCADE,
+        verbose_name='category',
+    )
+
+    panels = [
+        FieldPanel('category')
+    ]
+
+    def __str__(self):
+        return self.category.title
 
 
 class InformationPageRelatedPage(RelatedPage):
@@ -30,10 +48,15 @@ class InformationPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel('categories', label="Categories"),
+        # InlinePanel('related_pages', label="Related pages"),
     ]
 
+    class Meta:
+        verbose_name = "Standard Page"
 
+
+"""
 class IndexPage(BasePage):
     template = 'patterns/pages/standardpages/index_page.html'
 
@@ -64,3 +87,4 @@ class IndexPage(BasePage):
         context['subpages'] = subpages
 
         return context
+"""

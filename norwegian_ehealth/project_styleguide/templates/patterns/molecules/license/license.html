@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `license` into context.
+
+Example:
+    {% include "patterns/molecules/license/license.html" with license=license %}
+
+{% endcomment %}
+
+{% if license %}
+    <div class="license">
+
+        <h2>{{ license.title }}</h2>
+
+        <p>{{ license.description }}</p>
+
+        <p>{{ license.version }}</p>
+
+        <p><a href="{{ license.get_link_url }}">{{ license.get_link_text }}</a></p>
+
+    </div>
+{% endif %}
