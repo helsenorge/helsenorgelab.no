@@ -3,8 +3,9 @@
     <ul class="nav nav--primary" role="menubar">
         {% for link in primarynav %}
             {% with children=link.value.page.get_children.live.public.in_menu %}
-                <li class="nav__item nav__item--primary {% if children.exists %}nav__item--is-parent{% endif %}" role="presentation">
-                    {% include_block link with has_children=children.exists %}
+                <li class="nav__item nav__item--primary" role="presentation">
+                    {% include_block link with has_children=0 %}
+                    <!--- comment out sub-nav
                     {% if children.exists %}
                         <ul class="nav nav--subnav" role="menu">
                             <li class="nav__item nav__item--back js-subnav-back">&lsaquo; Back</li>
@@ -16,6 +17,7 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
+                    -->
                 </li>
             {% endwith %}
         {% endfor %}
