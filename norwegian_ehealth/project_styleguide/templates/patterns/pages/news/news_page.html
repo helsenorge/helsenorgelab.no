@@ -71,7 +71,7 @@
                         {% if author.biography %}
                             {{ author.biography }}
                         {% else %}
-                            {{ author.author.biography|truncatechars:255 }}
+                            {{ author.author.biography|striptags|truncatechars:255 }}
                         {% endif %}
                     </div>
                 </div>
