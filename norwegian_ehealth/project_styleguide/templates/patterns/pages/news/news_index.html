@@ -30,10 +30,10 @@
         {% endif %}
 
         {% if news %}
-            <div>
+            <div class="container">
                 {% for n in news %}
-                    <div class="articles__news-item grid-article-listing">
-                        <div class="grid-article-listing__item">
+                    <div class="articles__news-item row">
+                        <div class="col-4">
                             <a href="{% pageurl n %}">
                             {% if n.listing_image %}
                                 {% image n.listing_image fill-277x156 %}
@@ -42,7 +42,7 @@
                             {% endif %}
                             </a>
                         </div>
-                        <div class="grid-article-listing__item">
+                        <div class="col-8">
                             <h2 role="listitem">
                                 <a href="{% pageurl n %}">
                                     {% firstof n.listing_title n.title %}

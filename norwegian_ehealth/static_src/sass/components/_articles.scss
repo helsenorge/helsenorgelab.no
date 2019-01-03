@@ -40,6 +40,7 @@
 
     &__featured-image {
         padding: 0;
+        text-align: center;
 
         .image-caption {
             @include font-size(xs);
