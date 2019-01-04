@@ -40,7 +40,6 @@
     &__featured-image-caption,
     &__image-caption {
         @include font-size(xxs);
-        line-height: 0;
         padding-bottom: 20px
     }
 
