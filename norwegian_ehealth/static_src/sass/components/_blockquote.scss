@@ -9,4 +9,9 @@ blockquote {
 		margin-left: -1em;
 		position: absolute;
 	}
+
+	.citation_link {
+		@include font-size(xxs);
+		font-family: $font--primary;
+	}
 }
