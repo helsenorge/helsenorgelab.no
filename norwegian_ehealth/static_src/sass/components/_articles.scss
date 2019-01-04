@@ -1,11 +1,5 @@
 .articles {
 
-    .main-body {
-        h2 {
-            @include font-size(ms);
-        }
-    }
-
     &__header {
         @include font-size(xxl);
         @include heading-text();

@@ -1,6 +1,12 @@
 blockquote {
-    padding: 1rem;
-    margin: 1rem 0;
-    background: $color--tertiary;
-    border-left: 10px solid $color--secondary;
+    color: $color--secondary;
+
+    &::before {
+		content: "\2014";
+		color: $color--red;
+		display: inline-block;
+		width: 1em;
+		margin-left: -1em;
+		position: absolute;
+	}
 }
