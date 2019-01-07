@@ -60,7 +60,11 @@ blockquote {
 }
 
 // Default sizes
-h1 { @include font-size(xl); }
+h1 {
+    @include font-size(xl);
+    line-height: 72px;
+}
 h2 { @include font-size(m); }
 h3, h4, h5, h6 { @include font-size(s); }
 small { @include font-size(xxs); }
+p { padding: 5px 0; }

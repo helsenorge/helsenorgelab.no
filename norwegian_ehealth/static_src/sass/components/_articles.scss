@@ -39,7 +39,7 @@
     }
 
     &__featured-image {
-        padding: 10px 0 0;
+        padding: 0;
 
         .image-caption {
             @include font-size(xs);
@@ -48,8 +48,9 @@
 
     &__image-caption {
         @include font-size(xxs);
-        line-height: 16px;
+        line-height: 0;
         padding: 0 50px;
+        text-align: center;
     }
 
     &__intro {

@@ -34,7 +34,7 @@ $weight--light:         300;
 
 // Font sizes
 $base-font-size: 18px;
-$base-line-height: 29px;
+$base-line-height: 32px;
 $font-sizes: (
     default:    $base-font-size,
     xxl:        100px,
@@ -66,6 +66,7 @@ $breakpoints: (
 // Wrappers
 $site-width:            1280px;
 $wrapper--small:        790px;
+$wrapper--medium:        995px;
 
 // Grid setup
 $grid:                  20px;
