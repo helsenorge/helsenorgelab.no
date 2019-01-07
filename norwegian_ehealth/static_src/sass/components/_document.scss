@@ -1,5 +1,9 @@
 .document {
     a {
         @include font-size(xs);
+
+        svg {
+        	padding-right: 5px;
+        }
     }
 }
