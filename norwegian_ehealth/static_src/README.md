@@ -107,7 +107,10 @@ https://babeljs.io/docs/plugins/
 - **babel-preset-react** - babel preset for react. https://www.npmjs.com/package/babel-preset-react https://babeljs.io/env/ https://babeljs.io/docs/plugins/
 - **eslint-plugin-react** - linting for react and jsx https://www.npmjs.com/package/eslint-plugin-react
 
-
+## Bootstrap
+We include Bootstrap 4.0 via scss includes in the `main.scss` file with `@import 'vendor/bootstrap/bootstrap';`
+If Bootstrap CSS updates are needed for Bootstrap, please update files in the `vendor\bootstrap` folder.
+We import Bootstrap javascript in `base.html` via CDN along with the requirements for jQuery and Popper.
 
 
 
