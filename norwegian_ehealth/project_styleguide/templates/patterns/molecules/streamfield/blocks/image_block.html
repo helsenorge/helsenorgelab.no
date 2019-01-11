@@ -4,4 +4,7 @@
 
 <p class="articles__image-caption">
 	{{ value.caption }}
+	{% if value.image.license %} |
+		{{ value.image.license.title }} {{ value.image.license.description }} {{ value.image.license.version }}
+	{% endif %}
 </p>

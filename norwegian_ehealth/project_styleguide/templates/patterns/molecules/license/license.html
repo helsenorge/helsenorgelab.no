@@ -12,14 +12,11 @@ Example:
 
 {% if license %}
     <div class="license">
-
-        <h2>{{ license.title }}</h2>
-
-        <p>{{ license.description }}</p>
-
-        <p>{{ license.version }}</p>
-
-        <p><a href="{{ license.get_link_url }}">{{ license.get_link_text }}</a></p>
-
+        {{ license.title }}
+        {{ license.description }}
+        {{ license.version }}
+        <p>
+            <a href="{{ license.get_link_url }}">{{ license.get_link_text }}</a>
+        </p>
     </div>
 {% endif %}

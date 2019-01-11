@@ -42,6 +42,11 @@
         {% if page.image_caption %}
             <p class="articles__featured-image-caption">
                 {{ page.image_caption }}
+                {% if page.featured_image.license %} |
+                    {{ page.featured_image.license.title }}
+                    {{ page.featured_image.license.description }}
+                    {{ page.featured_image.license.version }}
+                {% endif %}
             </p>
         {% endif %}
     </div>
@@ -51,6 +56,8 @@
         <section class="main-body">
             {% include_block page.body %}
         </section>
+
+        {% include "patterns/molecules/license/license.html" with license=page.license %}
 
         <div class="articles__categories">
             {% for category in page.categories.all %}
