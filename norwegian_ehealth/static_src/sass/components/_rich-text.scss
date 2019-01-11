@@ -1,9 +1,25 @@
 .rich-text {
+    ol, ul {
+        padding-bottom: 30px;
+    }
+
     ul {
-        list-style: inside disc;
+        list-style: none;
     }
 
     ol {
         list-style: inside decimal;
+    }
+
+    ul li {
+        margin-left: 1em;
+    }
+
+    ul li::before {
+        content: "•";
+        color: $color--secondary;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em
     }
 }

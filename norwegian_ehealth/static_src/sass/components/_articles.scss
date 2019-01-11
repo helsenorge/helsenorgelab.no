@@ -1,11 +1,5 @@
 .articles {
 
-    .main-body {
-        h2 {
-            @include font-size(ms);
-        }
-    }
-
     &__header {
         @include font-size(xxl);
         @include heading-text();
@@ -41,17 +35,18 @@
     &__featured-image {
         padding: 0;
         text-align: center;
-
-        .image-caption {
-            @include font-size(xs);
-        }
     }
 
+    &__featured-image-caption,
     &__image-caption {
         @include font-size(xxs);
         line-height: 0;
-        padding: 0 50px;
+        padding-bottom: 20px
+    }
+
+    &__featured-image-caption {
         text-align: center;
+        padding: 0;
     }
 
     &__intro {
