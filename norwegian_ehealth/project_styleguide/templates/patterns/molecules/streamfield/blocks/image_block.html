@@ -3,8 +3,15 @@
 {% image value.image fill-2160x1215 %}
 
 <p class="articles__image-caption">
-	{{ value.caption }}
-	{% if value.image.license %} |
-		{{ value.image.license.title }} {{ value.image.license.description }} {{ value.image.license.version }}
-	{% endif %}
+    {% if value.caption %}
+        {{ value.caption }}
+    {% endif %}
+
+    {% if value.image.license %} |
+        {{ value.image.license.title }}
+    {% endif %}
+
+    {% if value.image.author %} |
+        {{ value.image.author }}
+    {% endif %}
 </p>
