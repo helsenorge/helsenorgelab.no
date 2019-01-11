@@ -6,8 +6,6 @@ from wagtail.images.models import AbstractImage, AbstractRendition, Image
 # We define our own custom image class to replace wagtailimages.Image,
 # providing various additional data fields
 class CustomImage(AbstractImage):
-    alt = models.CharField(max_length=255, blank=True)
-    credit = models.CharField(max_length=255, blank=True)
     license = models.ForeignKey(
         'utils.LicenseSnippet',
         null=True,
@@ -15,19 +13,26 @@ class CustomImage(AbstractImage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-
-    admin_form_fields = Image.admin_form_fields + (
-        'alt',
-        'credit',
-        'license',
+    description = models.TextField(
+        blank=True,
+        max_length=165,
+    )
+    author = models.ForeignKey(
+        'people.PersonPage',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    image_source_url = models.URLField(
+        blank=True
     )
 
-    # When you save the image, check if alt text has been set. If not, set it as the title.
-    def save(self, *args, **kwargs):
-        if not self.alt:
-            self.alt = self.title
-
-        super().save(*args, **kwargs)
+    admin_form_fields = Image.admin_form_fields + (
+        'description',
+        'author',
+        'license',
+        'image_source_url'
+    )
 
 
 class Rendition(AbstractRendition):
