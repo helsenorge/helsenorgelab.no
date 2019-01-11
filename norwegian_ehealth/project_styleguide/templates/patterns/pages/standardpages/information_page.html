@@ -1,37 +1,87 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags navigation_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+<div class="wrapper articles">
 
-    <div class="wrapper wrapper--flex">
-        <section class="section section--main articles">
+    <div class="wrapper wrapper--small">
 
-            {% block breadcrumbs %}
-                {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-            {% endblock %}
+        {% block breadcrumbs %}
+            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+        {% endblock %}
 
-            <h1>{{ page.title }}</h1>
-            <h5>{{ page.introduction }}</h5>
+        <h1>{{ page.title }}</h1>
 
-            <div class="articles__categories">
-                {% for category in page.categories.all %}
-                    <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
-                        {{ category.category }}
-                    </a>
-                    {% if not forloop.last %},{% endif %}
+        <p class="articles__publish-info">
+            {% if page.display_date %}
+                <span class="publish-date">
+                    Published on
+                    {{ page.display_date|date:"l F j, Y" }}
+                </span>
+            {% endif %}
+            {% if page.author %}
+                <a href="{% pageurl page.author %}">
+                    {{ page.author.first_name }} {{ page.author.last_name }}
+                </a>
+            {% endif %}
+        </p>
 
-                {% endfor %}
-            </div>
-
-            {% include_block page.body %}
-            {% include "patterns/molecules/share/share.html" %}
-
-        </section>
-
-        {% sidebar %}
+        {% if page.introduction %}
+            <p class="articles__intro">
+                {{ page.introduction }}
+            </p>
+        {% endif %}
 
     </div>
 
-    {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_pages=page.related_pages.all %}
+    {# TODO break out featured image into molecule for this and news_page.html #}
+    <div class="wrapper wrapper--medium">
+        {% if page.featured_image %}
+            <p class="articles__featured-image">
+                {% image page.featured_image fill-995x560 %}
+            </p>
+        {% endif %}
+
+        {% if page.image_caption %}
+            <p class="articles__featured-image-caption">
+                {{ page.image_caption }}
+                {% if page.featured_image.license %} |
+                    {{ page.featured_image.license.title }}
+                    {{ page.featured_image.license.description }}
+                    {{ page.featured_image.license.version }}
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
+
+    <div class="wrapper wrapper--small">
+
+        <section class="main-body">
+            {% include_block page.body %}
+        </section>
+
+        {% include "patterns/molecules/license/license.html" with license=page.license %}
+
+        <div class="articles__categories">
+            {% for category in page.categories.all %}
+                <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                    {{ category.category }}
+                </a>
+                {% if not forloop.last %},{% endif %}
+
+            {% endfor %}
+        </div>
+
+    </div> {# wrapper-small #}
+
+    {% comment %}
+    {% include "patterns/molecules/share/share.html" %}
+    {% endcomment %}
+
+</div> {# wrapper articles #}
+
+{% comment %}
+{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
+{% endcomment %}
 
 {% endblock %}
