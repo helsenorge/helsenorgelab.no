@@ -62,6 +62,8 @@
 
         {% include "patterns/molecules/license/license.html" with license=page.license %}
 
+        {# commenting this out for now because there is no index page for info pages #}
+        {% comment %}
         <div class="articles__categories">
             {% for category in page.categories.all %}
                 <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
@@ -70,6 +72,11 @@
                 {% if not forloop.last %},{% endif %}
 
             {% endfor %}
+        </div>
+        {% endcomment %}
+
+        <div class="container">
+            {% include "patterns/molecules/author/author.html" with author=page.author biography=page.biography %}
         </div>
 
     </div> {# wrapper-small #}
