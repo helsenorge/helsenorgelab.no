@@ -73,26 +73,7 @@
 
         <div class="container">
             {% for author in page.authors.all %}
-                <div class="articles__author row">
-                    <div class="col-4">
-                        {% image author.author.photo fill-140x140 %}
-                    </div>
-
-                    <div class="col-8">
-                        <h2>
-                            <a href="{% pageurl author.author %}">
-                                {{ author.author.first_name }} {{ author.author.last_name }}
-                            </a>
-                        </h2>
-                        <div class="author-bio">
-                            {% if author.biography %}
-                                {{ author.biography }}
-                            {% else %}
-                                {{ author.author.biography|striptags|truncatechars:255 }}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+                {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
             {% endfor %}
         </div>
 
