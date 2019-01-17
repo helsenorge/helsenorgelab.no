@@ -46,19 +46,6 @@
         {% include_block page.biography %}
     </div>
 
-    <hr>
-
-    {% with person_type=page.person_types.all %}
-        {% if person_type %}
-            <div class="container">
-                <h4>Person types</h4>
-                {% for person_type in person_type %}
-                    <p>{{ person_type }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
 </section>
 
 {% endblock %}

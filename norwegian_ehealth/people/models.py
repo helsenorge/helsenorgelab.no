@@ -38,38 +38,6 @@ class SocialMediaProfile(models.Model):
             self.username = self.username[1:]
 
 
-class PersonType(models.Model):
-    title = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.title
-
-
-class PersonPagePersonType(models.Model):
-    page = ParentalKey('PersonPage', related_name='person_types')
-    person_type = models.ForeignKey(
-        'PersonType',
-        related_name='+',
-        on_delete=models.CASCADE,
-    )
-
-    panels = [
-        FieldPanel('person_type')
-    ]
-
-    def __str__(self):
-        return self.person_type.title
-
-
-class PersonPagePhoneNumber(models.Model):
-    page = ParentalKey('PersonPage', related_name='phone_numbers')
-    phone_number = models.CharField(max_length=255)
-
-    panels = [
-        FieldPanel('phone_number')
-    ]
-
-
 class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
@@ -102,9 +70,7 @@ class PersonPage(BasePage):
         FieldPanel('website'),
         MultiFieldPanel([
             FieldPanel('email'),
-            InlinePanel('phone_numbers', label='Phone numbers'),
         ], heading='Contact information'),
-        # InlinePanel('person_types', label='Person types'),
         FieldPanel('introduction'),
         StreamFieldPanel('biography')
     ]
