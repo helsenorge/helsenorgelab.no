@@ -44,10 +44,11 @@
         {% if page.image_caption %}
             <p class="articles__featured-image-caption">
                 {{ page.image_caption }}
-                {% if page.featured_image.license %} |
+                {% if page.featured_image.license.title %} |
                     {{ page.featured_image.license.title }}
-                    {{ page.featured_image.license.description }}
-                    {{ page.featured_image.license.version }}
+                {% endif %}
+                {% if page.featured_image.author %} |
+                    {{ page.featured_image.author }}
                 {% endif %}
             </p>
         {% endif %}
