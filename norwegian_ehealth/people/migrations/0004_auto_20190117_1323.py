@@ -22,6 +22,10 @@ class Migration(migrations.Migration):
             model_name='personpagephonenumber',
             name='page',
         ),
+        migrations.RemoveField(
+            model_name='personpage',
+            name='website',
+        ),
         migrations.DeleteModel(
             name='PersonType',
         ),
