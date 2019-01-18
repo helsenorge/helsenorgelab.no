@@ -38,38 +38,6 @@ class SocialMediaProfile(models.Model):
             self.username = self.username[1:]
 
 
-class PersonType(models.Model):
-    title = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.title
-
-
-class PersonPagePersonType(models.Model):
-    page = ParentalKey('PersonPage', related_name='person_types')
-    person_type = models.ForeignKey(
-        'PersonType',
-        related_name='+',
-        on_delete=models.CASCADE,
-    )
-
-    panels = [
-        FieldPanel('person_type')
-    ]
-
-    def __str__(self):
-        return self.person_type.title
-
-
-class PersonPagePhoneNumber(models.Model):
-    page = ParentalKey('PersonPage', related_name='phone_numbers')
-    phone_number = models.CharField(max_length=255)
-
-    panels = [
-        FieldPanel('phone_number')
-    ]
-
-
 class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
@@ -87,7 +55,6 @@ class PersonPage(BasePage):
     )
     job_title = models.CharField(max_length=255)
     introduction = models.TextField(blank=True)
-    website = models.URLField(blank=True, max_length=255)
     biography = StreamField(StoryBlock(), blank=True)
     email = models.EmailField(blank=True)
 
@@ -99,12 +66,9 @@ class PersonPage(BasePage):
         ImageChooserPanel('photo'),
         FieldPanel('job_title'),
         InlinePanel('social_media_profile', label='Social accounts'),
-        FieldPanel('website'),
         MultiFieldPanel([
             FieldPanel('email'),
-            InlinePanel('phone_numbers', label='Phone numbers'),
         ], heading='Contact information'),
-        # InlinePanel('person_types', label='Person types'),
         FieldPanel('introduction'),
         StreamFieldPanel('biography')
     ]
