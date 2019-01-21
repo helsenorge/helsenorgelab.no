@@ -2,16 +2,29 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
+    <div class="homepage">
 
+        <div class="homepage__hero-image-container">
+            {% if page.featured_image %}
+                {% image page.featured_image fill-1400x555 %}
+            {% endif %}
+            <div class="homepage__hero-text-block">
+                <h2>{{ page.title }}</h2>
 
-    {{ page.strapline }}
+                <p>{{ page.introduction }}</p>
 
-    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+                <a class="btn btn-primary" href="{{ page.button_link }}" role="button">
+                    {{ page.button_text }}
+                </a>
+            </div>
+        </div>
 
-    {% comment %}
-    {% include "patterns/molecules/share/share.html" %}
-    {% endcomment %}
+        {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+        {% comment %}
+        {% include "patterns/molecules/share/share.html" %}
+        {% endcomment %}
+    </div>
 
 {% endblock %}
