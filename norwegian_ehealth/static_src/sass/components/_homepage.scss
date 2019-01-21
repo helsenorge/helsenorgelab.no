@@ -1,0 +1,29 @@
+.homepage {
+
+    &__hero-container {
+      position: relative;
+    }
+
+    &__hero-image-container {
+      position: relative;
+    }
+
+    &__hero-text-block {
+      color: $color--white;
+      background-color: $color--secondary;
+      padding: 5px 20px;
+
+      @include media-query(tablet-landscape) {
+        position: absolute;
+        top: 188px;
+        left: 100px;
+        width: 600px;
+        height: 250px;
+      }
+
+      h2 {
+          color: $color--white;
+      }
+    }
+
+}
