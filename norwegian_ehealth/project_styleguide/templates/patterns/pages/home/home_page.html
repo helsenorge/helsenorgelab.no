@@ -3,20 +3,22 @@
 
 {% block content %}
 
-    <div class="homepage">
+    <div class="wrapper homepage">
 
-        <div class="homepage__hero-image-container">
-            {% if page.featured_image %}
-                {% image page.featured_image fill-1400x555 %}
-            {% endif %}
-            <div class="homepage__hero-text-block">
-                <h2>{{ page.title }}</h2>
+        <div class="wrapper wrapper--extra-large">
+            <div class="homepage__hero-image-container">
+                {% if page.featured_image %}
+                    {% image page.featured_image fill-1400x555 %}
+                {% endif %}
+                <div class="homepage__hero-text-block">
+                    <h2>{{ page.title }}</h2>
 
-                <p>{{ page.introduction }}</p>
+                    <p>{{ page.introduction }}</p>
 
-                <a class="btn btn-primary" href="{{ page.button_link }}" role="button">
-                    {{ page.button_text }}
-                </a>
+                    <a class="btn btn-primary" href="{{ page.button_link }}" role="button">
+                        {{ page.button_text }}
+                    </a>
+                </div>
             </div>
         </div>
 
