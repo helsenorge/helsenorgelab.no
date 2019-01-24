@@ -46,10 +46,10 @@ class HomePage(BasePage):
 
     featured_image = models.ForeignKey(
         'images.CustomImage',
-        null=False,
+        null=True,
         blank=False,
         related_name='+',
-        on_delete=models.PROTECT
+        on_delete=models.SET_NULL,
     )
 
     search_fields = BasePage.search_fields + [
