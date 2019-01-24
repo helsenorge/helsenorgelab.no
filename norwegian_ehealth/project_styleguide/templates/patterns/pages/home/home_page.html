@@ -20,9 +20,11 @@
 
                     <p>{{ page.introduction }}</p>
 
-                    <a class="homepage__hero-button btn btn-primary" href="{% pageurl page.button_link %}" role="button">
-                        {{ page.button_text }}
-                    </a>
+                    {% if page.button_link and page.button_text %}
+                        <a class="homepage__hero-button btn btn-primary" href="{% pageurl page.button_link %}" role="button">
+                            {{ page.button_text }}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
