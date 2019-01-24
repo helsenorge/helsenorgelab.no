@@ -1,6 +1,11 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+{# override the wrapper size for an extra large featured image on the homepage #}
+{% block header-wrapper %}
+    <main class="wrapper wrapper--extra-large wrapper--main homepage__wrapper">
+{% endblock %}
+
 {% block content %}
 
     <div class="wrapper homepage">
@@ -15,14 +20,16 @@
 
                     <p>{{ page.introduction }}</p>
 
-                    <a class="btn btn-primary" href="{{ page.button_link }}" role="button">
+                    <a class="homepage__hero-button btn btn-primary" href="{% pageurl page.button_link %}" role="button">
                         {{ page.button_text }}
                     </a>
                 </div>
             </div>
         </div>
 
-        {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+        <div class="wrapper wrapper--large">
+
+        </div>
 
         {% comment %}
         {% include "patterns/molecules/share/share.html" %}

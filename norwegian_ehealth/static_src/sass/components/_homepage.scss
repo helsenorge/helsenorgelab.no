@@ -1,5 +1,9 @@
 .homepage {
 
+    &__wrapper {
+        padding: 0px 0px 100px !important;
+    }
+
     &__hero-container {
       position: relative;
     }
@@ -15,7 +19,7 @@
 
       @include media-query(tablet-landscape) {
         position: absolute;
-        top: 188px;
+        bottom: 40px;
         left: 100px;
         width: 600px;
         height: 250px;
@@ -24,6 +28,14 @@
       h2 {
           color: $color--white;
       }
+    }
+
+    &__hero-button {
+        @include media-query(tablet-landscape) {
+            position: absolute;
+            top: 175px;
+            left: 40px;
+        }
     }
 
 }
