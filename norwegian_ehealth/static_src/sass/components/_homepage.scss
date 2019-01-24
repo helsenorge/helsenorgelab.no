@@ -10,6 +10,7 @@
 
     &__hero-image-container {
       position: relative;
+      padding-bottom: 50px
     }
 
     &__hero-text-block {
@@ -19,10 +20,11 @@
 
       @include media-query(tablet-landscape) {
         position: absolute;
-        bottom: 40px;
+        bottom: 90px;
         left: 100px;
         width: 600px;
-        height: 250px;
+        height: 325px;
+        padding: 30px;
       }
 
       h2 {
@@ -33,9 +35,13 @@
     &__hero-button {
         @include media-query(tablet-landscape) {
             position: absolute;
-            top: 175px;
+            top: 250px;
             left: 40px;
         }
+    }
+
+    &__article-top {
+        padding-bottom: 70px
     }
 
 }

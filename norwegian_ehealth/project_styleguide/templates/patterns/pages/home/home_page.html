@@ -29,6 +29,67 @@
 
         <div class="wrapper wrapper--large">
 
+            {% if article_top %}
+
+                <h2>Latest News</h2>
+
+                <div class="row homepage__article-top">
+                    <div class="col-sm-8">
+                        <a href="{% pageurl article_top %}">
+                            {% if article_top.listing_image %}
+                                {% image article_top.listing_image fill-775x430 %}
+                            {% elif article_top.featured_image %}
+                                {% image article_top.featured_image fill-775x430 %}
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h2>
+                            <a href="{% pageurl article_top %}">
+                                {% firstof article_top.listing_title article_top.title %}
+                            </a>
+                        </h2>
+                        <p>{% firstof article_top.listing_summary article_top.introduction %}</p>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    {% for article in articles_row_1 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+                    {% for article in articles_row_2 %}
+                        {% for article in articles_row_1 %}
+                            {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+
+            {% if page.featured_pages %}
+
+                <h2>Featured</h2>
+
+                <div class="row">
+                    {% for article in featured_row_1 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+                    {% for article in featured_row_2 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                    {% endfor %}
+                </div>
+
+
+            {% endif %}
+
         </div>
 
         {% comment %}

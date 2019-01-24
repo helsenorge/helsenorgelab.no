@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<div class="col-sm-4">
+  <a href="{% pageurl page %}">
+      <div class="card">
+          <div class="card-body">
+            {% if page.listing_image %}
+                {% image page.listing_image fill-370x270 class="card-img-top" %}
+            {% elif page.featured_image %}
+                {% image page.featured_image fill-370x270 class="card-img-top" %}
+            {% endif %}
+            <p class="card-text">
+                <h3 class="card-link">{% firstof page.listing_title page.title %}</h3>
+            </p>
+          </div>
+      </div>
+  </a>
+</div>

@@ -6,6 +6,7 @@ from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
+from norwegian_ehealth.news.models import NewsPage
 from norwegian_ehealth.utils.models import BasePage
 
 
@@ -72,3 +73,17 @@ class HomePage(BasePage):
             heading='Featured Pages, Maximum 6'
         ),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        latest_articles = NewsPage.objects.live().public().order_by('-publication_date')
+        article_top = latest_articles[0]
+        articles_row_1 = latest_articles[1:4]
+        articles_row_2 = latest_articles[4:7]
+        context['article_top'] = article_top
+        context['articles_row_1'] = articles_row_1
+        context['articles_row_2'] = articles_row_2
+        context['featured_row_1'] = self.featured_pages.all()[:3]
+        context['featured_row_2'] = self.featured_pages.all()[3:6]
+
+        return context
