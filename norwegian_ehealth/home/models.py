@@ -32,7 +32,7 @@ class HomePage(BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
 
-    introduction = models.CharField(blank=True, max_length=255)
+    introduction = models.CharField(blank=False, max_length=255)
 
     button_text = models.CharField(blank=True, max_length=55)
 
@@ -46,10 +46,10 @@ class HomePage(BasePage):
 
     featured_image = models.ForeignKey(
         'images.CustomImage',
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         related_name='+',
-        on_delete=models.SET_NULL
+        on_delete=models.PROTECT
     )
 
     search_fields = BasePage.search_fields + [
