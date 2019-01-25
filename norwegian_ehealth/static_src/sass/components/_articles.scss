@@ -48,6 +48,10 @@
         padding: 0;
     }
 
+    &__filter-label {
+        padding-right: 20px;
+    }
+
     &__intro {
         @include font-size(m);
         line-height: 40px;
@@ -57,7 +61,7 @@
     }
 
     &__news-item {
-        padding-bottom: 20px;
+        padding-bottom: 40px;
 
         img {
             padding-top: 15px;
