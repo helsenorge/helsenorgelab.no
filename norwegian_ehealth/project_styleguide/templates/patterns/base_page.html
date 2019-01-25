@@ -18,6 +18,13 @@
         Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
     {% endcomment %}
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     {% comment %}
         Twitter summary card - see https://dev.twitter.com/cards/types/summary
         and https://dev.twitter.com/cards/getting-started
