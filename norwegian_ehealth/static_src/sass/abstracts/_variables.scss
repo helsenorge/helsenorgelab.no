@@ -31,7 +31,7 @@ $weight--bold:          700;
 $weight--semibold:      600;
 $weight--medium:        500;
 $weight--normal:        400;
-$weight--light:         300;
+$weight--light:         100;
 
 // Font sizes
 $base-font-size: 18px;
@@ -44,6 +44,7 @@ $font-sizes: (
     m:          27px,
     ms:         22px,
     s:          18px,
+    ss:         14px,
     xs:         16px,
     xxs:        12px
 );
