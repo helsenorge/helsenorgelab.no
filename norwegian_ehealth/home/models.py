@@ -78,12 +78,9 @@ class HomePage(BasePage):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         latest_articles = NewsPage.objects.live().public().order_by('-publication_date')
-        article_top = latest_articles[0]
-        articles_row_1 = latest_articles[1:4]
-        articles_row_2 = latest_articles[4:7]
-        context['article_top'] = article_top
-        context['articles_row_1'] = articles_row_1
-        context['articles_row_2'] = articles_row_2
+        context['article_top'] = latest_articles[0]
+        context['articles_row_1'] = latest_articles[1:4]
+        context['articles_row_2'] = latest_articles[4:7]
         context['featured_row_1'] = self.featured_pages.all()[:3]
         context['featured_row_2'] = self.featured_pages.all()[3:6]
 
