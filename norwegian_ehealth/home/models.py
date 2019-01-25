@@ -3,13 +3,14 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel)
+from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from norwegian_ehealth.utils.models import BasePage
 
 
-class HomePageFeaturedPage(models.Model):
+class HomePageFeaturedPage(Orderable):
     page = ParentalKey(
         'home.HomePage',
         related_name='featured_pages'
