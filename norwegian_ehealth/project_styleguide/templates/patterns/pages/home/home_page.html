@@ -65,9 +65,7 @@
 
                 <div class="row">
                     {% for article in articles_row_2 %}
-                        {% for article in articles_row_1 %}
-                            {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
-                        {% endfor %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
                     {% endfor %}
                 </div>
 
