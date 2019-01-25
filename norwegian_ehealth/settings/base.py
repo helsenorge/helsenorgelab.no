@@ -559,6 +559,7 @@ if 'RECAPTCHA_PUBLIC_KEY' in env and 'RECAPTCHA_PRIVATE_KEY' in env:
     RECAPTCHA_PUBLIC_KEY = env['RECAPTCHA_PUBLIC_KEY']
     RECAPTCHA_PRIVATE_KEY = env['RECAPTCHA_PRIVATE_KEY']
 
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Basic authentication settings
 # These are settings to configure the third-party library:
