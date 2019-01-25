@@ -21,7 +21,7 @@
                     <p>{{ page.introduction }}</p>
 
                     {% if page.button_link and page.button_text %}
-                        <a class="homepage__hero-button btn btn-primary" href="{% pageurl page.button_link %}" role="button">
+                        <a class="homepage__hero-button btn" href="{% pageurl page.button_link %}" role="button">
                             {{ page.button_text }}
                         </a>
                     {% endif %}

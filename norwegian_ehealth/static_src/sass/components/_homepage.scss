@@ -33,6 +33,14 @@
     }
 
     &__hero-button {
+        color: $color--white;
+        border: $color--white solid 1px;
+
+        &:hover {
+            background-color: lighten($color--secondary, 20%);
+            color: $color--white !important;
+        }
+
         @include media-query(tablet-landscape) {
             position: absolute;
             top: 250px;
