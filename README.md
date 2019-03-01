@@ -5,11 +5,11 @@ norwegian_ehealth Wagtail site
 
 1. Make changes on a new branch, including a broad category and the ticket number if relevant e.g. `feature/123-extra-squiggles`, `fix/newsletter-signup`.
 1. Push your branch to the remote.
-1. Make merge requests at https://git.torchbox.com/norwegian-ehealth/norwegian-ehealth-wagtail/merge_requests/new, setting the 'Source branch' to your feature branch and the 'Target branch' to `master`. Select 'Compare branches and continue'.
+1. Make merge requests at https://github.com/helsenorgelab/helsenorgelab.no/compare, setting the 'compare' to your feature branch and the 'base' to `master`. Select 'Compare branches and continue'.
 1. Edit details as necessary.
 
 
-Gitlab has built-in CI tests. These can be configured by editing `.gitlab-ci.yml`. By default these are run on all pushes and merge requests.
+~~Gitlab has built-in CI tests. These can be configured by editing `.gitlab-ci.yml`. By default these are run on all pushes and merge requests.~~
 
 
 If you need to preview work on `staging`, this can be merged and deployed manually without making a merge request. You can still make the merge request as above, but add a note to say that this is on `staging`, and not yet ready to be merged to `master`.
@@ -23,7 +23,7 @@ To set up a new build:
 
 ``` bash
 git clone [URL TO GIT REMOTE]
-cd norwegian_ehealth
+cd helsenorgelab.no
 vagrant up
 vagrant ssh
 ```

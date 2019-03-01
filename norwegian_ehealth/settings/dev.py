@@ -42,6 +42,8 @@ INSTALLED_APPS.append('django_extensions')  # noqa
 # Disable forcing HTTPS locally since development server supports HTTP only.
 SECURE_SSL_REDIRECT = False
 
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
 
 # Import settings from local.py file if it exists. Please use it to keep
 # settings that are not meant to be checked into Git and never check it in.
