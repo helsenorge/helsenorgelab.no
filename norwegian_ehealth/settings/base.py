@@ -638,6 +638,9 @@ DEFAULT_PER_PAGE = 10
 PATTERN_LIBRARY_ENABLED = env.get('PATTERN_LIBRARY_ENABLED', 'false').lower() == 'true'
 PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(PROJECT_DIR, 'project_styleguide', 'templates')
 
+# Wagtail forms not used so silence captcha warning
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
 
 # Favicon settings
 # After you add favicon.ico file, please add its path relative to the static
