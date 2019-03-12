@@ -1,42 +1,35 @@
 .hero {
 
-    &__hero-image-container {
+    &-image-container {
       position: relative;
       padding-bottom: 50px;
     }
 
-    &__hero-text-block {
-      color: $color--white;
-      background-color: $color--secondary;
+    &-text-block {
+      color: $white;
+      background-color: rgba($info, 0.9);
       padding: 20px;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         position: absolute;
         bottom: 90px;
-        left: 100px;
-        width: 600px;
-        height: 325px;
+        left: 40px;
+        width: 40%;
         padding: 30px;
       }
 
       h2 {
-          color: $color--white;
+          color: $white;
       }
     }
 
-    &__hero-button {
-        color: $color--white;
-        border: $color--white solid 1px;
+    &-button {
+        color: $white;
+        border: $white solid 1px;
 
         &:hover {
-            background-color: lighten($color--secondary, 40%);
-            color: $color--white !important;
-        }
-
-        @include media-breakpoint-up(md) {
-            position: absolute;
-            top: 250px;
-            left: 40px;
+            background-color: darken($info, 10%);
+            color: $white !important;
         }
     }
 

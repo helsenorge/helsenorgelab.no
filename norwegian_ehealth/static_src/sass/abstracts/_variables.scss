@@ -10,6 +10,32 @@ $headings-font-family:   $font-family-serif;
 $body-bg:                   #efefef;
 $body-color:                #111 ;
 
+
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+
+$spacer: 1rem ;
+$spacers: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    0_25: ($spacer * .25),
+    0_5: ($spacer * .5),
+    1: $spacer,
+    1_5: ($spacer * 1.5),
+    2: ($spacer * 2),
+    3: ($spacer * 3),
+    5: ($spacer * 5),
+    10: ($spacer * 10)
+  ),
+  $spacers
+);
+
+
 // --------------------------------- Colors -------------------------------------
 $color--primary:        #fff;
 $color--secondary:      #1c166c;  /* dark blue-purple */

@@ -1,9 +1,9 @@
 {% load wagtailcore_tags %}
-<nav role="navigation" aria-label="Quaternary">
-    <ul class="nav nav--tertiary">
+<nav role="navigation">
+    <ul class="nav">
         {% for link in footerlinks %}
-            <li class="nav__item nav__item--footer" role="presentation">
-                {% include_block link %}
+            <li class="nav-item">
+                {% include_block link %} 
             </li>
         {% endfor %}
     </ul>

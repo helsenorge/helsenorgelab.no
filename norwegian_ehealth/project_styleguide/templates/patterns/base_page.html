@@ -66,7 +66,7 @@
 
 {% block header %}
     <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-white pt-3 pb-3" aria-label="Primary">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white pt-1 pb-1" aria-label="Primary">
                 <div class="container">
                     <a class="navbar-brand" href="{% slugurl 'home' %}">
                         <svg height="35" viewBox="0 0 159 20" width="159" xmlns="http://www.w3.org/2000/svg"><text fill="#1c166c" fill-rule="evenodd" font-family="PlayfairDisplay-Bold, Playfair Display" font-size="20" font-weight="bold" transform="translate(-100 -38)"><tspan x="100" y="54">helsenorgelab.no</tspan></text></svg>
@@ -100,31 +100,8 @@
 {% endblock header %}
 
 {% block footer %}
-    <footer class="footer bg-white">
+    <footer class="footer bg-white mt-10 pt-2 pb-1">
         <div class="container">
-            <div class="footer__nav-container">
-                {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
-                    <section class="footer__social-links">
-                        <h5 class="footer__heading">Follow us:</h5>
-                        {% if settings.utils.SocialMediaSettings.twitter_handle %}
-                            <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
-                                <svg class="icon icon--footer-social"><use xlink:href="#twitter"></use></svg>
-                            </a>
-                        {% endif %}
-                        {% if settings.utils.SocialMediaSettings.facebook_app_id %}
-                            <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
-                                <svg class="icon icon--footer-social"><use xlink:href="#facebook"></use></svg>
-                            </a>
-                        {% endif %}
-                    </section>
-                {% endif %}
-
-                {% comment %}
-                <section>
-                    {% footernav %}
-                </section>
-                {% endcomment %}
-
                 <section>
                     {% footerlinks %}
                 </section>
@@ -134,12 +111,7 @@
                 </section>
 
             </div>
-
-            <div class="footer__credit" role="contentinfo">
-                <div>En side fra gjengen bak <a href="https://helsenorge.no/">Helsenorge</a></div>
-            </div>
         </div>
     </footer>
-
 {% endblock footer %}
 

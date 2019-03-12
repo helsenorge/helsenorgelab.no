@@ -2,17 +2,17 @@
 
 <div class="col-sm-4">
   <a href="{% pageurl page %}">
-      <div class="card">
-          <div class="card-body">
+      <div class="card border-0 bg-transparent">
+          {% if page.listing_image %}
+            {% image page.listing_image fill-370x270 as img %}
+            <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
+          {% elif page.featured_image %}
+            {% image page.featured_image fill-370x270 as img %}
+            <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
+          {% endif %}
 
-            {% if page.listing_image %}
-                {% image page.listing_image fill-370x270 class="card-img-top" %}
-            {% elif page.featured_image %}
-                {% image page.featured_image fill-370x270 class="card-img-top" %}
-            {% endif %}
-
+          <div class="card-body pl-0">
             <h3 class="card-link">{% firstof page.listing_title page.title %}</h3>
-
           </div>
       </div>
   </a>
