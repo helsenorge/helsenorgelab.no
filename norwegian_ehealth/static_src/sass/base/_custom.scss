@@ -1,6 +1,22 @@
 
 
 
+// Extra width classes
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+.extra-wide {
+  @include media-breakpoint-up(lg) {
+    margin-right: -50px;
+    margin-left: -50px;
+  }
+}
+
 // Remove left padding on first navigation link in footer
 .footer .nav .nav-item:first-child .nav-link {
     padding-left: 0;
