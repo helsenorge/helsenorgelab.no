@@ -4,8 +4,6 @@
 {% block content %}
 <div class="wrapper articles">
 
-    <div class="wrapper wrapper--small">
-
         {% block breadcrumbs %}
             {% include "patterns/molecules/navigation/breadcrumbs.html" %}
         {% endblock %}
@@ -15,8 +13,8 @@
         <p class="articles__publish-info">
             {% if page.display_date %}
                 <span class="publish-date">
-                    Published on
-                    {{ page.display_date|date:"l F j, Y" }}
+                    Publisert 
+                    {{ page.display_date|date:"d.m.Y" }}
                 </span>
             {% endif %}
             {% for author in page.authors.all %}
