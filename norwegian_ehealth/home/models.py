@@ -85,7 +85,8 @@ class HomePage(BasePage):
             if NewsPage.objects.live().public().count() >= 7 : 
                 context['articles_row_1'] = latest_articles[1:4]
                 context['articles_row_2'] = latest_articles[4:7]
-                context['featured_row_1'] = self.featured_pages.all()[:3]
-                context['featured_row_2'] = self.featured_pages.all()[3:6]
+                
+            context['featured_row_1'] = self.featured_pages.all()[:3]
+            context['featured_row_2'] = self.featured_pages.all()[3:6]
 
         return context
