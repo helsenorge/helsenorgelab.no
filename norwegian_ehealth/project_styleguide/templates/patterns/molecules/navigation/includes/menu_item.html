@@ -1,9 +1,9 @@
 {% load wagtailcore_tags %}
 {% if page %}
 	{% pageurl page as item_url %}
-	<a class="nav__link{% if has_children %} js-open-subnav{% endif %}" href="{{ item_url }}"
+	<a class="nav-link{% if has_children %} dropdown{% endif %}" href="{{ item_url }}"
 	    role="menuitem"
-	    {% if has_children %} aria-haspopup="true" {% endif %}
+	    {% if has_children %} role="button" aria-haspopup="true" aria-expanded="false"{% endif %}
 	    >
 	    {{ title|default:page.title }}
 	    {% if has_children %}
