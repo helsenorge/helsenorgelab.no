@@ -36,7 +36,7 @@ This will make the site available on the host machine at: http://127.0.0.1:8000/
 
 # Front-end assets
 
-To build front-end assets you will additionally need to run the following commands:
+To build front-end assets you will additionally need to run the following commands in the `norwegian_ehalth/static_src folder`:
 
  ```bash
 npm install
