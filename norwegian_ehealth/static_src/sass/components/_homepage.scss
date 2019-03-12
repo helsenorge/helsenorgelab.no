@@ -1,0 +1,55 @@
+.homepage {
+
+    &__wrapper {
+        padding: 0px 0px 100px !important;
+    }
+
+    &__hero-container {
+      position: relative;
+    }
+
+    &__hero-image-container {
+      position: relative;
+      padding-bottom: 50px
+    }
+
+    &__hero-text-block {
+      color: $color--white;
+      background-color: $color--secondary;
+      padding: 5px 20px;
+
+      @include media-query(tablet-landscape) {
+        position: absolute;
+        bottom: 90px;
+        left: 100px;
+        width: 600px;
+        height: 325px;
+        padding: 30px;
+      }
+
+      h2 {
+          color: $color--white;
+      }
+    }
+
+    &__hero-button {
+        color: $color--white;
+        border: $color--white solid 1px;
+
+        &:hover {
+            background-color: lighten($color--secondary, 20%);
+            color: $color--white !important;
+        }
+
+        @include media-query(tablet-landscape) {
+            position: absolute;
+            top: 250px;
+            left: 40px;
+        }
+    }
+
+    &__article-top {
+        padding-bottom: 70px
+    }
+
+}

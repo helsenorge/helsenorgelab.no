@@ -65,7 +65,7 @@ h1 {
     @include font-size(xl);
     line-height: 72px;
 }
-h2 { @include font-size(m); }
+h2 { @include font-size(l); }
 h3 { @include font-size(ms); }
 h4, h5, h6 { @include font-size(s); }
 small { @include font-size(xxs); }

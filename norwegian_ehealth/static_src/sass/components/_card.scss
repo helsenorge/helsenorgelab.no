@@ -1,6 +1,7 @@
 .card {
-    padding: 20px;
     background-color: $color--tertiary;
+    border: none;  // override bootstrap
+    border-radius: 0;  // override bootstrap
     transition: background-color $transition;
 
     &:hover {
@@ -12,4 +13,19 @@
     &:only-child {
         max-width: 260px;
 	}
+}
+
+// override bootstrap
+
+.card-body {
+	padding: 0;
+}
+
+.card-img-top {
+	border-radius: 0;
+}
+
+.card-link {
+	color: $color--quarternary;
+	padding: 30px 0;
 }

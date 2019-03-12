@@ -1,17 +1,100 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+{# override the wrapper size for an extra large featured image on the homepage #}
+{% block header-wrapper %}
+    <main class="wrapper wrapper--extra-large wrapper--main homepage__wrapper">
+{% endblock %}
+
 {% block content %}
-    <h1>{{ page.title }}</h1>
+
+    <div class="wrapper homepage">
+
+        <div class="wrapper wrapper--extra-large">
+            <div class="homepage__hero-image-container">
+                {% if page.featured_image %}
+                    {% image page.featured_image fill-1400x555 %}
+                {% endif %}
+                <div class="homepage__hero-text-block">
+                    <h2>{{ page.title }}</h2>
+
+                    <p>{{ page.introduction }}</p>
+
+                    {% if page.button_link and page.button_text %}
+                        <a class="homepage__hero-button btn" href="{% pageurl page.button_link %}" role="button">
+                            {{ page.button_text }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper--large">
+
+            {% if article_top %}
+
+                <h2>Latest News</h2>
+
+                <div class="row homepage__article-top">
+                    <div class="col-sm-8">
+                        <a href="{% pageurl article_top %}">
+                            {% if article_top.listing_image %}
+                                {% image article_top.listing_image fill-775x430 %}
+                            {% elif article_top.featured_image %}
+                                {% image article_top.featured_image fill-775x430 %}
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h2>
+                            <a href="{% pageurl article_top %}">
+                                {% firstof article_top.listing_title article_top.title %}
+                            </a>
+                        </h2>
+                        <p>{% firstof article_top.listing_summary article_top.introduction %}</p>
+                    </div>
+                </div>
 
 
+                <div class="row">
+                    {% for article in articles_row_1 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                    {% endfor %}
+                </div>
 
-    {{ page.strapline }}
+                <div class="row">
+                    {% for article in articles_row_2 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                    {% endfor %}
+                </div>
 
-    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+            {% endif %}
 
-    {% comment %}
-    {% include "patterns/molecules/share/share.html" %}
-    {% endcomment %}
+            {% if featured_row_1 %}
+
+                <h2>Featured</h2>
+
+                <div class="row">
+                    {% for article in featured_row_1 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+                    {% for article in featured_row_2 %}
+                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                    {% endfor %}
+                </div>
+
+
+            {% endif %}
+
+        </div>
+
+        {% comment %}
+        {% include "patterns/molecules/share/share.html" %}
+        {% endcomment %}
+    </div>
 
 {% endblock %}
