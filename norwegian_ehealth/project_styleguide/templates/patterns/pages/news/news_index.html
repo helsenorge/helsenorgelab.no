@@ -2,39 +2,35 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper wrapper--medium">
     <section class="section articles">
 
-        <div class="articles__header">{{ page.title }}</div>
+        <h1 class="articles__header pt-5">{{ page.title }}</h1>
 
         {% if page.introduction %}
-            <p class="articles__intro">
+            <p class="lead">
                 {{ page.introduction }}
             </p>
         {% endif %}
 
-        <div class="container">
-            <div class="row">
-                <span class="articles__filter-label">
-                    Filter by:
-                </span>
-                <span class="form-item">
-                    <form method="GET">
-                        <select name="category" onchange="this.form.submit()">
-                            <option value="">Show me everything</option>
-                            {% for category in categories %}
-                                <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                </span>
+            <div>
+                    <div class="d-inline">
+                        Vis bare:
+                    </div>
+                    <div class="d-inline">
+                        <form method="GET">
+                            <select name="category" onchange="this.form.submit()">
+                                <option value="">Alt sammen</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
             </div>
-        </div>
 
         {% if news %}
-            <div class="container">
                 {% for n in news %}
-                    <div class="articles__news-item row">
+                    <div class="article-items row py-2">
                         <div class="col-4">
                             <a href="{% pageurl n %}">
                             {% if n.listing_image %}
@@ -56,7 +52,6 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div>
 
             {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
 
@@ -67,5 +62,4 @@
         {% endif %}
     </section>
 
-</div>
 {% endblock %}

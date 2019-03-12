@@ -19,28 +19,26 @@
 
     <div class="wrapper wrapper--medium">
         {% if page.featured_image %}
-            <p class="articles__featured-image">
+            <figure class="figure">
                 {% image page.featured_image fill-995x560 as img %}
                 <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid extra-wide" />
-            </p>
+                <figcaption class="figure-caption">
+                    {{ page.image_caption }}
+                    {% if page.featured_image.license.title %} |
+                        {{ page.featured_image.license.title }}
+                    {% endif %}
+                    {% if page.featured_image.author %} |
+                        {{ page.featured_image.author }}
+                    {% endif %}
+                </figcaption>
+            </figure>
         {% endif %}
 
-        {% if page.image_caption %}
-            <p class="articles__featured-image-caption">
-                {{ page.image_caption }}
-                {% if page.featured_image.license.title %} |
-                    {{ page.featured_image.license.title }}
-                {% endif %}
-                {% if page.featured_image.author %} |
-                    {{ page.featured_image.author }}
-                {% endif %}
-            </p>
-        {% endif %}
     </div>
 
     <div class="wrapper wrapper--small">
 
-        <section class="main-body">
+        <section class="main-body py-3">
             {% include_block page.body %}
         </section>
 
