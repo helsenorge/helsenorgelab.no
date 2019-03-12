@@ -2,32 +2,34 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper wrapper--flex">
-    <section class="section section--main articles">
+<div class="wrapper wrapper--medium">
+    <section class="section articles">
 
         <div class="articles__header">{{ page.title }}</div>
-
-        <div class="grid">
-            <div class="grid-item">
-                Filter by:
-            </div>
-            <div class="grid-item form-item">
-                <form method="GET">
-                    <select name="category" onchange="this.form.submit()">
-                        <option value="">Show me everything</option>
-                        {% for category in categories %}
-                            <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
-        </div>
 
         {% if page.introduction %}
             <p class="articles__intro">
                 {{ page.introduction }}
             </p>
         {% endif %}
+
+        <div class="container">
+            <div class="row">
+                <span class="articles__filter-label">
+                    Filter by:
+                </span>
+                <span class="form-item">
+                    <form method="GET">
+                        <select name="category" onchange="this.form.submit()">
+                            <option value="">Show me everything</option>
+                            {% for category in categories %}
+                                <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </span>
+            </div>
+        </div>
 
         {% if news %}
             <div class="container">

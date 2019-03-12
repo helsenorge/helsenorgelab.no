@@ -8,5 +8,7 @@
 {% block content %}
     <h1>{{ settings.utils.SystemMessagesSettings.title_404 }}</h1>
 
-    {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+    <div class="page-not-found__body">
+        {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+    </div>
 {% endblock %}

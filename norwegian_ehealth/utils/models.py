@@ -3,10 +3,9 @@ from django.db import models
 from django.utils.decorators import method_decorator
 
 from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel,
-                                         PageChooserPanel, StreamFieldPanel)
+                                         PageChooserPanel)
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.core import blocks
-from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.fields import RichTextField
 from wagtail.core.models import Orderable, Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
@@ -136,64 +135,6 @@ class ListingFields(models.Model):
             FieldPanel('listing_summary'),
         ], 'Listing information'),
     ]
-
-
-@register_snippet
-class CallToActionSnippet(models.Model):
-    title = models.CharField(max_length=255)
-    summary = RichTextField(blank=True, max_length=255)
-    image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-
-    link = StreamField(
-        blocks.StreamBlock([
-            (
-                'external_link', blocks.StructBlock([
-                    ('url', blocks.URLBlock()),
-                    ('title', blocks.CharBlock()),
-                ], icon='link')
-            ),
-            (
-                'internal_link', blocks.StructBlock([
-                    ('page', blocks.PageChooserBlock()),
-                    ('title', blocks.CharBlock(required=False)),
-                ], icon='link'),
-            ),
-        ], max_num=1, required=True),
-        blank=True
-    )
-
-    panels = [
-        FieldPanel('title'),
-        FieldPanel('summary'),
-        ImageChooserPanel('image'),
-        StreamFieldPanel('link'),
-    ]
-
-    def get_link_text(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        title = block.value['title']
-        if block.block_type == 'external_link':
-            return title
-
-        # Title is optional for internal_link
-        # so fallback to page's title, if it's empty
-        return title or block.value['page'].title
-
-    def get_link_url(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        if block.block_type == 'external_link':
-            return block.value['url']
-
-        return block.value['page'].get_url()
-
-    def __str__(self):
-        return self.title
 
 
 @register_setting

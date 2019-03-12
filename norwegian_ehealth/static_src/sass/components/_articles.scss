@@ -40,12 +40,16 @@
     &__featured-image-caption,
     &__image-caption {
         @include font-size(xxs);
-        padding-bottom: 20px
+        padding-bottom: 40px;
     }
 
     &__featured-image-caption {
         text-align: center;
         padding: 0;
+    }
+
+    &__filter-label {
+        padding-right: 20px;
     }
 
     &__intro {
@@ -57,7 +61,7 @@
     }
 
     &__news-item {
-        padding-bottom: 20px;
+        padding-bottom: 40px;
 
         img {
             padding-top: 15px;
@@ -65,7 +69,7 @@
     }
 
     &__publish-info {
-        @include font-size(xxs);
+        @include font-size(ss);
 
         .publish-date {
             padding-right: 5px;

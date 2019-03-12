@@ -29,3 +29,11 @@
 	color: $color--quarternary;
 	padding: 30px 0;
 }
+
+.card:hover {
+    background-color: $color--white;
+
+    h3 {
+        color: lighten($color--quarternary, 20%);
+    }
+}
