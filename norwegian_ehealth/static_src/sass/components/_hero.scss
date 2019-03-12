@@ -1,17 +1,4 @@
-.homepage {
-
-    &__header {
-      padding-top: 20px;
-      padding-bottom: 40px;
-    }
-
-    &__wrapper {
-        padding: 0px 20px 100px !important;
-    }
-
-    &__hero-container {
-      position: relative;
-    }
+.hero {
 
     &__hero-image-container {
       position: relative;
@@ -23,7 +10,7 @@
       background-color: $color--secondary;
       padding: 20px;
 
-      @include media-query(tablet-landscape) {
+      @include media-breakpoint-up(md) {
         position: absolute;
         bottom: 90px;
         left: 100px;
@@ -46,7 +33,7 @@
             color: $color--white !important;
         }
 
-        @include media-query(tablet-landscape) {
+        @include media-breakpoint-up(md) {
             position: absolute;
             top: 250px;
             left: 40px;

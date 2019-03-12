@@ -65,46 +65,43 @@
 
 
 {% block header %}
-    <header class="header">
-        <div class="header__inner wrapper wrapper--large">
-            <a href="{% slugurl 'home' %}">
-                <svg height="35" viewBox="0 0 159 20" width="159" xmlns="http://www.w3.org/2000/svg"><text fill="#1c166c" fill-rule="evenodd" font-family="PlayfairDisplay-Bold, Playfair Display" font-size="20" font-weight="bold" transform="translate(-100 -38)"><tspan x="100" y="54">helsenorgelab.no</tspan></text></svg>
-            </a>
-
-            <div class="header__menu-toggle">
-                <span>Menu</span>
-                <button class="button button-menu-toggle js-mobile-menu-toggle" aria-haspopup="true" aria-label="Mobile menu toggle">
-                    <span class="button-menu-toggle__line"></span>
-                    <span class="button-menu-toggle__line"></span>
-                    <span class="button-menu-toggle__line"></span>
-                    <span class="button-menu-toggle__line"></span>
-                </button>
+    <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-white pt-3 pb-3" aria-label="Primary">
+                <div class="container">
+                    <a class="navbar-brand" href="{% slugurl 'home' %}">
+                        <svg height="35" viewBox="0 0 159 20" width="159" xmlns="http://www.w3.org/2000/svg"><text fill="#1c166c" fill-rule="evenodd" font-family="PlayfairDisplay-Bold, Playfair Display" font-size="20" font-weight="bold" transform="translate(-100 -38)"><tspan x="100" y="54">helsenorgelab.no</tspan></text></svg>
+                    </a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        {% primarynav %}
+                        <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
+                                <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
+                        </button>      
+                    </div>           
+                </div>
+            </nav>
+            <div class="collapse navbar-collapse py-5 bg-light" id="headerSearch">
+                <div class="container">
+                        <form action="{% url 'search' %}" method="get" role="search" class="form-inline my-2 my-lg-0">
+                                <input class="input form-control mr-sm-2" type="text" placeholder="S&oslash;k…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                                         S&oslash;k
+                                </button>
+                            </form>
+                </div>
             </div>
 
-            <section class="header__menus header__menus--desktop">
-                <div class="header__inner--top">
-                    {% primarynav %}
-                    <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
-                        <input class="input" type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                        <button class="button" type="submit">
-                            <svg class="icon icon--magnifying-glass"><use xlink:href="#magnifying-glass"></use></svg>
-                        </button>
-                    </form>
-                </div>
 
-
-            </section>
-
-            <section class="header__menus header__menus--mobile js-mobile-menu">
-                {% primarynav %}
-            </section>
-        </div>
     </header>
 {% endblock header %}
 
 {% block footer %}
-    <footer class="footer">
-        <div class="footer__inner wrapper wrapper--large">
+    <footer class="footer bg-white">
+        <div class="container">
             <div class="footer__nav-container">
                 {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
                     <section class="footer__social-links">
@@ -139,14 +136,10 @@
             </div>
 
             <div class="footer__credit" role="contentinfo">
-                {% if COPYRIGHT %}
-                    <p>© {% now "Y" %} {{ COPYRIGHT }}</p>
-                {% endif %}
                 <div>En side fra gjengen bak <a href="https://helsenorge.no/">Helsenorge</a></div>
             </div>
         </div>
     </footer>
 
-    {% include "patterns/molecules/cookie-message/cookie-message.html" %}
 {% endblock footer %}
 

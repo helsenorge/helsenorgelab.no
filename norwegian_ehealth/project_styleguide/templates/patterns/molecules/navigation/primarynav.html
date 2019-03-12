@@ -1,12 +1,10 @@
 {% load wagtailcore_tags %}
-<nav role="navigation" aria-label="Primary">
-    <ul class="nav nav--primary" role="menubar">
+    <ul class="navbar-nav ml-auto">
         {% for link in primarynav %}
             {% with children=link.value.page.get_children.live.public.in_menu %}
-                <li class="nav__item nav__item--primary" role="presentation">
+                <li class="nav-item px-5">
                     {% include_block link with has_children=0 %}
                 </li>
             {% endwith %}
         {% endfor %}
     </ul>
-</nav>
