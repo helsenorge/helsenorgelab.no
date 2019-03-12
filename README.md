@@ -1,4 +1,4 @@
-norwegian_ehealth Wagtail site
+helsenorgelab.no website
 ==================
 
 ## Contributing
@@ -9,20 +9,15 @@ norwegian_ehealth Wagtail site
 1. Edit details as necessary.
 
 
-~~Gitlab has built-in CI tests. These can be configured by editing `.gitlab-ci.yml`. By default these are run on all pushes and merge requests.~~
-
-
-If you need to preview work on `staging`, this can be merged and deployed manually without making a merge request. You can still make the merge request as above, but add a note to say that this is on `staging`, and not yet ready to be merged to `master`.
-
 # Setting up a local build
 
-This repository includes a Vagrantfile for running the project in a Debian VM and
-a fabfile for running common commands with Fabric.
+This repository includes a Vagrantfile for running the project in a Debian VM and a fabfile for running common commands with Fabric. 
+Make sure [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) are installed
 
 To set up a new build:
 
 ``` bash
-git clone [URL TO GIT REMOTE]
+git clone https://github.com/helsenorgelab/helsenorgelab.no.git
 cd helsenorgelab.no
 vagrant up
 vagrant ssh
@@ -70,19 +65,15 @@ to be able to connect to it.
 
 ## Pulling data
 
-To populate your local database with the content of staging/production:
+To populate your local database with the content from production:
 
 ``` bash
-fab pull-dev-data
-fab pull-staging-data
 fab pull-production-data
 ```
 
 Additionally, to fetch images and other media.
 
 ``` bash
-fab pull-dev-media
-fab pull-staging-media
 fab pull-production-media
 ```
 
@@ -94,7 +85,6 @@ To deploy the site to dev/staging/production:
 
 
 ``` bash
-fab deploy-dev
 fab deploy-staging
 fab deploy-production
 ```
@@ -104,7 +94,6 @@ fab deploy-production
 To open the shell of the servers.
 
 ```bash
-fab dev-shell
 fab staging-shell
 fab production-shell
 ```
@@ -117,7 +106,6 @@ sure to take backups.
 If you want to push your local database to the servers.
 
 ```bash
-fab push-dev-data
 fab push-staging-data
 fab push-production-data
 ```
@@ -125,7 +113,6 @@ fab push-production-data
 Or if you want to push your local media files.
 
 ```bash
-fab push-dev-media
 fab push-staging-media
 fab push-production-media
 ```
@@ -138,3 +125,7 @@ When you set up a server you should make sure the following scheduled tasks are 
 * `django-admin publish_scheduled_pages` - every 10 minutes or more often. This is necessary to make publishing scheduled pages work.
 * `django-admin clearsessions` - once a day (not necessary, but useful).
 * `django-admin update_index` - once a day  (not necessary, but useful to make sure search index stays intact).
+
+
+## To do
+[ ] Configure CI tests? Checkk sample config in .gitlab-ci.yml
