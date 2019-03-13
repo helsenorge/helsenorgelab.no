@@ -3,79 +3,79 @@
 
 {% block content %}
 
+    <article>
         {% block breadcrumbs %}
             {% include "patterns/molecules/navigation/breadcrumbs.html" %}
         {% endblock %}
 
-        <h1 class="pt-2">{{ page.title }}</h1>
+        <header class="container">
+            <h1 class="pt-2">{{ page.title }}</h1>
 
-        {% if page.introduction %}
-            <p class="lead py-2">
-                {{ page.introduction }}
-            </p>
-        {% endif %}
+            {% if page.introduction %}
+                <p class="lead py-2">
+                    {{ page.introduction }}
+                </p>
+            {% endif %}
+        </header>
 
-    </div>
-
-    <div class="wrapper wrapper--medium">
-        {% if page.featured_image %}
-            <figure class="figure">
-                {% image page.featured_image fill-995x560 as img %}
-                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid extra-wide" />
-                <figcaption class="figure-caption">
-                    {{ page.image_caption }}
-                    {% if page.featured_image.license.title %} |
-                        {{ page.featured_image.license.title }}
-                    {% endif %}
-                    {% if page.featured_image.author %} |
-                        {{ page.featured_image.author }}
-                    {% endif %}
-                </figcaption>
-            </figure>
-        {% endif %}
-
-    </div>
-
-    <div class="wrapper wrapper--small">
-
-        <section class="main-body py-3">
-            {% include_block page.body %}
-        </section>
-
-        {% include "patterns/molecules/license/license.html" with license=page.license %}
-
-        <div class="articles__categories">
-            {% for category in page.categories.all %}
-                <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
-                    {{ category.category }}
-                </a>
-                {% if not forloop.last %},{% endif %}
-
-            {% endfor %}
         </div>
-
-        <p class="article meta">
-                {% if page.display_date %}
-                    <span class="publish-date">
-                        Publisert 
-                        {{ page.display_date|date:"d.m.Y" }}
-                    </span>
-                {% endif %}
-            </p>
 
         <div class="container">
-            {% for author in page.authors.all %}
-                {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
-            {% endfor %}
+            {% if page.featured_image %}
+                <figure class="figure">
+                    {% image page.featured_image fill-995x560 as img %}
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="extra-wide" />
+                    <figcaption class="figure-caption">
+                        {{ page.image_caption }}
+                        {% if page.featured_image.license.title %} |
+                            {{ page.featured_image.license.title }}
+                        {% endif %}
+                        {% if page.featured_image.author %} |
+                            {{ page.featured_image.author }}
+                        {% endif %}
+                    </figcaption>
+                </figure>
+            {% endif %}
+
         </div>
 
-    </div> {# wrapper-small #}
+            <section class="main-body py-3">
+                {% include_block page.body %}
+            </section>
 
-    {% comment %}
-    {% include "patterns/molecules/share/share.html" %}
-    {% endcomment %}
+            {% include "patterns/molecules/license/license.html" with license=page.license %}
+
+            <div class="articles__categories">
+                {% for category in page.categories.all %}
+                    <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                        {{ category.category }}
+                    </a>
+                    {% if not forloop.last %},{% endif %}
+
+                {% endfor %}
+            </div>
+
+            <p class="article meta">
+                    {% if page.display_date %}
+                        <span class="publish-date">
+                            Publisert 
+                            {{ page.display_date|date:"d.m.Y" }}
+                        </span>
+                    {% endif %}
+                </p>
+
+            <div class="container">
+                {% for author in page.authors.all %}
+                    {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
+                {% endfor %}
+            </div>
 
 
+        {% comment %}
+        {% include "patterns/molecules/share/share.html" %}
+        {% endcomment %}
+
+    </article>
     {% comment %}
     {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
     {% endcomment %}

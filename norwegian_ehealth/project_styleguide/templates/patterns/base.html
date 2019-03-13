@@ -19,14 +19,12 @@
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
         {% block body_top %}{% endblock %}
 
-        {% include "patterns/atoms/sprites/sprites.html" %}
-
         {% wagtailuserbar %}
 
         {% block header %}{% endblock %}
 
         {% block header-wrapper %}
-        <main class="container">
+        <main>
         {% endblock %}
             {% block content %}
                 {{ pattern_library_rendered_pattern }}

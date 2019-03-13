@@ -12,7 +12,7 @@ $body-color:                #111 ;
 
 
 // Breadcrumb separator
-$breadcrumb-divider: &mdash;
+$breadcrumb-divider: quote("\2014");
 
 // Spacing
 //
@@ -33,7 +33,9 @@ $spacers: map-merge(
     2: ($spacer * 2),
     3: ($spacer * 3),
     5: ($spacer * 5),
-    10: ($spacer * 10)
+    10: ($spacer * 10),
+    15: ($spacer * 15),
+    20: ($spacer * 20)
   ),
   $spacers
 );

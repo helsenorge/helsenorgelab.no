@@ -7,13 +7,13 @@
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: -75vw;
+    margin-right: -75vw;
   }
 .extra-wide {
   @include media-breakpoint-up(lg) {
-    margin-right: -50px;
-    margin-left: -50px;
+    width: calc( 100% + 368px);
+    margin-left: -184px;
   }
 }
 
