@@ -2,7 +2,7 @@
     <ul class="navbar-nav ml-auto">
         {% for link in primarynav %}
             {% with children=link.value.page.get_children.live.public.in_menu %}
-                <li class="nav-item px-5">
+                <li class="nav-item">
                     {% include_block link with has_children=0 %}
                 </li>
             {% endwith %}

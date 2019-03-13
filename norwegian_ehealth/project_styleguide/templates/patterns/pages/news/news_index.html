@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <section class="section articles">
+    <section class="section articles container">
 
         <h1 class="display-2 pt-5">{{ page.title }}</h1>
 
@@ -12,21 +12,20 @@
             </p>
         {% endif %}
 
-            <div>
-                    <div class="d-inline">
-                        Vis bare:
-                    </div>
-                    <div class="d-inline">
-                        <form method="GET">
-                            <select name="category" onchange="this.form.submit()">
-                                <option value="">Alt sammen</option>
-                                {% for category in categories %}
-                                    <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
+        <form method="GET">
+            <div class="form-group row py-2">
+                <label for="category" class="col-sm-2 col-form-label">Vis kategori</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-lg" name="category" onchange="this.form.submit()">
+                        <option value="">Alt sammen</option>
+                        {% for category in categories %}
+                            <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
+        </form>
+
 
         {% if news %}
                 {% for n in news %}

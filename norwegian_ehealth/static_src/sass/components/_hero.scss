@@ -7,7 +7,7 @@
 
     &-text-block {
       color: $white;
-      background-color: rgba($info, 0.9);
+      background-color: rgba($primary, 0.9);
       padding: 20px;
 
       @include media-breakpoint-up(lg) {
@@ -26,9 +26,10 @@
     &-button {
         color: $white;
         border: $white solid 1px;
+        text-decoration: none;
 
         &:hover {
-            background-color: darken($info, 10%);
+            background-color: lighten($primary, 10%);
             color: $white !important;
         }
     }

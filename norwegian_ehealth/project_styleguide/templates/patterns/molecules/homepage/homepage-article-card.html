@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 <div class="col-sm-4">
-  <a href="{% pageurl page %}">
+  <a href="{% pageurl page %}" class="article-card-link">
       <div class="card border-0 bg-transparent">
           {% if page.listing_image %}
             {% image page.listing_image fill-370x270 as img %}

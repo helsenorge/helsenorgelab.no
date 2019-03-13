@@ -22,14 +22,17 @@
     padding-left: 0;
 }
 
-a.nav-link, .breadcrumb-item a {
+h1 a, h2 a, h3 a, a.nav-link, .breadcrumb-item a, .article-card-link {
   text-decoration: none;
 }
 
 h1, h2, h3, h4 {
   color: darken($primary, 8%);
+  font-weight: 300;
 }
 
 p.lead {
   color: darken($primary, 8%);
 }
+
+#main { min-height: 75vh; }
