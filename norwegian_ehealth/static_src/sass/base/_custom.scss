@@ -12,12 +12,24 @@
   }
 .extra-wide {
   @include media-breakpoint-up(lg) {
-    width: calc( 100% + 368px);
-    margin-left: -184px;
+    width: calc( 100% + 200px);
+    margin-left: -100px;
   }
 }
 
 // Remove left padding on first navigation link in footer
 .footer .nav .nav-item:first-child .nav-link {
     padding-left: 0;
+}
+
+a.nav-link, .breadcrumb-item a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  color: darken($primary, 8%);
+}
+
+p.lead {
+  color: darken($primary, 8%);
 }

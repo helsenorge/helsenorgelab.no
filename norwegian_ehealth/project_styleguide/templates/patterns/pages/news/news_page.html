@@ -9,25 +9,21 @@
         {% endblock %}
 
         <header class="container">
-            <h1 class="pt-2">{{ page.title }}</h1>
+            <h1>{{ page.title }}</h1>
 
             {% if page.introduction %}
                 <p class="lead py-2">
                     {{ page.introduction }}
                 </p>
             {% endif %}
-        </header>
 
-        </div>
-
-        <div class="container">
             {% if page.featured_image %}
-                <figure class="figure">
+                <figure class="figure w-100">
                     {% image page.featured_image fill-995x560 as img %}
                     <img src="{{ img.url }}" alt="{{ img.alt }}" class="extra-wide" />
                     <figcaption class="figure-caption">
                         {{ page.image_caption }}
-                        {% if page.featured_image.license.title %} |
+                        {% if page.featured_image.license.title %}|
                             {{ page.featured_image.license.title }}
                         {% endif %}
                         {% if page.featured_image.author %} |
@@ -36,14 +32,24 @@
                     </figcaption>
                 </figure>
             {% endif %}
+        
+        </header>
 
-        </div>
+        <section class="main-body container py-3">
+            {% include_block page.body %}
+        </section>
 
-            <section class="main-body py-3">
-                {% include_block page.body %}
-            </section>
-
+        <footer class="container">
             {% include "patterns/molecules/license/license.html" with license=page.license %}
+
+            <p class="article meta">
+                {% if page.display_date %}
+                    <span class="publish-date">
+                        Publisert 
+                        {{ page.display_date|date:"d.m.Y" }}
+                    </span>
+                {% endif %}
+            </p>
 
             <div class="articles__categories">
                 {% for category in page.categories.all %}
@@ -55,14 +61,12 @@
                 {% endfor %}
             </div>
 
-            <p class="article meta">
-                    {% if page.display_date %}
-                        <span class="publish-date">
-                            Publisert 
-                            {{ page.display_date|date:"d.m.Y" }}
-                        </span>
-                    {% endif %}
-                </p>
+        </footer>
+            
+
+            
+
+
 
             <div class="container">
                 {% for author in page.authors.all %}
