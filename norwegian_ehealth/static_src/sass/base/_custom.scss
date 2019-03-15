@@ -1,0 +1,38 @@
+
+
+
+// Extra width classes
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -75vw;
+    margin-right: -75vw;
+  }
+.extra-wide {
+  @include media-breakpoint-up(lg) {
+    width: calc( 100% + 200px);
+    margin-left: -100px;
+  }
+}
+
+// Remove left padding on first navigation link in footer
+.footer .nav .nav-item:first-child .nav-link {
+    padding-left: 0;
+}
+
+h1 a, h2 a, h3 a, a.nav-link, .breadcrumb-item a, .article-card-link, .page-link {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  color: darken($primary, 8%);
+  font-weight: 300;
+}
+
+p.lead {
+  color: darken($primary, 8%);
+}
+
+#main { min-height: 75vh; }

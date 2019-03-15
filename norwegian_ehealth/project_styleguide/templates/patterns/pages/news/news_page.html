@@ -2,92 +2,86 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper articles">
 
-    <div class="wrapper wrapper--small">
-
+    <article>
         {% block breadcrumbs %}
             {% include "patterns/molecules/navigation/breadcrumbs.html" %}
         {% endblock %}
 
-        <h1>{{ page.title }}</h1>
+        <header class="container">
+            <h1>{{ page.title }}</h1>
 
-        <p class="articles__publish-info">
-            {% if page.display_date %}
-                <span class="publish-date">
-                    Published on
-                    {{ page.display_date|date:"l F j, Y" }}
-                </span>
+            {% if page.introduction %}
+                <p class="lead py-2">
+                    {{ page.introduction }}
+                </p>
             {% endif %}
-            {% for author in page.authors.all %}
-                <a href="{% pageurl author.author %}">
-                    {{ author.author.first_name }} {{ author.author.last_name }}
-                </a>
-            {% endfor %}
-        </p>
 
-        {% if page.introduction %}
-            <p class="articles__intro">
-                {{ page.introduction }}
-            </p>
-        {% endif %}
+            {% if page.featured_image %}
+                <figure class="figure w-100">
+                    {% image page.featured_image fill-995x560 as img %}
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="extra-wide" />
+                    <figcaption class="figure-caption">
+                        {{ page.image_caption }}
+                        {% if page.featured_image.license.title %}|
+                            {{ page.featured_image.license.title }}
+                        {% endif %}
+                        {% if page.featured_image.author %} |
+                            {{ page.featured_image.author }}
+                        {% endif %}
+                    </figcaption>
+                </figure>
+            {% endif %}
+        
+        </header>
 
-    </div>
-
-    <div class="wrapper wrapper--medium">
-        {% if page.featured_image %}
-            <p class="articles__featured-image">
-                {% image page.featured_image fill-995x560 %}
-            </p>
-        {% endif %}
-
-        {% if page.image_caption %}
-            <p class="articles__featured-image-caption">
-                {{ page.image_caption }}
-                {% if page.featured_image.license.title %} |
-                    {{ page.featured_image.license.title }}
-                {% endif %}
-                {% if page.featured_image.author %} |
-                    {{ page.featured_image.author }}
-                {% endif %}
-            </p>
-        {% endif %}
-    </div>
-
-    <div class="wrapper wrapper--small">
-
-        <section class="main-body">
+        <section class="main-body container py-3">
             {% include_block page.body %}
         </section>
 
-        {% include "patterns/molecules/license/license.html" with license=page.license %}
+        <footer class="container">
+            {% include "patterns/molecules/license/license.html" with license=page.license %}
 
-        <div class="articles__categories">
-            {% for category in page.categories.all %}
-                <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
-                    {{ category.category }}
-                </a>
-                {% if not forloop.last %},{% endif %}
+            <p class="article meta">
+                {% if page.display_date %}
+                    <span class="publish-date">
+                        Publisert 
+                        {{ page.display_date|date:"d.m.Y" }}
+                    </span>
+                {% endif %}
+            </p>
 
-            {% endfor %}
-        </div>
+            <div class="articles__categories">
+                {% for category in page.categories.all %}
+                    <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                        {{ category.category }}
+                    </a>
+                    {% if not forloop.last %},{% endif %}
 
-        <div class="container">
-            {% for author in page.authors.all %}
-                {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
 
-    </div> {# wrapper-small #}
+        </footer>
+            
 
+            
+
+
+
+            <div class="container">
+                {% for author in page.authors.all %}
+                    {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
+                {% endfor %}
+            </div>
+
+
+        {% comment %}
+        {% include "patterns/molecules/share/share.html" %}
+        {% endcomment %}
+
+    </article>
     {% comment %}
-    {% include "patterns/molecules/share/share.html" %}
+    {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
     {% endcomment %}
-
-</div> {# wrapper articles #}
-
-{% comment %}
-{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
-{% endcomment %}
 
 {% endblock %}

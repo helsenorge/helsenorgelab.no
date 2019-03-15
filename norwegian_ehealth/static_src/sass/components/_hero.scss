@@ -1,0 +1,37 @@
+.hero {
+
+    &-image-container {
+      position: relative;
+      padding-bottom: 50px;
+    }
+
+    &-text-block {
+      color: $white;
+      background-color: rgba($primary, 0.9);
+      padding: 20px;
+
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        bottom: 90px;
+        left: 40px;
+        width: 40%;
+        padding: 30px;
+      }
+
+      h2 {
+          color: $white;
+      }
+    }
+
+    &-button {
+        color: $white;
+        border: $white solid 1px;
+        text-decoration: none;
+
+        &:hover {
+            background-color: lighten($primary, 10%);
+            color: $white !important;
+        }
+    }
+
+}

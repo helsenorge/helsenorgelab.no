@@ -4,6 +4,5 @@ from norwegian_ehealth.navigation.templatetags.navigation_tags import register
 
 override_tag(register, name='primarynav')
 override_tag(register, name='secondarynav')
-# override_tag(register, name='footernav')
 override_tag(register, name='sidebar')
 override_tag(register, name='footerlinks')

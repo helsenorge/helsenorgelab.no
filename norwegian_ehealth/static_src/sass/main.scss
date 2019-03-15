@@ -1,7 +1,17 @@
+
+
+// Abstracts
+@import 'abstracts/variables';
+
 // Vendor
-@import 'vendor/normalize';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
-@import 'vendor/bootstrap/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+// Components
+@import 'components/hero';
+@import 'base/custom';
+
+/*
 
 // Abstracts
 @import 'abstracts/variables';
@@ -42,3 +52,4 @@
 @import 'layout/sidebar';
 
 // Pages
+*/

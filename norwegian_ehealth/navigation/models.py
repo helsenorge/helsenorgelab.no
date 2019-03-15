@@ -13,14 +13,6 @@ class LinkBlock(blocks.StructBlock):
         template = 'patterns/molecules/navigation/blocks/menu_item.html',
 
 
-class LinkColumnWithHeader(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False, help_text="Leave blank if no header required.")
-    links = blocks.ListBlock(LinkBlock())
-
-    class Meta:
-        template = 'patterns/molecules/navigation/blocks/footer_column.html',
-
-
 @register_setting(icon='list-ul')
 class NavigationSettings(BaseSetting, ClusterableModel):
     primary_navigation = StreamField(

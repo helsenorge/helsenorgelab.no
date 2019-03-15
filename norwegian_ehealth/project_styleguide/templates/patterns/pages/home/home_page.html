@@ -1,51 +1,52 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{# override the wrapper size for an extra large featured image on the homepage #}
-{% block header-wrapper %}
-    <main class="wrapper wrapper--extra-large wrapper--main homepage__wrapper">
-{% endblock %}
-
 {% block content %}
 
-    <div class="wrapper homepage">
+        {% if page.featured_image %}
 
-        <div class="wrapper wrapper--extra-large">
-            <div class="homepage__hero-image-container">
-                {% if page.featured_image %}
-                    {% image page.featured_image fill-1400x555 %}
-                {% endif %}
-                <div class="homepage__hero-text-block">
-                    <h2>{{ page.title }}</h2>
+            <div class="container hero">
+                <div class="hero-image-container">
 
-                    <p>{{ page.introduction }}</p>
-
-                    {% if page.button_link and page.button_text %}
-                        <a class="homepage__hero-button btn" href="{% pageurl page.button_link %}" role="button">
-                            {{ page.button_text }}
-                        </a>
+                    {% if page.featured_image %}
+                        {% image page.featured_image fill-1400x555 as img %}
+                        <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
                     {% endif %}
+
+                    <div class="hero-text-block">
+                        <h2>{{ page.title }}</h2>
+
+                        <p>{{ page.introduction }}</p>
+
+                        {% if page.button_link and page.button_text %}
+                            <a class="btn hero-button" href="{% pageurl page.button_link %}" role="button">
+                                {{ page.button_text }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="wrapper wrapper--large">
+        {% endif %}
+
+        <section id="articles" class="container">
 
             {% if article_top %}
 
-                <h2 class="homepage__header">Latest News</h2>
+                <h1 class="pt-5 pb-3 text-primary">Siste artikler</h1>
 
-                <div class="row homepage__article-top">
+                <div class="row py-1">
                     <div class="col-sm-8">
                         <a href="{% pageurl article_top %}">
                             {% if article_top.listing_image %}
-                                {% image article_top.listing_image fill-775x430 %}
+                                {% image article_top.listing_image fill-775x430 as img %}
+                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
                             {% elif article_top.featured_image %}
-                                {% image article_top.featured_image fill-775x430 %}
+                                {% image article_top.featured_image fill-775x430 as img %}
+                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
                             {% endif %}
                         </a>
                     </div>
-
                     <div class="col-sm-4">
                         <h2>
                             <a href="{% pageurl article_top %}">
@@ -57,13 +58,13 @@
                 </div>
 
 
-                <div class="row">
+                <div class="row py-2">
                     {% for article in articles_row_1 %}
                         {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
                     {% endfor %}
                 </div>
 
-                <div class="row">
+                <div class="row py-2">
                     {% for article in articles_row_2 %}
                         {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
                     {% endfor %}
@@ -73,7 +74,7 @@
 
             {% if featured_row_1 %}
 
-                <h2 class="homepage__header">Featured</h2>
+                <h1 class="text-primary pt-5">Kanskje du vil lese mer om?</h1>
 
                 <div class="row">
                     {% for article in featured_row_1 %}
@@ -90,11 +91,6 @@
 
             {% endif %}
 
-        </div>
-
-        {% comment %}
-        {% include "patterns/molecules/share/share.html" %}
-        {% endcomment %}
-    </div>
+            </section>
 
 {% endblock %}
