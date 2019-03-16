@@ -99,4 +99,3 @@ class PersonIndexPage(BasePage):
         context.update(people=people)
 
         return context
-
