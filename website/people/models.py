@@ -82,19 +82,27 @@ class PersonIndexPage(BasePage):
     subpage_types = ['PersonPage']
     parent_page_types = ['home.HomePage']
 
-    def people(self):
-        return self.get_children().specific().live().public()
+    introduction = models.TextField(blank=True)
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel('introduction'),
+    ]
+
+    class Meta:
+        verbose_name = "People Index"
 
     def get_context(self, request, *args, **kwargs):
-        page_number = request.GET.get('page')
-        paginator = Paginator(self.people, settings.DEFAULT_PER_PAGE)
+        people = PersonPage.objects.live().public().descendant_of(self).order_by('slug')
+
+        page_number = request.GET.get('page', 1)
+        paginator = Paginator(people, settings.DEFAULT_PER_PAGE)
         try:
             people = paginator.page(page_number)
         except PageNotAnInteger:
             people = paginator.page(1)
         except EmptyPage:
             people = paginator.page(paginator.num_pages)
-
+        
         context = super().get_context(request, *args, **kwargs)
         context.update(people=people)
 
