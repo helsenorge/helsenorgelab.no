@@ -17,10 +17,9 @@ class CustomImage(AbstractImage):
         blank=True,
         max_length=165,
     )
-    author = models.ForeignKey(
-        'people.PersonPage',
-        on_delete=models.CASCADE,
+    author = models.TextField(
         blank=True,
+        max_length=165,
         null=True,
     )
     image_source_url = models.URLField(
