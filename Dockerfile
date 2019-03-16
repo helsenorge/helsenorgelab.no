@@ -24,7 +24,7 @@ WORKDIR /app
 #    variable is read by Gunicorn
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=norwegian_ehealth.settings.production \
+    DJANGO_SETTINGS_MODULE=website.settings.production \
     PORT=8000 \
     WEB_CONCURRENCY=3 \
     GUNICORN_CMD_ARGS="--max-requests 1200 --access-logfile -"
@@ -43,12 +43,12 @@ RUN apt-get update -y && \
 # Intsall WSGI server - Gunicorn - that will serve the application.
 RUN pip install "gunicorn== 19.9.0"
 
-WORKDIR norwegian_ehealth/static_src
+WORKDIR website/static_src
 
 # Install front-end dependencies.
 # TODO: Once new npm LTS version is released, please switch to using "npm ci"
 # instead of "npm install" - https://docs.npmjs.com/cli/ci.
-COPY ./norwegian_ehealth/static_src/package.json ./norwegian_ehealth/static_src/package-lock.json ./
+COPY ./website/static_src/package.json ./website/static_src/package-lock.json ./
 RUN npm install
 
 # Install your app's Python requirements.
@@ -56,7 +56,7 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 # Compile static files
-COPY ./norwegian_ehealth/static_src/ ./
+COPY ./website/static_src/ ./
 RUN npm run build:prod
 
 WORKDIR /app
@@ -72,10 +72,10 @@ RUN SECRET_KEY=none django-admin collectstatic --noinput --clear
 # Don't use the root user as it's an anti-pattern and Heroku does not run
 # containers as root either.
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
-RUN useradd norwegian_ehealth
-RUN chown -R norwegian_ehealth .
-USER norwegian_ehealth
+RUN useradd website
+RUN chown -R website .
+USER website
 
 # Run the WSGI server. It reads GUNICORN_CMD_ARGS, PORT and WEB_CONCURRENCY
 # environment variable hence we don't specify a lot options below.
-CMD gunicorn norwegian_ehealth.wsgi:application
+CMD gunicorn website.wsgi:application

@@ -20,7 +20,7 @@ addons:
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=norwegian_ehealth.settings.production
+    - DJANGO_SETTINGS_MODULE=website.settings.production
     - DATABASE_URL=postgres://postgres@localhost/test_db
     - SECRET_KEY=iamnotsosecret
     - ALLOWED_HOSTS=localhost
@@ -41,7 +41,7 @@ install:
   - nvm install 8
 
   # Move into the static_src folder where we will compile the FE
-  - cd ./norwegian_ehealth/static_src
+  - cd ./website/static_src
 
   # Install node dependencies
   -  npm install --quiet
@@ -56,7 +56,7 @@ install:
 # Run the tests
 script:
   # Run python code style checks
-  - flake8 norwegian_ehealth
+  - flake8 website
 
   # Run system checks
   - python manage.py check

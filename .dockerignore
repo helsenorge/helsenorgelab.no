@@ -1,5 +1,5 @@
-/norwegian_ehealth/static_compiled
-/norwegian_ehealth/settings/local.py
+/website/static_compiled
+/website/settings/local.py
 
 *.pyc
 .DS_Store
