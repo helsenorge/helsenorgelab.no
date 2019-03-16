@@ -23,7 +23,7 @@
             {% if page.featured_image %}
                 <figure class="figure w-100">
                     {% image page.featured_image fill-995x560 as img %}
-                    <img src="{{ img.url }}" alt="{{ firstof img.alt img.description }}" class="extra-wide" />
+                    <img src="{{ img.url }}" alt="{{ page.featured_image.description }}" class="extra-wide" />
                     <figcaption class="figure-caption">
                         {{ page.image_caption }}
                         {% if page.featured_image.license.title %}|
@@ -39,7 +39,11 @@
         </header>
 
         <section class="main-body container py-3">
-            {% include_block page.body %}
+            <div class="row">
+                <div class="col-lg-9">
+                        {% include_block page.body %}
+                </div>
+            </div>
         </section>
 
         <footer class="container">
@@ -54,7 +58,7 @@
                 {% endif %}
             </p>
 
-            <div class="articles__categories">
+            <div class="article categories">
                 {% for category in page.categories.all %}
                     <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
                         {{ category.category }}
