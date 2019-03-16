@@ -63,16 +63,11 @@
 
         </footer>
             
-
-            
-
-
-
-            <div class="container">
-                {% for author in page.authors.all %}
-                    {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
-                {% endfor %}
-            </div>
+        <div class="container">
+            {% for author in page.authors.all %}
+                {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
+            {% endfor %}
+        </div>
 
 
         {% comment %}
