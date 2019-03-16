@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
@@ -42,7 +44,7 @@ class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
     subpage_types = []
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['people.PersonIndexPage']
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -74,14 +76,12 @@ class PersonPage(BasePage):
     ]
 
 
-"""
 class PersonIndexPage(BasePage):
     template = 'patterns/pages/people/person_index_page.html'
 
     subpage_types = ['PersonPage']
     parent_page_types = ['home.HomePage']
 
-    @cached_property
     def people(self):
         return self.get_children().specific().live().public()
 
@@ -99,4 +99,4 @@ class PersonIndexPage(BasePage):
         context.update(people=people)
 
         return context
-"""
+
