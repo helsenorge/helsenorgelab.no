@@ -1,21 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="articles__author row">
-    <div class="col-4">
-        {% image author.photo fill-140x140 %}
-    </div>
-    <div class="col-8">
-        <h2>
-            <a href="{% pageurl author %}">
-                {{ author.first_name }} {{ author.last_name }}
-            </a>
-        </h2>
-        <div class="author-bio">
-            {% if biography %}
-                {{ biography }}
-            {% else %}
-                {{ author.biography|striptags|truncatechars:255 }}
-            {% endif %}
-        </div>
-    </div>
+
+<div class="media py-1">
+    {% image author.photo fill-100x100 class="mr-1 rounded-circle" %}
+    <div class="media-body">
+        <h5 class="mt-0">{{ author.first_name }} {{ author.last_name }}</h5>
+        {% if biography %}
+            {{ biography }}
+        {% else %}
+            {{ author.introduction|striptags|truncatechars:255 }}
+        {% endif %}
+   </div>
 </div>
