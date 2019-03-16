@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper articles">
+<div class="container informationpage">
 
     <div class="wrapper wrapper--small">
 
@@ -18,11 +18,6 @@
                     Published on
                     {{ page.display_date|date:"l F j, Y" }}
                 </span>
-            {% endif %}
-            {% if page.author %}
-                <a href="{% pageurl page.author %}">
-                    {{ page.author.first_name }} {{ page.author.last_name }}
-                </a>
             {% endif %}
         </p>
 
@@ -76,15 +71,17 @@
         </div>
         {% endcomment %}
 
-        <div class="container">
-            {% include "patterns/molecules/author/author.html" with author=page.author biography=page.biography %}
-        </div>
-
     </div> {# wrapper-small #}
 
     {% comment %}
     {% include "patterns/molecules/share/share.html" %}
     {% endcomment %}
+
+    <div class="container">
+        {% for author in page.authors.all %}
+            {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
+        {% endfor %}
+    </div>
 
 </div> {# wrapper articles #}
 
