@@ -102,7 +102,7 @@ class PersonIndexPage(BasePage):
             people = paginator.page(1)
         except EmptyPage:
             people = paginator.page(paginator.num_pages)
-        
+
         context = super().get_context(request, *args, **kwargs)
         context.update(people=people)
 
