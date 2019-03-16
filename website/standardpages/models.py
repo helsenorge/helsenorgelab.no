@@ -76,13 +76,7 @@ class InformationPage(BasePage):
         ),
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Categories"),
-        MultiFieldPanel(
-            [
-                PageChooserPanel('author'),
-                FieldPanel('biography'),
-            ],
-            heading="Author"
-        ),
+        InlinePanel('authors', label="Authors"),
     ]
 
     class Meta:
