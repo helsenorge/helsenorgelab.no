@@ -4,8 +4,6 @@
 {% block content %}
 <div class="container informationpage">
 
-    <div class="wrapper wrapper--small">
-
         {% block breadcrumbs %}
             {% include "patterns/molecules/navigation/breadcrumbs.html" %}
         {% endblock %}
@@ -77,11 +75,10 @@
     {% include "patterns/molecules/share/share.html" %}
     {% endcomment %}
 
-    <div class="container">
-        {% for author in page.authors.all %}
-            {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
-        {% endfor %}
-    </div>
+    {% for author in page.authors.all %}
+    {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
+    {% endfor %}
+
 
 </div> {# wrapper articles #}
 

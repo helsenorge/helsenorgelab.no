@@ -1,14 +1,17 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+
+
 {% block content %}
+    {% block breadcrumbs %}
+        {% include "patterns/molecules/navigation/breadcrumbs.html" with navclass="container" %}
+    {% endblock %}
 
     <article>
-        {% block breadcrumbs %}
-            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-        {% endblock %}
-
         <header class="container">
+
+
             <h1>{{ page.title }}</h1>
 
             {% if page.introduction %}
@@ -20,7 +23,7 @@
             {% if page.featured_image %}
                 <figure class="figure w-100">
                     {% image page.featured_image fill-995x560 as img %}
-                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="extra-wide" />
+                    <img src="{{ img.url }}" alt="{{ firstof img.alt img.description }}" class="extra-wide" />
                     <figcaption class="figure-caption">
                         {{ page.image_caption }}
                         {% if page.featured_image.license.title %}|
