@@ -86,7 +86,6 @@ class NewsPage(BasePage):
     ]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel('publication_date'),
         FieldPanel('introduction'),
         MultiFieldPanel(
             [
@@ -99,6 +98,7 @@ class NewsPage(BasePage):
         InlinePanel('categories', label="Categories"),
         InlinePanel('authors', label="Authors"),
         SnippetChooserPanel('license'),
+        FieldPanel('publication_date'),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
         # InlinePanel('related_pages', label="Related pages"),
     ]
