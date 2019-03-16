@@ -34,11 +34,13 @@ class HomePage(BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
 
-    introduction = models.CharField(blank=False, max_length=255)
+    hero_title = models.CharField(null=True, blank=False, max_length=80)
 
-    button_text = models.CharField(blank=True, max_length=55)
+    hero_introduction = models.CharField(blank=False, max_length=255)
 
-    button_link = models.ForeignKey(
+    hero_button_text = models.CharField(blank=True, max_length=55)
+
+    hero_button_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
         blank=True,
@@ -55,15 +57,16 @@ class HomePage(BasePage):
     )
 
     search_fields = BasePage.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('hero_introduction'),
     ]
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
             [
-                FieldPanel('introduction'),
-                FieldPanel('button_text'),
-                PageChooserPanel('button_link'),
+                FieldPanel('hero_title'),
+                FieldPanel('hero_introduction'),
+                FieldPanel('hero_button_text'),
+                PageChooserPanel('hero_button_link'),
                 ImageChooserPanel('featured_image'),
             ], heading="Hero Section",
         ),

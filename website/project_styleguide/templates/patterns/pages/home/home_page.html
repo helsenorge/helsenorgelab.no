@@ -14,13 +14,13 @@
                     {% endif %}
 
                     <div class="hero-text-block">
-                        <h2>{{ page.title }}</h2>
+                        <h2>{{ page.hero_title }}</h2>
 
-                        <p>{{ page.introduction }}</p>
+                        <p>{{ page.hero_introduction }}</p>
 
-                        {% if page.button_link and page.button_text %}
-                            <a class="btn hero-button" href="{% pageurl page.button_link %}" role="button">
-                                {{ page.button_text }}
+                        {% if page.hero_button_link and page.hero_button_text %}
+                            <a class="btn hero-button" href="{% pageurl page.hero_button_link %}" role="button">
+                                {{ page.hero_button_text }}
                             </a>
                         {% endif %}
                     </div>
