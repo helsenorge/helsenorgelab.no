@@ -50,12 +50,6 @@ class NewsPage(BasePage):
     subpage_types = []
     parent_page_types = ['NewsIndex']
 
-    # It's datetime for easy comparison with first_published_at
-    publication_date = models.DateTimeField(
-        null=True, blank=True,
-        help_text="Use this field to override the date that the "
-        "news item appears to have been published."
-    )
     introduction = models.TextField(
         blank=True,
         max_length=165,
@@ -78,6 +72,13 @@ class NewsPage(BasePage):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
+    )
+
+    # It's datetime for easy comparison with first_published_at
+    publication_date = models.DateTimeField(
+        null=True, blank=True,
+        help_text="Use this field to override the date that the "
+        "news item appears to have been published."
     )
 
     search_fields = BasePage.search_fields + [
