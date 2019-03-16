@@ -104,6 +104,7 @@ class InformationPageAuthor(Orderable):
         FieldPanel('biography'),
     ]
 
+
 """
 class IndexPage(BasePage):
     template = 'patterns/pages/standardpages/index_page.html'
