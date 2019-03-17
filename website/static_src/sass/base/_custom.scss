@@ -3,14 +3,18 @@
 
 // Extra width classes
 .full-width {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -75vw;
-    margin-right: -75vw;
-  }
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -75vw;
+  margin-right: -75vw;
+}
+
 .extra-wide {
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
   @include media-breakpoint-up(lg) {
     width: calc( 100% + 200px);
     margin-left: -100px;

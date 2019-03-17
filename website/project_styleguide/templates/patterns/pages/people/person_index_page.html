@@ -3,32 +3,27 @@
 
 {% block content %}
 
-<div class="wrapper wrapper--small">
+<div class="container authors pt-5">
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
-        </div>
-    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="lead">{{ page.introduction }}</p>
 
-    <section class="main-body">
-        <div class="container">
-            {% if people %}
-                {% for person in people %}
-                    <article class="person">
-                        <h2><a href="{% pageurl person %}">{{ person.first_name }} {{ person.last_name }}</a></h2>
+    <section class="authors-list">
+        {% if people %}
+            {% for person in people %}
+                <article class="person pt-2">
+                    <h3><a href="{% pageurl person %}">{{ person.first_name }} {{ person.last_name }}</a></h3>
 
-                        {% if person.listing_summary or person.introduction %}
-                            <p>{% firstof person.listing_summary person.introduction %}</p>
-                        {% endif %}
-                    </article>
-                {% endfor %}
+                    {% if person.listing_summary or person.introduction %}
+                        <p>{% firstof person.listing_summary person.introduction %}</p>
+                    {% endif %}
+                </article>
+            {% endfor %}
 
-                {% include "patterns/molecules/pagination/pagination.html" with paginator_page=people %}
-            {% else %}
-                {# no results #}
-            {% endif %}
-        </div>
+            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=people %}
+        {% else %}
+            {# no results #}
+        {% endif %}
     </section>
 </div>
 

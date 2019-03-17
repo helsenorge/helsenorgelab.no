@@ -5,6 +5,7 @@ from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
 from wagtail.core.fields import StreamField
+from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
@@ -52,12 +53,6 @@ class InformationPage(BasePage):
         blank=True,
         max_length=250,
     )
-    author = models.ForeignKey(
-        'people.PersonPage',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
     biography = models.CharField(
         help_text="Use this field to override the author's biography "
         "on this page.",
@@ -81,17 +76,33 @@ class InformationPage(BasePage):
         ),
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Categories"),
-        MultiFieldPanel(
-            [
-                PageChooserPanel('author'),
-                FieldPanel('biography'),
-            ],
-            heading="Author"
-        ),
+        InlinePanel('authors', label="Authors"),
     ]
 
     class Meta:
         verbose_name = "Standard Page"
+
+
+class InformationPageAuthor(Orderable):
+    page = ParentalKey(
+        InformationPage,
+        related_name='authors'
+    )
+    author = models.ForeignKey(
+        'people.PersonPage',
+        on_delete=models.CASCADE
+    )
+    biography = models.CharField(
+        help_text="Use this field to override the author's biography "
+        "on this information page.",
+        max_length=255,
+        blank=True
+    )
+
+    panels = [
+        PageChooserPanel('author'),
+        FieldPanel('biography'),
+    ]
 
 
 """

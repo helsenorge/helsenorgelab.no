@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -42,7 +44,7 @@ class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
     subpage_types = []
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['people.PersonIndexPage']
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -74,20 +76,26 @@ class PersonPage(BasePage):
     ]
 
 
-"""
 class PersonIndexPage(BasePage):
     template = 'patterns/pages/people/person_index_page.html'
 
     subpage_types = ['PersonPage']
     parent_page_types = ['home.HomePage']
 
-    @cached_property
-    def people(self):
-        return self.get_children().specific().live().public()
+    introduction = models.TextField(blank=True)
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel('introduction'),
+    ]
+
+    class Meta:
+        verbose_name = "People Index"
 
     def get_context(self, request, *args, **kwargs):
-        page_number = request.GET.get('page')
-        paginator = Paginator(self.people, settings.DEFAULT_PER_PAGE)
+        people = PersonPage.objects.live().public().descendant_of(self).order_by('slug')
+
+        page_number = request.GET.get('page', 1)
+        paginator = Paginator(people, settings.DEFAULT_PER_PAGE)
         try:
             people = paginator.page(page_number)
         except PageNotAnInteger:
@@ -99,4 +107,3 @@ class PersonIndexPage(BasePage):
         context.update(people=people)
 
         return context
-"""
