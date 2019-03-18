@@ -47,25 +47,35 @@
         </section>
 
         <footer class="container">
-            {% include "patterns/molecules/license/license.html" with license=page.license %}
-
-            <p class="article meta">
+            <div class="article meta py-2">
+                <p>
                 {% if page.display_date %}
                     <span class="publish-date">
                         Publisert 
-                        {{ page.display_date|date:"d.m.Y" }}
+                        {{ page.display_date|date:"d.m.Y" }}. 
                     </span>
                 {% endif %}
-            </p>
+                {% if page.license %}
+                <span class="license">
+                    Lisens for teksten er 
+                    {% include "patterns/molecules/license/license.html" with license=page.license %}.
+                    Lisensen gjelder kun teksten. Bilder, illustrasjon og andre elementer er lisensiert selvstendig.
+                </span>
+                {% endif %}
+                </p>
 
-            {% if page.tags.all.count %}
-                <div class="tags">
-                    <h3>Emneknagger</h3>
-                    {% for tag in page.tags.all %}
-                        <a href="{% slugurl 'tags' %}?tag={{ tag }}"><span class="badge badge-secondary">{{ tag }}</span></a>
-                    {% endfor %}
+                {% if page.tags.all.count %}
+                    <p class="tags">
+                        {% for tag in page.tags.all %}
+                           <span class="badge badge-secondary p-0_5 rounded">{{ tag }}</span>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                
+                
                 </div>
-            {% endif %}
+
+
 
             <div class="article categories">
                 {% for category in page.categories.all %}

@@ -11,12 +11,12 @@ Example:
 {% endcomment %}
 
 {% if license %}
-    <div class="license">
-        {{ license.title }}
-        {{ license.description }}
-        {{ license.version }}
-        <p>
-            <a href="{{ license.get_link_url }}">{{ license.get_link_text }}</a>
-        </p>
-    </div>
+    <span class="license">
+        {% if license.url %}
+            <a href="{{ license.url }}">{{ license.title }}</a>
+        {% else %}
+            {{ license.title }}
+        {% endif %}
+    </span>
 {% endif %}
+
