@@ -79,7 +79,7 @@
                             Meny
                     </button>
                   
-                    <div class="collapse navbar-collapse" id="navbarContent">
+                    <div class="collapse navbar-collapse" id="navbarContent" role="menu">
                         {% primarynav %}
                         <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
                                 <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
@@ -90,7 +90,7 @@
             <div class="collapse navbar-collapse bg-white" id="headerSearch">
                 <div class="container">
                         <form action="{% url 'search' %}" method="get" role="search" class="form-inline py-1">
-                                <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                                <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                                          S&oslash;k
                                 </button>
