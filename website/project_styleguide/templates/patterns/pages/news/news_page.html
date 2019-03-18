@@ -26,7 +26,7 @@
         
         </header>
 
-        <section class="main-body container py-3">
+        <div class="main-body container pt-3">
             <div class="row">
                 <div class="col-lg-9">
                         {% include_block page.body %}
@@ -36,11 +36,14 @@
                         {% endcomment %}
                 </div>
             </div>
-        </section>
+        </div>
 
         <footer class="container">
             <div class="row">
                 <div class="meta py-2 small col-lg-9">
+                    {% for author in page.authors.all %}
+                        {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
+                    {% endfor %}
                     <p>
                     {% if page.display_date %}
                         <span class="publish-date">
@@ -78,10 +81,6 @@
                     {% comment %}
                         {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
                     {% endcomment %}
-
-                    {% for author in page.authors.all %}
-                        {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
-                    {% endfor %}
                     
                     </div>
     
