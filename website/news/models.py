@@ -3,6 +3,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
 
+from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
@@ -12,6 +13,8 @@ from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+
+from taggit.models import TaggedItemBase
 
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
@@ -44,6 +47,14 @@ class NewsPageRelatedPage(RelatedPage):
     )
 
 
+class NewsPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'NewsPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
+
 class NewsPage(BasePage):
     template = 'patterns/pages/news/news_page.html'
 
@@ -73,6 +84,7 @@ class NewsPage(BasePage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
     # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
@@ -99,6 +111,7 @@ class NewsPage(BasePage):
         InlinePanel('categories', label="Categories"),
         InlinePanel('authors', label="Authors"),
         SnippetChooserPanel('license'),
+        FieldPanel('tags'),
         FieldPanel('publication_date'),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
         # InlinePanel('related_pages', label="Related pages"),
