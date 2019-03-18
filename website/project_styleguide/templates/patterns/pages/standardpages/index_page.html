@@ -2,42 +2,54 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
 {% block content %}
-<div class="wrapper">
-    <section class="section section--main">
-        <h1>{{ page.title }}</h1>
-        <p>{{ page.introduction }}</p>
+<section class="section articles container">
 
-        {% if subpages %}
-            <div class="grid">
-                {% if subpages.object_list.exists %}
+    <h1 class="display-2 pt-5">{{ page.title }}</h1>
+
+    {% if page.introduction %}
+        <p class="lead">
+            {{ page.introduction }}
+        </p>
+    {% endif %}
+
+
+    {% if subpages %}
+        <div class="row">
+            <div class="col-12">
+            {% if subpages.object_list.exists %}
+                <div class="card-deck py-2">
                     {% for subpage in subpages.object_list.specific %}
-                        <a class="card-with-image" href="{% pageurl subpage %}">
-                            {% if subpage.listing_image %}
-                                {% image subpage.listing_image fill-450x300 %}
-                            {% else %}
-                                {# Add a default image here #}
-                            {% endif %}
+                        
                             <div class="card">
-                                <h3 role="listitem">
-                                    {% firstof subpage.listing_title subpage.title %}
-                                </h3>
-                                {% if subpage.listing_summary or subpage.introduction %}
-                                    <p>{% firstof subpage.listing_summary subpage.introduction %}</p>
-                                {% endif %}
+                                <div class="card-body">        
+                                    {% comment %}                        
+                                        {% if subpage.listing_image %}
+                                            {% image subpage.listing_image fill-450x300 %}
+                                        {% else %}
+                                            {# Add a default image here #}
+                                        {% endif %}
+                                    {% endcomment %}   
+                                    <h2 class="card-title">{% firstof subpage.listing_title subpage.title %}</h5>
+                                    {% if subpage.listing_summary or subpage.introduction %}
+                                        <p class="card-text">{% firstof subpage.listing_summary subpage.introduction %}</p>
+                                    {% endif %}
+                                    <a class="card-link stretched-link" href="{% pageurl subpage %}">Les</a>
+                                </div>
                             </div>
-                        </a>
+                            {% if forloop.counter|divisibleby:3 %}</div><div class="card-deck py-2">{% endif %}
                     {% endfor %}
-                {% else %}
-                    {# no items on this page #}
-                {% endif %}
+                </div>
+            {% else %}
+                {# no items on this page #}
+            {% endif %}
             </div>
+        </div>
+        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=subpages %}
 
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=subpages %}
+    {% else %}
+        {# no items on any page #}
+    {% endif %}
 
-        {% else %}
-            {# no items on any page #}
-        {% endif %}
-
-    </section>
-</div>
+</section>
 {% endblock %}
+
