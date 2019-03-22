@@ -1,7 +1,8 @@
 {
-  "name": "NorwegianEHealth",
-  "version": "0.0.0",
-  "author": "Torchbox Ltd",
+  "name": "helsenorgelab",
+  "version": "0.1.0",
+  "author": "Helsenorge.no",
+  "license" : "MIT",
   "repository": {
     "type": "git",
     "url": ""
@@ -95,10 +96,12 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.2.3",
-    "js-cookie": "^2.2.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "babel-polyfill": "^6.26.0",
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
+    "popper.js": "^1.14.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
