@@ -63,6 +63,33 @@ class HomePage(BasePage):
         index.SearchField('hero_introduction'),
     ]
 
+    articles_text = models.CharField(null=True, blank=False, max_length=150)
+    articles_link = models.ForeignKey(
+        'wagtailcore.Page',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='+',
+    )
+
+    pages_text = models.CharField(null=True, blank=False, max_length=150)
+    pages_link = models.ForeignKey(
+        'wagtailcore.Page',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='+',
+    )
+
+    news_text = models.CharField(null=True, blank=False, max_length=150)
+    news_link = models.ForeignKey(
+        'wagtailcore.Page',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='+',
+    )
+
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
             [
@@ -78,6 +105,16 @@ class HomePage(BasePage):
             label="Featured Pages",
             max_num=6,
             heading='Featured Pages, Maximum 6'
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('articles_text'),
+                PageChooserPanel('articles_link'),
+                FieldPanel('pages_text'),
+                PageChooserPanel('pages_link'),
+                FieldPanel('news_text'),
+                PageChooserPanel('news_link'),
+            ], heading="Front page sections",
         ),
     ]
 
