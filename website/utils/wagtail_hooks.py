@@ -1,7 +1,6 @@
+"""
 from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
-
-from website.utils.models import Category
 
 
 class CategoryModelAdmin(ModelAdmin):
@@ -9,11 +8,10 @@ class CategoryModelAdmin(ModelAdmin):
     menu_icon = 'tag'
 
 
-"""
 class PersonTypeModelAdmin(ModelAdmin):
     model = PersonType
     menu_icon = 'tag'
-"""
+
 
 
 class TaxonomiesModelAdminGroup(ModelAdminGroup):
@@ -26,3 +24,4 @@ class TaxonomiesModelAdminGroup(ModelAdminGroup):
 
 
 modeladmin_register(TaxonomiesModelAdminGroup)
+"""
