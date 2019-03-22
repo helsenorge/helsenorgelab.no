@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.functions import Coalesce
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
 from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -72,6 +72,7 @@ class NewsPage(BasePage):
     )
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
+    categories = ParentalManyToManyField('articles.ArticlePageCategory', blank=True)
 
     publication_date = models.DateTimeField(
         null=True, blank=True,
