@@ -63,7 +63,7 @@ class HomePage(BasePage):
         index.SearchField('hero_introduction'),
     ]
 
-    articles_text = models.CharField(null=True, blank=False, max_length=150)
+    articles_text = models.CharField(null=True, blank=True, max_length=150)
     articles_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -71,8 +71,9 @@ class HomePage(BasePage):
         null=True,
         related_name='+',
     )
+    articles_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    pages_text = models.CharField(null=True, blank=False, max_length=150)
+    pages_text = models.CharField(null=True, blank=True, max_length=150)
     pages_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -80,8 +81,9 @@ class HomePage(BasePage):
         null=True,
         related_name='+',
     )
+    pages_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    news_text = models.CharField(null=True, blank=False, max_length=150)
+    news_text = models.CharField(null=True, blank=True, max_length=150)
     news_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -89,6 +91,7 @@ class HomePage(BasePage):
         null=True,
         related_name='+',
     )
+    news_linktext = models.CharField(null=True, blank=True, max_length=80)
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
@@ -120,6 +123,15 @@ class HomePage(BasePage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context['articles_text'] = self.articles_text
+        context['articles_link'] = self.articles_link
+        context['articles_linktext'] = self.articles_linktext
+        context['pages_text'] = self.pages_text
+        context['pages_link'] = self.pages_link
+        context['pages_linktext'] = self.pages_linktext
+        context['news_text'] = self.news_text
+        context['news_link'] = self.news_link
+        context['news_linktext'] = self.news_linktext
 
         if ArticlePage.objects.live().public().count() >= 1:
             latest_articles = ArticlePage.objects.live().public().order_by('-first_published_at')
