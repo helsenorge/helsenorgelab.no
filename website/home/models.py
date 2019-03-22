@@ -95,6 +95,8 @@ class HomePage(BasePage):
 
         if NewsPage.objects.live().public().count() >= 1:
             latest_news = NewsPage.objects.live().public().order_by('-first_published_at')
-            context['latest_news'] = latest_news[0:10]
+            context['latest_news_1'] = latest_news[0:4]
+            context['latest_news_2'] = latest_news[4:8]
+            context['latest_news_3'] = latest_news[8:12]
 
         return context
