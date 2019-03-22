@@ -5,39 +5,33 @@ from django.db.models.functions import Coalesce
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
-                                         MultiFieldPanel, PageChooserPanel,
-                                         StreamFieldPanel)
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Orderable
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
+from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from taggit.models import TaggedItemBase
 
-from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 
 
+@register_snippet
 class NewsPageCategory(models.Model):
-    page = ParentalKey(
-        'news.NewsPage',
-        related_name='categories'
-    )
-    category = models.ForeignKey(
-        'utils.Category',
-        related_name='+',
-        on_delete=models.CASCADE,
-        verbose_name='category',
-    )
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, max_length=80)
 
     panels = [
-        FieldPanel('category')
+        FieldPanel('name'),
+        FieldPanel('slug'),
     ]
 
     def __str__(self):
-        return self.category.title
+        return self.name
+
+    class Meta:
+        verbose_name = "News category"
+        verbose_name_plural = "News categories"
 
 
 class NewsPageRelatedPage(RelatedPage):
@@ -76,17 +70,9 @@ class NewsPage(BasePage):
         blank=True,
         max_length=250,
     )
-    body = StreamField(StoryBlock())
-    license = models.ForeignKey(
-        'utils.LicenseSnippet',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
+    body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
-    # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
         null=True, blank=True,
         help_text="Use this field to override the date that the "
@@ -107,14 +93,10 @@ class NewsPage(BasePage):
             ],
             heading="Featured Image",
         ),
-        StreamFieldPanel('body'),
+        FieldPanel('body', classname="full"),
         InlinePanel('categories', label="Categories"),
-        InlinePanel('authors', label="Authors"),
-        SnippetChooserPanel('license'),
         FieldPanel('tags'),
         FieldPanel('publication_date'),
-        # TODO: comment related_pages back in if we have time with the front-end work for news
-        # InlinePanel('related_pages', label="Related pages"),
     ]
 
     class Meta:
@@ -126,28 +108,6 @@ class NewsPage(BasePage):
             return self.publication_date
         else:
             return self.first_published_at
-
-
-class NewsPageAuthor(Orderable):
-    page = ParentalKey(
-        NewsPage,
-        related_name='authors'
-    )
-    author = models.ForeignKey(
-        'people.PersonPage',
-        on_delete=models.CASCADE
-    )
-    biography = models.CharField(
-        help_text="Use this field to override the author's biography "
-        "on this news page.",
-        max_length=255,
-        blank=True
-    )
-
-    panels = [
-        PageChooserPanel('author'),
-        FieldPanel('biography'),
-    ]
 
 
 class NewsIndex(BasePage):
@@ -173,7 +133,7 @@ class NewsIndex(BasePage):
 
         category = request.GET.get('category')
         if category:
-            news = news.filter(categories__category=category)
+            news = news.filter(categories__slug=category)
             extra_url_params = 'category=' + category
 
         # Pagination
@@ -190,9 +150,7 @@ class NewsIndex(BasePage):
         context.update(
             news=news,
             # Only show news types that have been used
-            categories=NewsPageCategory.objects.all().values_list(
-                'category__pk', 'category__title'
-            ).distinct().order_by('category__title'),
+            categories=NewsPageCategory.objects.all().values_list('slug', 'name').distinct().order_by('name'),
             extra_url_params=extra_url_params,
         )
         return context
