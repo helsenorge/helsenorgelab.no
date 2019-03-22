@@ -85,7 +85,7 @@ class ArticlePage(BasePage):
         related_name='+'
     )
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
-    categories = ParentalManyToManyField('articles.ArticleCategory', blank=True)
+    categories = ParentalManyToManyField('articles.ArticlePageCategory', blank=True)
 
     # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
