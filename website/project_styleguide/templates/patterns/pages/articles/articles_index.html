@@ -27,32 +27,32 @@
         </form>
 
 
-        {% if news %}
-                {% for n in news %}
+        {% if articles %}
+                {% for article in articles %}
                     <div class="article-items row py-2">
                         <div class="col-4">
-                            <a href="{% pageurl n %}">
-                            {% if n.listing_image %}
-                                {% image n.listing_image fill-277x156 %}
-                            {% elif n.featured_image %}
-                                {% image n.featured_image fill-277x156 %}
+                            <a href="{% pageurl article %}">
+                            {% if article.listing_image %}
+                                {% image article.listing_image fill-277x156 %}
+                            {% elif article.featured_image %}
+                                {% image article.featured_image fill-277x156 %}
                             {% endif %}
                             </a>
                         </div>
                         <div class="col-8">
                             <h2 role="listitem">
-                                <a href="{% pageurl n %}">
-                                    {% firstof n.listing_title n.title %}
+                                <a href="{% pageurl article %}">
+                                    {% firstof article.listing_title article.title %}
                                 </a>
                             </h2>
-                            {% if n.listing_summary or n.introduction %}
-                                <p>{{ n.listing_summary|default:n.introduction }}</p>
+                            {% if article.listing_summary or article.introduction %}
+                                <p>{{ article.listing_summary|default:article.introduction }}</p>
                             {% endif %}
                         </div>
                     </div>
                 {% endfor %}
 
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
+            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=articles %}
 
         {% else %}
 
