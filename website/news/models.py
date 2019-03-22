@@ -113,12 +113,12 @@ class NewsPage(BasePage):
         SnippetChooserPanel('license'),
         FieldPanel('tags'),
         FieldPanel('publication_date'),
-        # TODO: comment related_pages back in if we have time with the front-end work for articles
+        # TODO: comment related_pages back in if we have time with the front-end work for news
         # InlinePanel('related_pages', label="Related pages"),
     ]
 
     class Meta:
-        verbose_name = "Article"
+        verbose_name = "News"
 
     @property
     def display_date(self):
@@ -139,7 +139,7 @@ class NewsPageAuthor(Orderable):
     )
     biography = models.CharField(
         help_text="Use this field to override the author's biography "
-        "on this article page.",
+        "on this news page.",
         max_length=255,
         blank=True
     )
@@ -163,7 +163,7 @@ class NewsIndex(BasePage):
     ]
 
     class Meta:
-        verbose_name = "Articles Index"
+        verbose_name = "News Index"
 
     def get_context(self, request, *args, **kwargs):
         news = NewsPage.objects.live().public().descendant_of(self).annotate(
