@@ -1,7 +1,7 @@
 {
-  "name": "NorwegianEHealth",
-  "version": "0.0.0",
-  "author": "Torchbox Ltd",
+  "name": "helsenorgelab",
+  "version": "0.1.0",
+  "author": "Helsenorge.no",
   "repository": {
     "type": "git",
     "url": ""
