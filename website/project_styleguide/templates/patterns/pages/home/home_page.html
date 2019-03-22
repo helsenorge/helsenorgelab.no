@@ -33,7 +33,7 @@
 
             {% if article_top %}
 
-                <h2 class="display-3 pt-5 pb-1 text-primary">Siste artikler</h2>
+                <h2 class="display-3 pt-5 pb-1 text-primary">{{ articles_text|default:"Artikler" }}</h2>
 
         
                 {% if article_top.listing_image or article_top.featured_image %}
@@ -45,7 +45,7 @@
                         <a class="btn btn-primary my-1 stretched-link" href="{% pageurl article_top %}">Les mer</a>
                     </div>
                 {% endif %}
-                
+
 
                 <div class="py-1">
                     <div class="card-deck">
@@ -55,12 +55,16 @@
                     </div>
                 </div>
 
+                {% if articles_link %}
+                    <p class="pt-1"><a href="{% pageurl articles_link %}" class="btn btn-light">{{ articles_linktext|default:"Flere artikler" }}</a></p>
+                {% endif %}
+
 
             {% endif %}
 
             {% if featured_row_1 %}
 
-                <h2 class="display-3 text-primary pt-5">Kanskje du vil lese mer om?</h2>
+                <h2 class="display-3 text-primary pt-5">{{ pages_text|default:"Sider" }}</h2>
 
                 <div class="row">
                     {% for article in featured_row_1 %}
@@ -74,15 +78,14 @@
                     {% endfor %}
                 </div>
 
-
             {% endif %}
 
             </section>
 
 
-            {% if latest_news_1 %}
+            {% if news_text %}
             <section id="news" class="container">
-                <h2 class="display-3 text-primary pt-5 pb-1">Notert</h2>
+                <h2 class="display-3 text-primary pt-5 pb-1">{{ news_text|default:"Notert" }}</h2>
 
                 <div class="row d-flex">
                     <div class="col-md-4">
@@ -94,7 +97,11 @@
                     <div class="col-md-4">
                         {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_3 %}
                     </div>
-                </div> 
+                </div>
+                
+                {% if news_link %}
+                    <p class="pt-1"><a href="{% pageurl news_link %}" class="btn btn-light">{{ news_linktext|default:"Flere nyheter" }}</a></p>
+                {% endif %} 
             </section>
             {% endif %}
 

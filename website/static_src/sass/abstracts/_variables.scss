@@ -116,9 +116,9 @@ $body-color:                $black ;
 
 $enable-caret:                                true;
 $enable-rounded:                              false;
-$enable-shadows:                              false;
-$enable-gradients:                            false;
-$enable-transitions:                          true;
+$enable-shadows:                              true;
+$enable-gradients:                            true;
+$enable-transitions:                          false;
 $enable-prefers-reduced-motion-media-query:   true;
 $enable-grid-classes:                         true;
 $enable-pointer-cursor-for-buttons:           true;
@@ -126,8 +126,6 @@ $enable-print-styles:                         true;
 $enable-responsive-font-sizes:                true;
 $enable-validation-icons:                     true;
 $enable-deprecation-messages:                 false;
-
-
 
 
 // Breadcrumb separator
