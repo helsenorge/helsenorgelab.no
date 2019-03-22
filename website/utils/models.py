@@ -210,20 +210,8 @@ class LicenseSnippet(models.Model):
     panels = [
         FieldPanel('title'),
         FieldPanel('description'),
-        FieldPanel('version'),
         FieldPanel('url'),
     ]
-
-    def __str__(self):
-        return self.title
-
-
-class Category(models.Model):
-    title = models.CharField(max_length=128)
-
-    class Meta:
-        verbose_name = "category"
-        verbose_name_plural = "categories"
 
     def __str__(self):
         return self.title
