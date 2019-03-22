@@ -33,9 +33,9 @@
                         <div class="col-4">
                             <a href="{% pageurl article %}">
                             {% if article.listing_image %}
-                                {% image article.listing_image fill-277x156 %}
+                                {% image article.listing_image fill-277x156 class="img-fluid" %}
                             {% elif article.featured_image %}
-                                {% image article.featured_image fill-277x156 %}
+                                {% image article.featured_image fill-277x156 class="img-fluid" %}
                             {% endif %}
                             </a>
                         </div>
