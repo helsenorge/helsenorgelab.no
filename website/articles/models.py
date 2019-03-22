@@ -192,7 +192,7 @@ class ArticleIndex(BasePage):
         context.update(
             articles=articles,
             # Only show articles types that have been used
-            categories=ArticlePageCategory.objects.all(),
+            categories=ArticlePageCategory.objects.all().values_list(),
             extra_url_params=extra_url_params,
         )
         return context
