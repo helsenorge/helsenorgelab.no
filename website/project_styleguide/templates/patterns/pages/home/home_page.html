@@ -33,42 +33,28 @@
 
             {% if article_top %}
 
-                <h2 class="display-3 pt-5 pb-3 text-primary">Siste artikler</h2>
+                <h2 class="display-3 pt-5 pb-1 text-primary">Siste artikler</h2>
 
-                <div class="row py-1">
-                    <div class="col-sm-8">
-                        <a href="{% pageurl article_top %}">
-                            {% if article_top.listing_image %}
-                                {% image article_top.listing_image fill-775x430 as img %}
-                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
-                            {% elif article_top.featured_image %}
-                                {% image article_top.featured_image fill-775x430 as img %}
-                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
-                            {% endif %}
-                        </a>
+        
+                {% if article_top.listing_image or article_top.featured_image %}
+                    {% include "patterns/molecules/card/card-page-horizontal.html" with page=article_top %}
+                {% else %}
+                    <div class="jumbotron bg-gradient border-light">
+                        <h2>{% firstof article_top.listing_title article_top.title %}</h2>
+                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                        <a class="btn btn-primary my-1 stretched-link" href="{% pageurl article_top %}">Les mer</a>
                     </div>
-                    <div class="col-sm-4">
-                        <h2>
-                            <a href="{% pageurl article_top %}">
-                                {% firstof article_top.listing_title article_top.title %}
-                            </a>
-                        </h2>
-                        <p>{% firstof article_top.listing_summary article_top.introduction %}</p>
+                {% endif %}
+                
+
+                <div class="py-1">
+                    <div class="card-deck">
+                        {% for article in articles_row_1 %}
+                            {% include "patterns/molecules/card/card-page.html" with page=article %}
+                        {% endfor %}
                     </div>
                 </div>
 
-
-                <div class="row py-2">
-                    {% for article in articles_row_1 %}
-                        {% include "patterns/molecules/card/card-page.html" with page=article %}
-                    {% endfor %}
-                </div>
-
-                <div class="row py-2">
-                    {% for article in articles_row_2 %}
-                        {% include "patterns/molecules/card/card-page.html" with page=article %}
-                    {% endfor %}
-                </div>
 
             {% endif %}
 
