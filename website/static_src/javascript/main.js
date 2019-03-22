@@ -1,6 +1,8 @@
 import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import 'bootstrap';
+
 // Uncomment the lines below to use the test react component
 // import TestReact from './components/test-react';
 
