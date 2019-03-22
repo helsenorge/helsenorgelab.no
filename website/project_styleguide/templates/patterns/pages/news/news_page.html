@@ -21,24 +21,12 @@
             {% endif %}
 
             {% if page.featured_image %}
-                <figure class="figure w-100">
-                    {% image page.featured_image fill-995x560 as img %}
-                    <img src="{{ img.url }}" alt="{{ page.featured_image.description }}" class="extra-wide" />
-                    <figcaption class="figure-caption">
-                        {{ page.image_caption }}
-                        {% if page.featured_image.license.title %}|
-                            {{ page.featured_image.license.title }}
-                        {% endif %}
-                        {% if page.featured_image.author %} |
-                            {{ page.featured_image.author }}
-                        {% endif %}
-                    </figcaption>
-                </figure>
+                {% include "patterns/molecules/media/featured_image.html" with featured_image=page.featured_image caption=page.image_caption %}
             {% endif %}
         
         </header>
 
-        <section class="main-body container py-3">
+        <div class="main-body container pt-3">
             <div class="row">
                 <div class="col-lg-9">
                         {% include_block page.body %}
@@ -48,11 +36,14 @@
                         {% endcomment %}
                 </div>
             </div>
-        </section>
+        </div>
 
         <footer class="container">
             <div class="row">
                 <div class="meta py-2 small col-lg-9">
+                    {% for author in page.authors.all %}
+                        {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
+                    {% endfor %}
                     <p>
                     {% if page.display_date %}
                         <span class="publish-date">
@@ -73,7 +64,7 @@
                     {% if page.license %}
                     <span class="license">
                         Lisens for teksten er 
-                        {% include "patterns/molecules/license/license.html" with license=page.license %}.
+                        {% include "patterns/atoms/license/license.html" with license=page.license %}.
                         Lisensen gjelder kun teksten. Bilder, illustrasjon og andre elementer er lisensiert selvstendig.
                     </span>
                     {% endif %}
@@ -90,10 +81,6 @@
                     {% comment %}
                         {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
                     {% endcomment %}
-
-                    {% for author in page.authors.all %}
-                        {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
-                    {% endfor %}
                     
                     </div>
     

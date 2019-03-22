@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -105,9 +107,11 @@ class InformationPageAuthor(Orderable):
     ]
 
 
-"""
 class IndexPage(BasePage):
     template = 'patterns/pages/standardpages/index_page.html'
+
+    subpage_types = ['standardpages.InformationPage']
+    # parent_page_types = []
 
     introduction = models.TextField(blank=True)
 
@@ -136,4 +140,6 @@ class IndexPage(BasePage):
         context['subpages'] = subpages
 
         return context
-"""
+
+    class Meta:
+        verbose_name = "Pages index"

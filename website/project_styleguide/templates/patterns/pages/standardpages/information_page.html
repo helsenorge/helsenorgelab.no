@@ -2,88 +2,90 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="container informationpage">
 
-        {% block breadcrumbs %}
-            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-        {% endblock %}
+    {% block breadcrumbs %}
+        {% include "patterns/molecules/navigation/breadcrumbs.html" with navclass="container" %}
+    {% endblock %}
 
-        <h1>{{ page.title }}</h1>
+    <header class="container">
 
-        <p class="articles__publish-info">
-            {% if page.display_date %}
-                <span class="publish-date">
-                    Published on
-                    {{ page.display_date|date:"l F j, Y" }}
-                </span>
+
+            <h1>{{ page.title }}</h1>
+
+            {% if page.introduction %}
+                <p class="lead py-2">
+                    {{ page.introduction }}
+                </p>
             {% endif %}
-        </p>
 
-        {% if page.introduction %}
-            <p class="articles__intro">
-                {{ page.introduction }}
-            </p>
-        {% endif %}
+            {% if page.featured_image %}
+                {% include "patterns/molecules/media/featured_image.html" with featured_image=page.featured_image caption=page.image_caption %}
+            {% endif %}
+        
+        </header>
 
-    </div>
-
-    {# TODO break out featured image into molecule for this and news_page.html #}
-    <div class="wrapper wrapper--medium">
-        {% if page.featured_image %}
-            <p class="articles__featured-image">
-                {% image page.featured_image fill-995x560 %}
-            </p>
-        {% endif %}
-
-        {% if page.image_caption %}
-            <p class="articles__featured-image-caption">
-                {{ page.image_caption }}
-                {% if page.featured_image.license.title %} |
-                    {{ page.featured_image.license.title }}
-                {% endif %}
-                {% if page.featured_image.author %} |
-                    {{ page.featured_image.author }}
-                {% endif %}
-            </p>
-        {% endif %}
-    </div>
-
-    <div class="wrapper wrapper--small">
-
-        <section class="main-body">
-            {% include_block page.body %}
-        </section>
-
-        {% include "patterns/molecules/license/license.html" with license=page.license %}
-
-        {# commenting this out for now because there is no index page for info pages #}
-        {% comment %}
-        <div class="articles__categories">
-            {% for category in page.categories.all %}
-                <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
-                    {{ category.category }}
-                </a>
-                {% if not forloop.last %},{% endif %}
-
-            {% endfor %}
-        </div>
-        {% endcomment %}
-
-    </div> {# wrapper-small #}
-
-    {% comment %}
-    {% include "patterns/molecules/share/share.html" %}
-    {% endcomment %}
-
-    {% for author in page.authors.all %}
-    {% include "patterns/molecules/author/author.html" with author=author.author bio=author.biography %}
-    {% endfor %}
-
-
-</div> {# wrapper articles #}
-
-{% comment %}
-{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
-{% endcomment %}
-
-{% endblock %}
+        <section class="main-body container py-3">
+                <div class="row">
+                    <div class="col-lg-9">
+                            {% include_block page.body %}
+    
+                            {% comment %}
+                            {% include "patterns/molecules/share/share.html" %}
+                            {% endcomment %}
+                    </div>
+                </div>
+            </section>
+    
+            <footer class="container">
+                <div class="row">
+                    <div class="meta py-2 small col-lg-9">
+                        <p>
+                        {% if page.display_date %}
+                            <span class="publish-date">
+                                Publisert 
+                                {{ page.display_date|date:"d.m.Y" }}
+                                {% if page.categories %}
+                                i
+                                {% for category in page.categories.all %}
+                                    <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                                        {{ category.category }}
+                                    </a>
+                                    {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                .
+                            {% endif %}
+                            </span>
+                        {% endif %}
+                        {% if page.license %}
+                        <span class="license">
+                            Lisens for teksten er 
+                            {% include "patterns/atoms/license/license.html" with license=page.license %}.
+                            Lisensen gjelder kun teksten. Bilder, illustrasjon og andre elementer er lisensiert selvstendig.
+                        </span>
+                        {% endif %}
+                        </p>
+    
+                        {% if page.tags.all.count %}
+                            <p class="tags py-1">
+                                {% for tag in page.tags.all %}
+                                <span class="badge badge-secondary p-0_5 rounded">{{ tag }}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+    
+                        {% comment %}
+                            {% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
+                        {% endcomment %}
+    
+                        {% for author in page.authors.all %}
+                            {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
+                        {% endfor %}
+                        
+                        </div>
+        
+                    </div>
+                </div>
+            </footer>
+        </article>
+    
+    {% endblock %}
