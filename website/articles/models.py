@@ -109,7 +109,6 @@ class ArticlePage(BasePage):
             heading="Featured Image",
         ),
         StreamFieldPanel('body'),
-        InlinePanel('categories', label="Categories"),
         InlinePanel('authors', label="Authors"),
         SnippetChooserPanel('license'),
         FieldPanel('tags'),
