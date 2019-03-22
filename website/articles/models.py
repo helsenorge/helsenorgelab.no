@@ -175,7 +175,7 @@ class ArticleIndex(BasePage):
 
         category = request.GET.get('category')
         if category:
-            articles = articles.filter(categories__category=category)
+            articles = articles.filter(categories__slug=category)
             extra_url_params = 'category=' + category
 
         # Pagination
@@ -192,7 +192,7 @@ class ArticleIndex(BasePage):
         context.update(
             articles=articles,
             # Only show articles types that have been used
-            categories=ArticlePageCategory.objects.all().values_list(),
+            categories=ArticlePageCategory.objects.all().values_list('slug', 'name').distinct().order_by('name'),
             extra_url_params=extra_url_params,
         )
         return context
