@@ -1,0 +1,36 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `call_to_action` into context.
+
+Example:
+    {% include "patterns/molecules/card/card-page-horizontal.html" with page=article %}
+{% endcomment %}
+
+{% if page %}
+	<div class="card bg-transparent mb-3">
+		<div class="row no-gutters">
+			<div class="col-md-8">
+				{% if page.listing_image %}
+					{% image page.listing_image fill-1280x720 as img %}
+						<a href="{% pageurl page %}">
+							<img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img" />
+						</a>
+				{% elif page.featured_image %}
+					{% image page.featured_image fill-1280x720 as img %}
+						<a href="{% pageurl page %}">
+							<img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img" />
+						</a>
+				{% endif %}
+			</div>
+			<div class="col-md-4">
+			<div class="card-body">
+				<h3 class="card-title"><a href="{% pageurl page %}" class="stretched-link">{% firstof page.listing_title page.title %}</a></h3>
+				<p class="card-text">{% firstof article_top.listing_summary article_top.introduction %}</p>
+			</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

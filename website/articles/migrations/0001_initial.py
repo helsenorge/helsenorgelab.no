@@ -2,9 +2,12 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import modelcluster.contrib.taggit
 import modelcluster.fields
+import wagtail.core.blocks
 import wagtail.core.fields
+import wagtail.documents.blocks
+import wagtail.embeds.blocks
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -12,64 +15,48 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('images', '0001_initial'),
         ('wagtailcore', '0040_page_draft_title'),
         ('taggit', '0002_auto_20150616_2121'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='NewsIndex',
+            name='ArticleIndex',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('social_text', models.CharField(blank=True, max_length=255)),
                 ('listing_title', models.CharField(blank=True, help_text='Override the page title used when this page appears in listings', max_length=255)),
                 ('listing_summary', models.CharField(blank=True, help_text="The text summary used when this page appears in listings. It's also used as the description for search engines if the 'Search description' field above is not defined.", max_length=255)),
                 ('introduction', models.TextField(blank=True)),
-                ('listing_image', models.ForeignKey(blank=True, help_text='Choose the image you wish to be displayed when this page appears in listings', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage')),
-                ('social_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage')),
             ],
             options={
-                'verbose_name': 'News Index',
+                'verbose_name': 'Articles Index',
             },
             bases=('wagtailcore.page', models.Model),
         ),
         migrations.CreateModel(
-            name='NewsPage',
+            name='ArticlePage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('social_text', models.CharField(blank=True, max_length=255)),
                 ('listing_title', models.CharField(blank=True, help_text='Override the page title used when this page appears in listings', max_length=255)),
                 ('listing_summary', models.CharField(blank=True, help_text="The text summary used when this page appears in listings. It's also used as the description for search engines if the 'Search description' field above is not defined.", max_length=255)),
-                ('introduction', models.TextField(max_length=165)),
+                ('introduction', models.TextField(blank=True, max_length=165)),
                 ('image_caption', models.CharField(blank=True, max_length=250)),
-                ('body', wagtail.core.fields.RichTextField(blank=True)),
-                ('publication_date', models.DateTimeField(blank=True, help_text='Use this field to override the date that the news item appears to have been published.', null=True)),
+                ('body', wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title', icon='title', template='patterns/molecules/streamfield/blocks/heading_block.html')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.CharBlock(required=False))])), ('quote', wagtail.core.blocks.StructBlock([('quote', wagtail.core.blocks.CharBlock(classname='title')), ('attribution', wagtail.core.blocks.CharBlock(required=False)), ('citation_link', wagtail.core.blocks.URLBlock(required=False))])), ('embed', wagtail.embeds.blocks.EmbedBlock()), ('document', wagtail.core.blocks.StructBlock([('document', wagtail.documents.blocks.DocumentChooserBlock()), ('title', wagtail.core.blocks.CharBlock(required=False))]))])),
+                ('publication_date', models.DateTimeField(blank=True, help_text='Use this field to override the date that the articles item appears to have been published.', null=True)),
             ],
             options={
-                'verbose_name': 'News',
+                'verbose_name': 'Article',
             },
             bases=('wagtailcore.page', models.Model),
         ),
         migrations.CreateModel(
-            name='NewsPageCategory',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('slug', models.SlugField(max_length=80, unique=True)),
-            ],
-            options={
-                'verbose_name': 'News category',
-                'verbose_name_plural': 'News categories',
-            },
-        ),
-        migrations.CreateModel(
-            name='NewsPageRelatedPage',
+            name='ArticlePageAuthor',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
-                ('page', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailcore.Page')),
-                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_pages', to='news.NewsPage')),
+                ('biography', models.CharField(blank=True, help_text="Use this field to override the author's biography on this article page.", max_length=255)),
             ],
             options={
                 'ordering': ['sort_order'],
@@ -77,39 +64,39 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='NewsPageTag',
+            name='ArticlePageCategory',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content_object', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='tagged_items', to='news.NewsPage')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='news_newspagetag_items', to='taggit.Tag')),
+                ('name', models.CharField(max_length=255)),
+                ('slug', models.SlugField(max_length=80, unique=True)),
+            ],
+            options={
+                'verbose_name': 'Article category',
+                'verbose_name_plural': 'Article categories',
+            },
+        ),
+        migrations.CreateModel(
+            name='ArticlePageRelatedPage',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
+                ('page', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailcore.Page')),
+                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_pages', to='articles.ArticlePage')),
+            ],
+            options={
+                'ordering': ['sort_order'],
+                'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='ArticlePageTag',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('content_object', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='tagged_items', to='articles.ArticlePage')),
+                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='articles_articlepagetag_items', to='taggit.Tag')),
             ],
             options={
                 'abstract': False,
             },
-        ),
-        migrations.AddField(
-            model_name='newspage',
-            name='categories',
-            field=modelcluster.fields.ParentalManyToManyField(blank=True, to='news.NewsPageCategory'),
-        ),
-        migrations.AddField(
-            model_name='newspage',
-            name='featured_image',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage'),
-        ),
-        migrations.AddField(
-            model_name='newspage',
-            name='listing_image',
-            field=models.ForeignKey(blank=True, help_text='Choose the image you wish to be displayed when this page appears in listings', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage'),
-        ),
-        migrations.AddField(
-            model_name='newspage',
-            name='social_image',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage'),
-        ),
-        migrations.AddField(
-            model_name='newspage',
-            name='tags',
-            field=modelcluster.contrib.taggit.ClusterTaggableManager(blank=True, help_text='A comma-separated list of tags.', through='news.NewsPageTag', to='taggit.Tag', verbose_name='Tags'),
         ),
     ]

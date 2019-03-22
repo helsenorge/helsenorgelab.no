@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `call_to_action` into context.
+
+Example:
+    {% include "patterns/molecules/card/card.html" with card=card %}
+
+{% endcomment %}
+
+{% if call_to_action %}
+    <div class="card">
+
+        <h2>{{ card.title }}</h2>
+
+        {{ card.summary|richtext }}
+
+        {% image card.image fill-450x300 %}
+
+        <p><a href="{{ card.link }}">{{ card.link_text }}</a></p>
+
+    </div>
+{% endif %}

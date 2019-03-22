@@ -116,9 +116,9 @@ $body-color:                $black ;
 
 $enable-caret:                                true;
 $enable-rounded:                              false;
-$enable-shadows:                              false;
-$enable-gradients:                            false;
-$enable-transitions:                          true;
+$enable-shadows:                              true;
+$enable-gradients:                            true;
+$enable-transitions:                          false;
 $enable-prefers-reduced-motion-media-query:   true;
 $enable-grid-classes:                         true;
 $enable-pointer-cursor-for-buttons:           true;
@@ -126,8 +126,6 @@ $enable-print-styles:                         true;
 $enable-responsive-font-sizes:                true;
 $enable-validation-icons:                     true;
 $enable-deprecation-messages:                 false;
-
-
 
 
 // Breadcrumb separator
@@ -180,3 +178,10 @@ $font-size-sm:                $font-size-base * .875;
 
 $lead-font-size:              $font-size-base * 1.5;
 $lead-font-weight:            300;
+
+$h1-font-size:                $font-size-base * 2.5;
+$h2-font-size:                $font-size-base * 2;
+$h3-font-size:                $font-size-base * 1.5;
+$h4-font-size:                $font-size-base;
+$h5-font-size:                $font-size-base;
+$h6-font-size:                $font-size-base;

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # first - http://help.apm.scoutapp.com/#django.
     'scout_apm.django',
 
+    'website.articles',
     'website.documents',
     # 'website.forms',
     'website.home',

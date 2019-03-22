@@ -33,64 +33,77 @@
 
             {% if article_top %}
 
-                <h2 class="pt-5 pb-3 text-primary">Siste artikler</h2>
+                <h2 class="display-3 pt-5 pb-1 text-primary">{{ articles_text|default:"Artikler" }}</h2>
 
-                <div class="row py-1">
-                    <div class="col-sm-8">
-                        <a href="{% pageurl article_top %}">
-                            {% if article_top.listing_image %}
-                                {% image article_top.listing_image fill-775x430 as img %}
-                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
-                            {% elif article_top.featured_image %}
-                                {% image article_top.featured_image fill-775x430 as img %}
-                                <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
-                            {% endif %}
-                        </a>
+        
+                {% if article_top.listing_image or article_top.featured_image %}
+                    {% include "patterns/molecules/card/card-page-horizontal.html" with page=article_top %}
+                {% else %}
+                    <div class="jumbotron bg-gradient border-light">
+                        <h2>{% firstof article_top.listing_title article_top.title %}</h2>
+                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                        <a class="btn btn-primary my-1 stretched-link" href="{% pageurl article_top %}">Les mer</a>
                     </div>
-                    <div class="col-sm-4">
-                        <h2>
-                            <a href="{% pageurl article_top %}">
-                                {% firstof article_top.listing_title article_top.title %}
-                            </a>
-                        </h2>
-                        <p>{% firstof article_top.listing_summary article_top.introduction %}</p>
+                {% endif %}
+
+
+                <div class="py-1">
+                    <div class="card-deck">
+                        {% for article in articles_row_1 %}
+                            {% include "patterns/molecules/card/card-page.html" with page=article %}
+                        {% endfor %}
                     </div>
                 </div>
 
+                {% if articles_link %}
+                    <p class="pt-1"><a href="{% pageurl articles_link %}" class="btn btn-light">{{ articles_linktext|default:"Flere artikler" }}</a></p>
+                {% endif %}
 
-                <div class="row py-2">
-                    {% for article in articles_row_1 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
-                    {% endfor %}
-                </div>
-
-                <div class="row py-2">
-                    {% for article in articles_row_2 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
-                    {% endfor %}
-                </div>
 
             {% endif %}
 
             {% if featured_row_1 %}
 
-                <h1 class="text-primary pt-5">Kanskje du vil lese mer om?</h1>
+                <h2 class="display-3 text-primary pt-5">{{ pages_text|default:"Sider" }}</h2>
 
                 <div class="row">
                     {% for article in featured_row_1 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article.featured_page %}
                     {% endfor %}
                 </div>
 
                 <div class="row">
                     {% for article in featured_row_2 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article.featured_page %}
                     {% endfor %}
                 </div>
-
 
             {% endif %}
 
             </section>
+
+
+            {% if news_text %}
+            <section id="news" class="container">
+                <h2 class="display-3 text-primary pt-5 pb-1">{{ news_text|default:"Notert" }}</h2>
+
+                <div class="row d-flex">
+                    <div class="col-md-4">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_1 %}
+                    </div>
+                    <div class="col-md-4 h-100">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_2 %}
+                    </div>
+                    <div class="col-md-4">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_3 %}
+                    </div>
+                </div>
+                
+                {% if news_link %}
+                    <p class="pt-1"><a href="{% pageurl news_link %}" class="btn btn-light">{{ news_linktext|default:"Flere nyheter" }}</a></p>
+                {% endif %} 
+            </section>
+            {% endif %}
+
 
 {% endblock %}

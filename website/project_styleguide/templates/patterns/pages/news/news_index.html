@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <section class="section articles container">
+    <section class="section news container">
 
         <h1 class="display-2 pt-5">{{ page.title }}</h1>
 
@@ -26,34 +26,37 @@
             </div>
         </form>
 
-
+                
         {% if news %}
-                {% for n in news %}
-                    <div class="article-items row py-2">
-                        <div class="col-4">
-                            <a href="{% pageurl n %}">
-                            {% if n.listing_image %}
-                                {% image n.listing_image fill-277x156 %}
-                            {% elif n.featured_image %}
-                                {% image n.featured_image fill-277x156 %}
-                            {% endif %}
-                            </a>
-                        </div>
-                        <div class="col-8">
-                            <h2 role="listitem">
+            {% for n in news %}
+            <div class="row pt-3">
+                <div class="news-item py-1 col-9">
+                    <h2>
+                        <a href="{% pageurl n %}">
+                            {{ n.title }}
+                        </a>
+                    </h2>
+                        <p>
+                            {% if n.featured_image %}
                                 <a href="{% pageurl n %}">
-                                    {% firstof n.listing_title n.title %}
+                                {% if n.featured_image %}
+                                    {% image n.featured_image fill-277x156 class="float-left rounded mr-1 mb-1-" %}
+                                {% endif %}
                                 </a>
-                            </h2>
-                            {% if n.listing_summary or n.introduction %}
-                                <p>{{ n.listing_summary|default:n.introduction }}</p>
                             {% endif %}
-                        </div>
+                            
+                            <b>
+                                {{ n.introduction }}
+                            </b>
+                        </p>
+                        {{ n.body | richtext }}
                     </div>
+            </div>
                 {% endfor %}
-
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
-
+            
+            
+                {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
+            
         {% else %}
 
             {# no items #}

@@ -41,12 +41,32 @@
         <footer class="container">
             <div class="row">
                 <div class="meta py-2 small col-lg-9">
+                    {% for author in page.authors.all %}
+                        {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
+                    {% endfor %}
                     <p>
                     {% if page.display_date %}
                         <span class="publish-date">
                             Publisert 
                             {{ page.display_date|date:"d.m.Y" }}
+                            {% if page.categories %}
+                            i
+                            {% for category in page.categories.all %}
+                                <a href="{% pageurl page.get_parent %}?category={{ category.category.pk }}">
+                                    {{ category.category }}
+                                </a>
+                                {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                            .
+                        {% endif %}
                         </span>
+                    {% endif %}
+                    {% if page.license %}
+                    <span class="license">
+                        Lisens for teksten er 
+                        {% include "patterns/atoms/license/license.html" with license=page.license %}.
+                        Lisensen gjelder kun teksten. Bilder, illustrasjon og andre elementer er lisensiert selvstendig.
+                    </span>
                     {% endif %}
                     </p>
 
