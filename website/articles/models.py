@@ -36,8 +36,8 @@ class ArticlePageCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+        verbose_name = "Article category"
+        verbose_name_plural = "Article categories"
 
 
 class ArticlePageRelatedPage(RelatedPage):
@@ -192,9 +192,7 @@ class ArticleIndex(BasePage):
         context.update(
             articles=articles,
             # Only show articles types that have been used
-            categories=ArticlePageCategory.objects.all().values_list(
-                'category__pk', 'category__title'
-            ).distinct().order_by('category__title'),
+            categories=ArticlePageCategory.objects.all(),
             extra_url_params=extra_url_params,
         )
         return context
