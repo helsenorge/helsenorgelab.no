@@ -56,7 +56,7 @@ class ArticlePageTag(TaggedItemBase):
 
 
 class ArticlePage(BasePage):
-    template = 'patterns/pages/articles/articles_page.html'
+    template = 'patterns/pages/articles/article_page.html'
 
     subpage_types = []
     parent_page_types = ['ArticleIndex']
