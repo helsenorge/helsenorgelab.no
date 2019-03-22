@@ -1,0 +1,56 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `call_to_action` into context.
+
+Example:
+    {% include "patterns/molecules/card/card.html" with card=card %}
+
+{% endcomment %}
+
+{% if call_to_action %}
+    <div class="card">
+
+        <h2>{{ card.title }}</h2>
+
+        {{ card.summary|richtext }}
+
+        {% image card.image fill-450x300 %}
+
+        <p><a href="{{ card.link }}">{{ card.link_text }}</a></p>
+
+    </div>
+{% endif %}
+
+
+<div class="card" style="width: 18rem;">
+		<img class="card-img-top" src="..." alt="Card image cap">
+		<div class="card-body">
+		  <h5 class="card-title">Card title</h5>
+		  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  <a href="#" class="btn btn-primary">Go somewhere</a>
+		</div>
+		</div>
+		
+
+		{% load wagtailcore_tags wagtailimages_tags static %}
+
+<div class="col-sm-4">
+  <a href="{% pageurl page %}" class="article-card-link">
+      <div class="card border-0 bg-transparent">
+          {% if page.listing_image %}
+            {% image page.listing_image fill-370x270 as img %}
+            <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
+          {% elif page.featured_image %}
+            {% image page.featured_image fill-370x270 as img %}
+            <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid" />
+          {% endif %}
+
+          <div class="card-body pl-0">
+            <h3 class="card-link">{% firstof page.listing_title page.title %}</h3>
+          </div>
+      </div>
+  </a>
+</div>

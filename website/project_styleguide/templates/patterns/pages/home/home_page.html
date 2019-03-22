@@ -60,13 +60,13 @@
 
                 <div class="row py-2">
                     {% for article in articles_row_1 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article %}
                     {% endfor %}
                 </div>
 
                 <div class="row py-2">
                     {% for article in articles_row_2 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article %}
                     {% endfor %}
                 </div>
 
@@ -78,13 +78,13 @@
 
                 <div class="row">
                     {% for article in featured_row_1 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article.featured_page %}
                     {% endfor %}
                 </div>
 
                 <div class="row">
                     {% for article in featured_row_2 %}
-                        {% include "patterns/molecules/homepage/homepage-article-card.html" with page=article.featured_page %}
+                        {% include "patterns/molecules/card/card-page.html" with page=article.featured_page %}
                     {% endfor %}
                 </div>
 
