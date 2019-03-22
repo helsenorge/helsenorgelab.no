@@ -57,7 +57,6 @@ class NewsPage(BasePage):
     parent_page_types = ['NewsIndex']
 
     introduction = models.TextField(
-        blank=True,
         max_length=165,
     )
     featured_image = models.ForeignKey(
