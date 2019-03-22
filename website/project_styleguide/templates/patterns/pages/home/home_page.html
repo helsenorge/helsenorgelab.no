@@ -93,4 +93,21 @@
 
             </section>
 
+
+            <section id="news" class="container">
+
+                    {% if latest_news %}
+
+                    <h1 class="text-primary pt-5">Nytt</h1>
+    
+                    <div class="row">
+                        {% for newsitem in latest_news %}
+                            {% include "patterns/molecules/homepage/homepage-article-card.html" with page=newsitem %}
+                        {% endfor %}
+                    </div>
+    
+    
+                {% endif %}
+            </section>
+
 {% endblock %}

@@ -7,6 +7,7 @@ from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
+from website.articles.models import ArticlePage
 from website.news.models import NewsPage
 from website.utils.models import BasePage
 
@@ -83,13 +84,17 @@ class HomePage(BasePage):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
 
-        if NewsPage.objects.live().public().count() >= 1:
-            latest_articles = NewsPage.objects.live().public().order_by('-first_published_at')
+        if ArticlePage.objects.live().public().count() >= 1:
+            latest_articles = ArticlePage.objects.live().public().order_by('-first_published_at')
             context['article_top'] = latest_articles[0]
             context['articles_row_1'] = latest_articles[1:4]
             context['articles_row_2'] = latest_articles[4:7]
 
             context['featured_row_1'] = self.featured_pages.all()[:3]
             context['featured_row_2'] = self.featured_pages.all()[3:6]
+
+        if NewsPage.objects.live().public().count() >= 1:
+            latest_news = NewsPage.objects.live().public().order_by('-first_published_at')
+            context['latest_news'] = latest_news[0:10]
 
         return context
