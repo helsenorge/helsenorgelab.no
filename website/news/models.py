@@ -1,3 +1,4 @@
+from django import forms
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
@@ -5,7 +6,7 @@ from django.db.models.functions import Coalesce
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
+from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel)
 from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
@@ -72,7 +73,7 @@ class NewsPage(BasePage):
     )
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
-    categories = ParentalManyToManyField('articles.ArticlePageCategory', blank=True)
+    categories = ParentalManyToManyField('news.NewsPageCategory', blank=True)
 
     publication_date = models.DateTimeField(
         null=True, blank=True,
@@ -95,7 +96,7 @@ class NewsPage(BasePage):
             heading="Featured Image",
         ),
         FieldPanel('body', classname="full"),
-        InlinePanel('categories', label="Categories"),
+        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
         FieldPanel('publication_date'),
     ]
