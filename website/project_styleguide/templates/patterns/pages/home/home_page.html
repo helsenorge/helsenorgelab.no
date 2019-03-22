@@ -33,7 +33,7 @@
 
             {% if article_top %}
 
-                <h2 class="pt-5 pb-3 text-primary">Siste artikler</h2>
+                <h2 class="display-3 pt-5 pb-3 text-primary">Siste artikler</h2>
 
                 <div class="row py-1">
                     <div class="col-sm-8">
@@ -74,7 +74,7 @@
 
             {% if featured_row_1 %}
 
-                <h1 class="text-primary pt-5">Kanskje du vil lese mer om?</h1>
+                <h2 class="display-3 text-primary pt-5">Kanskje du vil lese mer om?</h2>
 
                 <div class="row">
                     {% for article in featured_row_1 %}
@@ -94,20 +94,23 @@
             </section>
 
 
+            {% if latest_news_1 %}
             <section id="news" class="container">
+                <h2 class="display-3 text-primary pt-5 pb-1">Notert</h2>
 
-                    {% if latest_news %}
-
-                    <h1 class="text-primary pt-5">Nytt</h1>
-    
-                    <div class="row">
-                        {% for newsitem in latest_news %}
-                            {% include "patterns/molecules/homepage/homepage-article-card.html" with page=newsitem %}
-                        {% endfor %}
+                <div class="row d-flex">
+                    <div class="col-md-4">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_1 %}
                     </div>
-    
-    
-                {% endif %}
+                    <div class="col-md-4 h-100">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_2 %}
+                    </div>
+                    <div class="col-md-4">
+                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_3 %}
+                    </div>
+                </div> 
             </section>
+            {% endif %}
+
 
 {% endblock %}
