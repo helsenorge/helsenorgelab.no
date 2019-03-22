@@ -15,26 +15,6 @@ from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 
 
-class StandardPageCategory(models.Model):
-    page = ParentalKey(
-        'standardpages.InformationPage',
-        related_name='categories'
-    )
-    category = models.ForeignKey(
-        'utils.Category',
-        related_name='+',
-        on_delete=models.CASCADE,
-        verbose_name='category',
-    )
-
-    panels = [
-        FieldPanel('category')
-    ]
-
-    def __str__(self):
-        return self.category.title
-
-
 class InformationPageRelatedPage(RelatedPage):
     source_page = ParentalKey('InformationPage', related_name='related_pages')
 
@@ -77,7 +57,6 @@ class InformationPage(BasePage):
             heading="Featured Image",
         ),
         StreamFieldPanel('body'),
-        InlinePanel('categories', label="Categories"),
         InlinePanel('authors', label="Authors"),
     ]
 
