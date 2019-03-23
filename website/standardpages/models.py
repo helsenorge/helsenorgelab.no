@@ -123,4 +123,4 @@ class IndexPage(BasePage):
         return context
 
     class Meta:
-        verbose_name = "List of pages"
+        verbose_name = "Pages index"
