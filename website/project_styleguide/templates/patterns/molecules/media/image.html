@@ -6,12 +6,12 @@ This template can be used in different places. In streamfield block
 or directly in a page template. To use this template pass `image` into context.
 
 Example:
-    {% include "patterns/molecules/media/image.html" with image=page.featured_image caption=page.image_caption imgclass="extra-wide" %}
+    {% include "patterns/molecules/media/image.html" with media=page.featured_image caption=page.image_caption imgclass="extra-wide" sizing="fill-854x480" %}
 
 {% endcomment %}
 
-{% if image %}
-    {% image page.featured_image fill-1280x720 as img %}
+{% if media %}
+    {% image media fill-1920x1080 as img %}
     <figure class="figure w-100">
         <img src="{{ img.url }}" alt="{{ img.image.description }}" class="figure-img {{ imgclass|default:'img-fluid' }}" />
         <figcaption class="figure-caption">
