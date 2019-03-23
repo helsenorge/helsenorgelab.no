@@ -1,6 +1,6 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
 
-<div class="articles__news-item row">
+<div class="row listitem" role="listitem">
     <div class="col-4">
         {% if result.listing_image %}
             {% image result.listing_image fill-277x156 %}
@@ -8,9 +8,8 @@
             {% image result.featured_image fill-277x156 %}
         {% endif %}
     </div>
-
     <div class="col-8">
-        <h2 role="listitem">
+        <h2 >
             <a href="{% pageurl result %}">
                 {% firstof result.listing_title result.title %}
             </a>

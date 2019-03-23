@@ -1,47 +1,49 @@
 {% extends "patterns/base_page.html" %}
 {% load static wagtailcore_tags wagtailsearchpromotions_tags %}
 
-{% block body_class %}template-searchresults{% endblock %}
-
-{% block title %}
-    {% if search_query %}
-        Search results for &ldquo;{{ search_query }}&rdquo;
-    {% else %}
-        Search
-    {% endif %}
-{% endblock %}
-
 {% block content %}
-    <div class="wrapper wrapper--flex">
-        <section class="section section--main articles">
-
-            <div class="articles__header">Search</div>
-
-            <p class="articles__intro">
+    <div class="container">
+            <h1 class="pt-5">
+                {% block title %}
+                    {% if search_query %}
+                        S&oslash;keresultater for &ldquo;{{ search_query }}&rdquo;
+                    {% else %}
+                        S&oslash;k
+                    {% endif %}
+                {% endblock %}
+            </h1>
+            <p class="lead">
                 {% if search_query %}
-                    Search results for &ldquo;{{ search_query }}&rdquo;
+                    Vi s&oslash;kte etter &ldquo;{{ search_query }}&rdquo;
                 {% else %}
-                    Search
+                    S&oslash;k etter hva som helst.
                 {% endif %}
             </p>
 
-            <div class="articles__search-box">
-                <form action="{% url 'search' %}" method="get" role="search">
-                    <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                    <button class="button" type="submit">
-                        <svg class="icon icon--magnifying-glass"><use xlink:href="#magnifying-glass"></use></svg>
-                    </button>
-                </form>
-            </div>
+        
+            <form action="{% url 'search' %}" method="get" role="search">
+                <div class="form-row">
+                    <div class="col-sm-4 my-1">
+                        <input class="form-control form-control-lg" type="text" placeholder="Søk.." name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                    </div>
+                    <div class="col-sm-4 my-1">
+                        <button class="btn btn-primary" type="submit">
+                        <i class="material-icons">
+                            search
+                        </i>
+                        </button>
+                    </div>
+                </div>
+            </form>
 
             {% get_search_promotions search_query as search_picks %}
 
             {% if search_picks %}
                  <p class="articles__intro">
-                    Promoted Search Results
+                    Fremhevede resultater
                  </p>
 
-                 <div class="container">
+                 <div id="search-results-featured" role="list">
                     {% for pick in search_picks %}
                         {% include "patterns/molecules/search-result/search-result.html" with result=pick.page.specific %}
                      {% endfor %}
@@ -53,11 +55,11 @@
 
                 {% with count=search_results.paginator.count %}
                     <p class="articles__intro">
-                        {{ count }} result{{ count|pluralize }} found.
+                        {{ count }} sider funnet.
                     </p>
                 {% endwith %}
 
-                <div class="container">
+                <div class="py-2 search-results" role="list">
                     {% for result in search_results %}
                         {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
                     {% endfor %}
@@ -66,12 +68,11 @@
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
 
             {% elif search_query and not search_picks %}
-                <div class="articles__no-results">
-                    No results found.
+                <div class="no-results py-3">
+                    <p class="lead">Beklager</p>
+                    Fant ingenting
                 </div>
             {% endif %}
-
-        </section>
 
     </div>
 
