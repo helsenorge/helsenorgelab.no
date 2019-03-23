@@ -33,11 +33,12 @@
     <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
     <meta name="twitter:title" content="{{ page.title }}" />
     <meta name="twitter:description" content="{{ page|social_text:request.site }}">
-    {% if page.social_image  %}
-        {% image page.social_image width-320 as social_img %}
+    {% if page.social_image %}
+        {% image page.social_image width-1280 as social_img %}
         <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
-    {% else %}
-        {# Add a default image to use for social sharing here in case one is not provided on the page. #}
+    {% elif page.featured_image %}
+        {% image page.featured_image width-1280 as social_img %}
+        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
     {% endif %}
 
     {# facebook opengraph tags #}
@@ -46,9 +47,11 @@
     <meta property="og:url" content="{{ page.url }}" />
     <meta property="og:title" content="{{ page.title }}" />
     {% if page.social_image %}
-        <meta property="og:image" content="http://{{ request.site.hostname }}{{ social_img.url }}" />
-    {% else %}
-        {# Add a default image to use for social sharing here in case one is not provided on the page. #}
+        {% image page.social_image width-1280 as social_img %}
+        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+    {% elif page.featured_image %}
+        {% image page.featured_image width-1280 as social_img %}
+        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
     {% endif %}
     <meta property="og:description" content="{{ page|social_text:request.site }}" />
     <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
@@ -66,39 +69,38 @@
 
 {% block header %}
     <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-white pt-1 pb-1" aria-label="Primary">
-                <div class="container">
-                    <a class="navbar-brand" href="{% slugurl 'home' %}">
-                        helsenorgelab.no
-                    </a>
-                    
-                    
-                    <div class="collapse navbar-collapse" id="navbarContent" role="menu">
-                        {% primarynav %}
-                    </div>    
-                    <button class="navbar-toggler text-primary border-0 ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="material-icons align-top">
-                                reorder
-                            </i>
-                            <span class="sr-only">Meny</span>
-                        </button>
-                    <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
-                            <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
-                        </button>    
+        <nav class="navbar navbar-expand-lg navbar-light bg-white pt-1 pb-1" aria-label="Primary">
+            <div class="container">
+                <a class="navbar-brand" href="{% slugurl 'home' %}">
+                    helsenorgelab.no
+                </a>
+                
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    {% primarynav %}
+                </div>    
+                <button class="navbar-toggler text-primary border-0 ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="material-icons align-top">
+                            reorder
+                        </i>
+                        <span class="sr-only">Meny</span>
+                    </button>
+                <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
+                        <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
+                    </button>    
 
-       
-                </div>
-            </nav>
-            <div class="collapse navbar-collapse bg-dark py-0_5" id="headerSearch">
-                <div class="container">
-                        <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
-                                <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
-                                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                                         S&oslash;k
-                                </button>
-                            </form>
-                </div>
+    
             </div>
+        </nav>
+        <div class="collapse navbar-collapse bg-dark py-0_5" id="headerSearch">
+            <div class="container">
+                    <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
+                            <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                                        S&oslash;k
+                            </button>
+                        </form>
+            </div>
+        </div>
 
 
     </header>
