@@ -1,0 +1,22 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template can be used in different places. In streamfield block
+or directly in a page template. To use this template pass `image` into context.
+
+Example:
+    {% include "patterns/molecules/media/image.html" with media=page.featured_image caption=page.image_caption imgclass="extra-wide" sizing="fill-854x480" %}
+
+{% endcomment %}
+
+{% if media %}
+    {% image media fill-1920x1080 as img %}
+    <figure class="figure w-100">
+        <img src="{{ img.url }}" alt="{{ img.image.description }}" class="figure-img {{ imgclass|default:'img-fluid' }}" />
+        <figcaption class="figure-caption">
+            {{ caption }}
+            {% include "patterns/atoms/license/credit.html" with title=img.image.title author=img.image.author image_source_url=img.image.image_source_url license=img.image.license %}
+        </figcaption>
+    </figure>
+{% endif %}

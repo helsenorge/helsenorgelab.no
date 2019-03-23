@@ -1,17 +1,3 @@
 {% load wagtailimages_tags %}
 
-{% image value.image fill-2160x1215 %}
-
-<p class="articles__image-caption">
-    {% if value.caption %}
-        {{ value.caption }}
-    {% endif %}
-
-    {% if value.image.license %} |
-        {{ value.image.license.title }}
-    {% endif %}
-
-    {% if value.image.author %} |
-        {{ value.image.author }}
-    {% endif %}
-</p>
+{% include "patterns/molecules/media/image.html" with media=value.image caption=value.caption imgclass="" %}

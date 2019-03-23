@@ -6,14 +6,14 @@ This template can be used in different places. In streamfield block
 or directly in a page template. To use this template pass `license` into context.
 
 Example:
-    {% include "patterns/atoms/license/license.html" with license=license %}
+    {% include "patterns/atoms/license/license.html" with license=license suffix="." %}
 
 {% endcomment %}
 
 {% if license %}
     <span class="license">
         {% if license.url %}
-            <a href="{{ license.url }}">{{ license.title }}</a>
+            <a href="{{ license.url }}">{{ license.title }}</a>{{ suffix }}
         {% else %}
             {{ license.title }}
         {% endif %}

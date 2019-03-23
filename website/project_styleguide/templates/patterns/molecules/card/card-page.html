@@ -14,10 +14,10 @@ Example:
 	<div class="card bg-transparent">
 
 		{% if page.listing_image %}
-			{% image page.listing_image fill-370x270 as img %}
+			{% image page.listing_image fill-854x480 as img %}
 				<img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top" />
 		{% elif page.featured_image %}
-			{% image page.featured_image fill-370x270 as img %}
+			{% image page.featured_image fill-854x480 as img %}
 				<img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top" />
 		{% endif %}
 		<div class="card-body">

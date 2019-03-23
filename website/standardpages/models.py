@@ -22,6 +22,8 @@ class InformationPageRelatedPage(RelatedPage):
 class InformationPage(BasePage):
     template = 'patterns/pages/standardpages/information_page.html'
 
+    subpage_types = ['standardpages.InformationPage']
+
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     featured_image = models.ForeignKey(

@@ -1,16 +1,13 @@
-<blockquote>
-    <p>{{ value.quote }}</p>
+<blockquote class="blockquote text-center">
+    <p class="mb-0">{{ value.quote }}</p>
 
     {% if value.attribution %}
-        <p>
-            {{ value.attribution }}
-        </p>
-    {% endif %}
-
-    {% if value.citation_link %}
-        <p class="citation-link">
-            Source:
-            <a href="{{ value.citation_link }}">{{ value.citation_link }}</a>
-        </p>
+        <footer class="blockquote-footer">
+            {% if value.citation_link %}
+                <a href="{{ value.citation_link }}">{{ value.attribution }}</a>
+            {% else %}
+                {{ value.attribution }}
+            {% endif %}
+        </footer>
     {% endif %}
 </blockquote>
