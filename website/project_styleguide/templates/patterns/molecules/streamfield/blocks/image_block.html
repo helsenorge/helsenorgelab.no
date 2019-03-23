@@ -2,17 +2,3 @@
 
 {% image value.image fill-1920x1080 as img %}
 {% include "patterns/molecules/media/image.html" with image=img caption=value.caption imgclass="" %}
-
-<p class="articles__image-caption">
-    {% if value.caption %}
-        {{ value.caption }}
-    {% endif %}
-
-    {% if value.image.license %} |
-        {{ value.image.license.title }}
-    {% endif %}
-
-    {% if value.image.author %} |
-        {{ value.image.author }}
-    {% endif %}
-</p>
