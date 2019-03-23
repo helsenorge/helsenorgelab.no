@@ -15,7 +15,7 @@
         {% block extra_css %}{% endblock %}
     </head>
 
-    <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
+    <body class="{% block body_class %}page-{{ page.get_verbose_name|slugify }}{% endblock %}">
         {% block body_top %}{% endblock %}
 
         {% wagtailuserbar %}
