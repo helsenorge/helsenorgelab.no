@@ -2,7 +2,6 @@
 {% if page %}
 	{% pageurl page as item_url %}
 	<a class="nav-link{% if has_children %} dropdown{% endif %}" href="{{ item_url }}"
-	    role="menuitem"
 	    {% if has_children %} role="button" aria-haspopup="true" aria-expanded="false"{% endif %}
 	    >
 	    {{ title|default:page.title }}
