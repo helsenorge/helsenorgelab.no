@@ -1,6 +1,7 @@
 {% load wagtailimages_tags %}
 
-{% image value.image fill-2160x1215 %}
+{% image value.image fill-1920x1080 as img %}
+{% include "patterns/molecules/media/image.html" with image=img caption=value.caption imgclass="" %}
 
 <p class="articles__image-caption">
     {% if value.caption %}
