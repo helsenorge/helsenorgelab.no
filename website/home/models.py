@@ -23,6 +23,8 @@ class HomePageFeaturedPage(Orderable):
         on_delete=models.CASCADE,
         verbose_name='featured page',
     )
+    title = models.CharField(null=True, blank=True, max_length=80)
+    summary = models.TextField(null=True, blank=True, max_length=200)
     image = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -33,6 +35,8 @@ class HomePageFeaturedPage(Orderable):
 
     panels = [
         PageChooserPanel('featured_page'),
+        FieldPanel('title'),
+        FieldPanel('summary'),
         ImageChooserPanel('image')
     ]
 
