@@ -38,7 +38,7 @@ class StoryBlock(blocks.StreamBlock):
         classname='full title', icon='title',
         template='patterns/molecules/streamfield/blocks/heading_block.html'
     )
-    paragraph = blocks.RichTextBlock()
+    paragraph = blocks.RichTextBlock(features=['h2', 'h3', 'bold', 'italic', 'link', 'ol', 'ul'])
     image = ImageBlock()
     quote = QuoteBlock()
     embed = EmbedBlock()
