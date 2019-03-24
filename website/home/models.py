@@ -63,7 +63,7 @@ class HomePage(BasePage):
         index.SearchField('hero_introduction'),
     ]
 
-    articles_text = models.CharField(null=True, blank=True, max_length=150)
+    articles_title = models.CharField(null=True, blank=True, max_length=150)
     articles_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -73,7 +73,7 @@ class HomePage(BasePage):
     )
     articles_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    pages_text = models.CharField(null=True, blank=True, max_length=150)
+    featured_pages_title = models.CharField(null=True, blank=True, max_length=150)
     pages_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -83,7 +83,7 @@ class HomePage(BasePage):
     )
     pages_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    news_text = models.CharField(null=True, blank=True, max_length=150)
+    news_title = models.CharField(null=True, blank=True, max_length=150)
     news_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -111,11 +111,11 @@ class HomePage(BasePage):
         ),
         MultiFieldPanel(
             [
-                FieldPanel('articles_text'),
+                FieldPanel('articles_title'),
                 PageChooserPanel('articles_link'),
-                FieldPanel('pages_text'),
+                FieldPanel('featured_pages_title'),
                 PageChooserPanel('pages_link'),
-                FieldPanel('news_text'),
+                FieldPanel('news_title'),
                 PageChooserPanel('news_link'),
             ], heading="Front page sections",
         ),
@@ -123,13 +123,13 @@ class HomePage(BasePage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['articles_text'] = self.articles_text
+        context['articles_title'] = self.articles_title
         context['articles_link'] = self.articles_link
         context['articles_linktext'] = self.articles_linktext
-        context['pages_text'] = self.pages_text
+        context['featured_pages_title'] = self.featured_pages_title
         context['pages_link'] = self.pages_link
         context['pages_linktext'] = self.pages_linktext
-        context['news_text'] = self.news_text
+        context['news_title'] = self.news_title
         context['news_link'] = self.news_link
         context['news_linktext'] = self.news_linktext
 

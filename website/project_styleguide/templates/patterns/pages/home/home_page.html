@@ -33,7 +33,7 @@
 
             {% if article_top %}
 
-                <h2 class="display-3 pt-5 pb-1 text-primary">{{ articles_text|default:"Artikler" }}</h2>
+                <h2 class="display-3 pt-5 pb-1 text-primary">{{ articles_title|default:"Artikler" }}</h2>
 
         
                 {% if article_top.listing_image or article_top.featured_image %}
@@ -64,7 +64,7 @@
 
             {% if featured_row_1 %}
 
-                <h2 class="display-3 text-primary pt-5">{{ pages_text|default:"Sider" }}</h2>
+                <h2 class="display-3 text-primary pt-5">{{ featured_pages_title|default:"Sider" }}</h2>
 
                 <div class="row">
                     {% for article in featured_row_1 %}
@@ -83,9 +83,9 @@
             </section>
 
 
-            {% if news_text %}
+            {% if news_title %}
             <section id="news" class="container">
-                <h2 class="display-3 text-primary pt-5 pb-1">{{ news_text|default:"Notert" }}</h2>
+                <h2 class="display-3 text-primary pt-5 pb-1">{{ news_title|default:"Notert" }}</h2>
 
                 <div class="row d-flex">
                     <div class="col-md-4">
