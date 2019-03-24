@@ -72,7 +72,7 @@ class ArticlePage(BasePage):
         related_name='+',
         on_delete=models.SET_NULL
     )
-    image_caption = models.CharField(
+    featured_image_caption = models.CharField(
         blank=True,
         max_length=250,
     )
@@ -104,7 +104,7 @@ class ArticlePage(BasePage):
         MultiFieldPanel(
             [
                 ImageChooserPanel('featured_image'),
-                FieldPanel('image_caption'),
+                FieldPanel('featured_image_caption'),
             ],
             heading="Featured Image",
         ),

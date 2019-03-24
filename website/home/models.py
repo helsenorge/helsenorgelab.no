@@ -18,14 +18,26 @@ class HomePageFeaturedPage(Orderable):
         related_name='featured_pages'
     )
     featured_page = models.ForeignKey(
-        'standardpages.InformationPage',
+        'standardpages.StandardPage',
         related_name='+',
         on_delete=models.CASCADE,
         verbose_name='featured page',
     )
+    title = models.CharField(null=True, blank=True, max_length=80)
+    summary = models.TextField(null=True, blank=True, max_length=200)
+    image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL,
+    )
 
     panels = [
-        PageChooserPanel('featured_page')
+        PageChooserPanel('featured_page'),
+        FieldPanel('title'),
+        FieldPanel('summary'),
+        ImageChooserPanel('image')
     ]
 
 
@@ -34,8 +46,8 @@ class HomePage(BasePage):
 
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
-    subpage_types = ['news.NewsIndex', 'standardpages.InformationPage', 'articles.ArticleIndex',
-                     'people.PersonIndexPage']
+    subpage_types = ['news.NewsIndex', 'standardpages.StandardPage', 'articles.ArticleIndex',
+                     'people.PersonIndex']
 
     hero_title = models.CharField(null=True, blank=False, max_length=80)
 
@@ -63,7 +75,7 @@ class HomePage(BasePage):
         index.SearchField('hero_introduction'),
     ]
 
-    articles_text = models.CharField(null=True, blank=True, max_length=150)
+    articles_title = models.CharField(null=True, blank=True, max_length=150)
     articles_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -73,7 +85,7 @@ class HomePage(BasePage):
     )
     articles_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    pages_text = models.CharField(null=True, blank=True, max_length=150)
+    featured_pages_title = models.CharField(null=True, blank=True, max_length=150)
     pages_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -83,7 +95,7 @@ class HomePage(BasePage):
     )
     pages_linktext = models.CharField(null=True, blank=True, max_length=80)
 
-    news_text = models.CharField(null=True, blank=True, max_length=150)
+    news_title = models.CharField(null=True, blank=True, max_length=150)
     news_link = models.ForeignKey(
         'wagtailcore.Page',
         on_delete=models.SET_NULL,
@@ -111,11 +123,11 @@ class HomePage(BasePage):
         ),
         MultiFieldPanel(
             [
-                FieldPanel('articles_text'),
+                FieldPanel('articles_title'),
                 PageChooserPanel('articles_link'),
-                FieldPanel('pages_text'),
+                FieldPanel('featured_pages_title'),
                 PageChooserPanel('pages_link'),
-                FieldPanel('news_text'),
+                FieldPanel('news_title'),
                 PageChooserPanel('news_link'),
             ], heading="Front page sections",
         ),
@@ -123,13 +135,13 @@ class HomePage(BasePage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['articles_text'] = self.articles_text
+        context['articles_title'] = self.articles_title
         context['articles_link'] = self.articles_link
         context['articles_linktext'] = self.articles_linktext
-        context['pages_text'] = self.pages_text
+        context['featured_pages_title'] = self.featured_pages_title
         context['pages_link'] = self.pages_link
         context['pages_linktext'] = self.pages_linktext
-        context['news_text'] = self.news_text
+        context['news_title'] = self.news_title
         context['news_link'] = self.news_link
         context['news_linktext'] = self.news_linktext
 

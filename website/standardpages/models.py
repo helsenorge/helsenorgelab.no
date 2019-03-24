@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -15,14 +13,14 @@ from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 
 
-class InformationPageRelatedPage(RelatedPage):
-    source_page = ParentalKey('InformationPage', related_name='related_pages')
+class StandardPageRelatedPage(RelatedPage):
+    source_page = ParentalKey('StandardPage', related_name='related_pages')
 
 
-class InformationPage(BasePage):
+class StandardPage(BasePage):
     template = 'patterns/pages/standardpages/information_page.html'
 
-    subpage_types = ['standardpages.InformationPage']
+    subpage_types = ['standardpages.StandardPage']
 
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
@@ -33,7 +31,7 @@ class InformationPage(BasePage):
         related_name='+',
         on_delete=models.SET_NULL
     )
-    image_caption = models.CharField(
+    featured_image_caption = models.CharField(
         blank=True,
         max_length=250,
     )
@@ -54,7 +52,7 @@ class InformationPage(BasePage):
         MultiFieldPanel(
             [
                 ImageChooserPanel('featured_image'),
-                FieldPanel('image_caption'),
+                FieldPanel('featured_image_caption'),
             ],
             heading="Featured Image",
         ),
@@ -66,9 +64,9 @@ class InformationPage(BasePage):
         verbose_name = "Standard Page"
 
 
-class InformationPageAuthor(Orderable):
+class StandardPageAuthor(Orderable):
     page = ParentalKey(
-        InformationPage,
+        StandardPage,
         related_name='authors'
     )
     author = models.ForeignKey(
@@ -86,41 +84,3 @@ class InformationPageAuthor(Orderable):
         PageChooserPanel('author'),
         FieldPanel('biography'),
     ]
-
-
-class IndexPage(BasePage):
-    template = 'patterns/pages/standardpages/index_page.html'
-
-    subpage_types = ['standardpages.InformationPage']
-    # parent_page_types = []
-
-    introduction = models.TextField(blank=True)
-
-    content_panels = BasePage.content_panels + [
-        FieldPanel('introduction'),
-    ]
-
-    search_fields = BasePage.search_fields + [
-        index.SearchField('introduction'),
-    ]
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        subpages = self.get_children().live()
-        per_page = settings.DEFAULT_PER_PAGE
-        page_number = request.GET.get('page')
-        paginator = Paginator(subpages, per_page)
-
-        try:
-            subpages = paginator.page(page_number)
-        except PageNotAnInteger:
-            subpages = paginator.page(1)
-        except EmptyPage:
-            subpages = paginator.page(paginator.num_pages)
-
-        context['subpages'] = subpages
-
-        return context
-
-    class Meta:
-        verbose_name = "Pages index"
