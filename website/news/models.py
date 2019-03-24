@@ -70,7 +70,7 @@ class NewsPage(BasePage):
         blank=True,
         max_length=250,
     )
-    body = RichTextField(blank=True)
+    body = RichTextField(blank=True, features=['bold', 'italic', 'link'])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
     categories = ParentalManyToManyField('news.NewsPageCategory', blank=True)
 
@@ -87,6 +87,9 @@ class NewsPage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel('introduction'),
+        FieldPanel('body', classname="full"),
+        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+        FieldPanel('tags'),
         MultiFieldPanel(
             [
                 ImageChooserPanel('featured_image'),
@@ -94,9 +97,6 @@ class NewsPage(BasePage):
             ],
             heading="Featured Image",
         ),
-        FieldPanel('body', classname="full"),
-        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        FieldPanel('tags'),
         FieldPanel('publication_date'),
     ]
 
