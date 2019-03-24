@@ -1,6 +1,4 @@
 
-
-
 // Extra width classes
 .full-width {
   width: 100vw;
@@ -39,6 +37,15 @@ h1 a, h2 a, h3 a, a.nav-link, .breadcrumb-item a, .article-card-link, .page-link
 h1, h2, h3, h4 {
   color: darken($primary, 8%);
   font-weight: 300;
+}
+
+blockquote {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.main-content h2 {
+  padding-top: 2rem;
 }
 
 p.lead {
