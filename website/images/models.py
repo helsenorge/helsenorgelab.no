@@ -17,7 +17,7 @@ class CustomImage(AbstractImage):
         blank=True,
         max_length=165,
     )
-    author = models.TextField(
+    author = models.CharField(
         blank=True,
         max_length=165,
         null=True,
