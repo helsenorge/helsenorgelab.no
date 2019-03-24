@@ -44,7 +44,7 @@ class PersonPage(BasePage):
     template = 'patterns/pages/people/person_page.html'
 
     subpage_types = []
-    parent_page_types = ['people.PersonIndexPage']
+    parent_page_types = ['people.PersonIndex']
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -76,7 +76,7 @@ class PersonPage(BasePage):
     ]
 
 
-class PersonIndexPage(BasePage):
+class PersonIndex(BasePage):
     template = 'patterns/pages/people/person_index_page.html'
 
     subpage_types = ['PersonPage']

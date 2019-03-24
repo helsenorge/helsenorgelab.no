@@ -18,7 +18,7 @@ class HomePageFeaturedPage(Orderable):
         related_name='featured_pages'
     )
     featured_page = models.ForeignKey(
-        'standardpages.InformationPage',
+        'standardpages.StandardPage',
         related_name='+',
         on_delete=models.CASCADE,
         verbose_name='featured page',
@@ -34,8 +34,8 @@ class HomePage(BasePage):
 
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
-    subpage_types = ['news.NewsIndex', 'standardpages.InformationPage', 'articles.ArticleIndex',
-                     'people.PersonIndexPage']
+    subpage_types = ['news.NewsIndex', 'standardpages.StandardPage', 'articles.ArticleIndex',
+                     'people.PersonIndex']
 
     hero_title = models.CharField(null=True, blank=False, max_length=80)
 
