@@ -23,9 +23,17 @@ class HomePageFeaturedPage(Orderable):
         on_delete=models.CASCADE,
         verbose_name='featured page',
     )
+    image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL,
+    )
 
     panels = [
-        PageChooserPanel('featured_page')
+        PageChooserPanel('featured_page'),
+        ImageChooserPanel('image')
     ]
 
 
