@@ -20,6 +20,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # https://docs.djangoproject.com/en/stable/ref/settings/#debug
 DEBUG = False
 
+# https://docs.djangoproject.com/en/dev/ref/settings/#prepend-www
+PREPEND_WWW = True
+
 
 # Secret key is important to be kept secret. Never share it with anyone. Please
 # always set it in the environment variable and never check into the
