@@ -651,4 +651,4 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # Favicon settings
 # After you add favicon.ico file, please add its path relative to the static
 # directory here so it can be served at /favicon.ico.
-# FAVICON_STATIC_PATH = 'img/favicon.ico'
+FAVICON_STATIC_PATH = 'images/favicon/favicon.ico'
