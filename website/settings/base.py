@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 DEBUG = False
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#prepend-www
-PREPEND_WWW = True
+if 'PREPEND_WWW' in env:
+    PREPEND_WWW = env['PREPEND_WWW']
 
 
 # Secret key is important to be kept secret. Never share it with anyone. Please
