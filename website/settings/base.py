@@ -24,6 +24,9 @@ DEBUG = False
 if 'PREPEND_WWW' in env:
     PREPEND_WWW = env['PREPEND_WWW']
 
+if 'GOOGLE_TAG_MANAGER_ID' in env:
+    GOOGLE_TAG_MANAGER_ID = env['GOOGLE_TAG_MANAGER_ID']
+
 
 # Secret key is important to be kept secret. Never share it with anyone. Please
 # always set it in the environment variable and never check into the
