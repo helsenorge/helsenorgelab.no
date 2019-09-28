@@ -1,17 +1,15 @@
-<div class="media document clearfix">
-    <a href="{{ value.document.url }}">
+<div class="media document bg-white position-relative clearfix my-2">
         <i class="material-icons mx-2 display-3 text-primary">
                 save_alt
         </i>
-    </a>
-    <div class="media-body align-self-center">
-        <h5 class="mt-0">
-            <a href="{{ value.document.url }}">
-                {{ value.title|default:value.document.title }}
-            </a>
-        </h5>
-        {% if value.document.description %}
-            {{ value.document.description }}
-        {% endif %}
+        <div class="media-body align-self-center">
+            <h5 class="mt-0">
+                <a href="{{ value.document.url }}" class="stretched-link">
+                    {{ value.title|default:value.document.title }}
+                </a>
+            </h5>
+            {% if value.document.description %}
+                {{ value.document.description }}
+            {% endif %}
+        </div>
     </div>
-</div>
