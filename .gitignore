@@ -1,4 +1,5 @@
 /website/static_compiled
+.venv
 
 *.pyc
 .DS_Store
