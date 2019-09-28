@@ -3,6 +3,8 @@
 
 {% block content %}
 
+        <h1 class="sr-only">helsenorgelab.no</h1>
+
         {% if page.featured_image %}
 
             <div class="container hero">
@@ -14,12 +16,12 @@
                     {% endif %}
 
                     <div class="hero-text-block">
-                        <h1>{{ page.hero_title }}</h1>
+                        <h2 class="display-4">{{ page.hero_title }}</h2>
 
                         <p>{{ page.hero_introduction }}</p>
 
                         {% if page.hero_button_link and page.hero_button_text %}
-                            <a class="btn hero-button" href="{% pageurl page.hero_button_link %}" role="button">
+                            <a class="btn hero-button" href="{% pageurl page.hero_button_link %}">
                                 {{ page.hero_button_text }}
                             </a>
                         {% endif %}
@@ -90,18 +92,7 @@
             {% if news_title %}
             <section id="news" class="container">
                 <h2 class="display-3 text-primary pt-5 pb-1">{{ news_title|default:"Notert" }}</h2>
-
-                <div class="row d-flex">
-                    <div class="col-md-4">
-                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_1 %}
-                    </div>
-                    <div class="col-md-4 h-100">
-                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_2 %}
-                    </div>
-                    <div class="col-md-4">
-                        {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news_3 %}
-                    </div>
-                </div>
+                {% include "patterns/molecules/lists/list_group-links.html" with linklist=latest_news %}
                 
                 {% if news_link %}
                     <p class="pt-1"><a href="{% pageurl news_link %}" class="btn btn-light">{{ news_linktext|default:"Flere nyheter" }}</a></p>

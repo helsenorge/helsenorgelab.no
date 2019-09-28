@@ -11,8 +11,8 @@ Example:
 {% endcomment %}
 
 {% if media %}
-    {% image media width-1920 as img %}
-    <figure class="figure w-100 py-3">
+    {% image media fill-1920x1080 as img %}
+    <figure class="figure w-100">
         <img src="{{ img.url }}" alt="{{ img.image.description }}" class="figure-img {{ imgclass|default:'img-fluid' }}" />
         <figcaption class="figure-caption">
             {{ caption }}

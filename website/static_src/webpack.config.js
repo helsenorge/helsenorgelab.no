@@ -10,16 +10,6 @@ const options = {
     filename: '[name].js'  // based on entry name, e.g. main.js
   },
   module: {
-    rules: [
-      {
-        // tells webpack how to handle js and jsx files
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
   },
   // externals are loaded via base.html and not included in the webpack bundle.
   externals: {

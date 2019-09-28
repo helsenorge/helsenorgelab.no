@@ -35,6 +35,13 @@
         <script src="{% static 'js/main.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
+        <script>
+            function selectSearchBox() {
+                setTimeout(() => {
+                    document.getElementById("navbarSearch").focus();
+                }, 400)
+            }
+        </script>
     </body>
 </html>
 

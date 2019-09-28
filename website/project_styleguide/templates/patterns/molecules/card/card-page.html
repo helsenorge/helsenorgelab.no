@@ -14,7 +14,7 @@ Example (use specified image):
 {% endcomment %}
 
 {% if page %}
-	<div class="card bg-transparent">
+	<div class="card bg-white border-0">
 		{% if image %}
 			{% image image fill-854x480 as img %}
 				<img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top" />
