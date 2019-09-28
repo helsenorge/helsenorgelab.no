@@ -193,6 +193,9 @@ class BasePage(SocialFields, ListingFields, Page):
     class Meta:
         abstract = True
 
+    def get_absolute_url(self):
+        return self.full_url
+
     promote_panels = (
         Page.promote_panels
         + SocialFields.promote_panels
