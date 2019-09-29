@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         {% block meta_tags %}{% endblock %}
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400%7CPlayfair+Display%7CMaterial+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400%7CPlayfair+Display" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}{% endblock %}
@@ -42,6 +42,7 @@
                 }, 400)
             }
         </script>
+        {% include "patterns/atoms/sprites/sprites.html" %}
     </body>
 </html>
 
