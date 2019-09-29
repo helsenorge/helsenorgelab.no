@@ -38,7 +38,7 @@
 
         <footer class="container">
             <div class="row">
-                <div class="meta py-2 small col-lg-9">
+                <div class="meta py-2 col-lg-9">
                         {% for author in page.authors.all %}
                             {% include "patterns/molecules/author/author.html" with author=author.author biography=author.biography %}
                         {% endfor %}

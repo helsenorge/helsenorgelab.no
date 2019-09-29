@@ -77,14 +77,16 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     {% primarynav %}
                 </div>    
-                <button class="navbar-toggler text-primary border-0 ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
-                    <i class="material-icons align-top">
-                        reorder
-                    </i>
+                <button class="navbar-toggler text-primary border-0 ml-auto svg-icon" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                    <svg>
+                        <use xlink:href="#menu"></use>
+                    </svg>
                     <span class="sr-only">Meny</span>
                 </button>
-                <button class="navbar-toggler text-primary border-0" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" onclick="selectSearchBox()">
-                    <i class="material-icons align-top">search</i>
+                <button class="navbar-toggler text-primary border-0 d-block svg-icon" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" onclick="selectSearchBox()">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
                     <span class="sr-only">S&oslash;k</span>
                 </button>
             </div>
@@ -101,7 +103,6 @@
                 </form>
             </div>
         </div>
-
     </header>
 {% endblock header %}
 
@@ -113,4 +114,5 @@
         </div>
     </footer>
 {% endblock footer %}
+
    
