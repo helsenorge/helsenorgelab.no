@@ -68,10 +68,12 @@ INSTALLED_APPS = [
     'website.navigation',
     'website.news',
     'website.people',
+    'website.rss',
     'website.search',
     'website.standardpages',
     'website.utils',
 
+    'wagtail.api.v2',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.settings',
@@ -89,9 +91,13 @@ INSTALLED_APPS = [
     'wagtail.core',
 
     'modelcluster',
+    'rest_framework',
     'taggit',
     'captcha',
     'wagtailcaptcha',
+    "grapple",
+    "graphene_django",
+    "channels",
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -200,6 +206,17 @@ WAGTAILSEARCH_BACKENDS = {
     },
 }
 
+# Grapple Config:
+GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+GRAPPLE_APPS = {
+    "home": "",
+    "articles": "",
+    "documents": "",
+    "images": "",
+    "news": "",
+    "people": "",
+    "standardpages": "",
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators

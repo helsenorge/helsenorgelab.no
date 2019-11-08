@@ -74,35 +74,35 @@
                 <a class="navbar-brand" href="{% slugurl 'home' %}">
                     helsenorgelab.no
                 </a>
-                
                 <div class="collapse navbar-collapse" id="navbarContent">
                     {% primarynav %}
                 </div>    
-                <button class="navbar-toggler text-primary border-0 ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="material-icons align-top">
-                            reorder
-                        </i>
-                        <span class="sr-only">Meny</span>
-                    </button>
-                <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
-                        <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
-                    </button>    
-
-    
+                <button class="navbar-toggler text-primary border-0 ml-auto svg-icon" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                    <svg>
+                        <use xlink:href="#menu"></use>
+                    </svg>
+                    <span class="sr-only">Meny</span>
+                </button>
+                <button class="navbar-toggler text-primary border-0 d-block svg-icon" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" onclick="selectSearchBox()">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
+                    <span class="sr-only">S&oslash;k</span>
+                </button>
             </div>
         </nav>
-        <div class="collapse navbar-collapse bg-dark py-0_5" id="headerSearch">
-            <div class="container">
-                    <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
-                            <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                                        S&oslash;k
-                            </button>
-                        </form>
+        <div class="collapse navbar-collapse bg-dark" id="headerSearch">
+            <div class="container py-1">
+                <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
+                    <span class="sr-only">S&oslash;k p&aring; helsenorgelab.no</span>
+                    <input class="input form-control mr-0_25 rounded-pill" id="navbarSearch" type="text" placeholder="S&oslash;keord" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                    <button class="btn btn-outline-light px-1 my-2 my-sm-0 rounded-pill" type="submit">
+                                S&oslash;k
+                    </button>
+
+                </form>
             </div>
         </div>
-
-
     </header>
 {% endblock header %}
 
@@ -114,3 +114,5 @@
         </div>
     </footer>
 {% endblock footer %}
+
+   
