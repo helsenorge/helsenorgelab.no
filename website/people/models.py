@@ -80,7 +80,7 @@ class PersonPage(BasePage):
         GraphQLString("name"),
         GraphQLString("job_title"),
         GraphQLString("introduction"),
-        GraphQLString("photo"),
+        GraphQLImage("photo"),
         GraphQLStreamfield("biography"),
     ]
 

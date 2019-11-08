@@ -138,7 +138,7 @@ class ArticlePage(BasePage):
         GraphQLString("publication_date"),
         GraphQLStreamfield("body"),
         GraphQLString("categories"),
-        GraphQLString("featured_image")
+        GraphQLImage("featured_image")
     ]
 
     class Meta:
