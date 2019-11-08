@@ -106,7 +106,7 @@ class NewsPage(BasePage):
     graphql_fields = [
         GraphQLString("summary"),
         GraphQLString("body"),
-        GraphQLString("featured_image")
+        GraphQLImage("featured_image")
     ]
 
     class Meta:
