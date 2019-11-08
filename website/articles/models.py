@@ -20,7 +20,7 @@ from wagtail.snippets.models import register_snippet
 
 from taggit.models import TaggedItemBase
 
-from grapple.models import GraphQLStreamfield, GraphQLString
+from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 
