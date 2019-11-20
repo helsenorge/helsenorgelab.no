@@ -129,6 +129,7 @@ class ArticlePage(BasePage):
         APIField('tags'),
         APIField('categories'),
         APIField('featured_image', serializer=ImageRenditionField('fill-1920x1080')),
+        APIField('featured_image_caption'),
     ]
 
     # Export fields to GraphQL
@@ -138,7 +139,8 @@ class ArticlePage(BasePage):
         GraphQLString("publication_date"),
         GraphQLStreamfield("body"),
         GraphQLString("categories"),
-        GraphQLImage("featured_image")
+        GraphQLImage("featured_image"),
+        GraphQLString("featured_image_caption")
     ]
 
     class Meta:
