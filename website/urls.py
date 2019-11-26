@@ -13,6 +13,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 
 from grapple import urls as grapple_urls
+
 from website.search import views as search_views
 from website.utils.cache import get_default_cache_control_decorator
 from website.utils.views import favicon, robots
