@@ -1,5 +1,6 @@
 from django.apps import apps
 from django.conf import settings
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from django.views.decorators.vary import vary_on_headers
@@ -11,9 +12,12 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 
+from grapple import urls as grapple_urls
 from website.search import views as search_views
 from website.utils.cache import get_default_cache_control_decorator
 from website.utils.views import favicon, robots
+
+from .api import api_router
 
 # Private URLs are not meant to be cached.
 private_urlpatterns = [
@@ -28,6 +32,8 @@ private_urlpatterns = [
 
 # Public URLs that are meant to be cached.
 urlpatterns = [
+    url(r'^api/v2/', api_router.urls),
+    url(r"", include(grapple_urls)),
     path('sitemap.xml', sitemap),
     path('favicon.ico', favicon),
     path('robots.txt', robots),

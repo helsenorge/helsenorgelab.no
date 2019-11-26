@@ -9,8 +9,10 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.api import APIField
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
+from wagtail.images.api.fields import ImageRenditionField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -18,6 +20,7 @@ from wagtail.snippets.models import register_snippet
 
 from taggit.models import TaggedItemBase
 
+from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 
@@ -116,6 +119,28 @@ class ArticlePage(BasePage):
         FieldPanel('publication_date'),
         # TODO: comment related_pages back in if we have time with the front-end work for articles
         # InlinePanel('related_pages', label="Related pages"),
+    ]
+
+    # Export fields over REST API
+    api_fields = [
+        APIField('introduction'),
+        APIField('body'),
+        APIField('authors'),
+        APIField('tags'),
+        APIField('categories'),
+        APIField('featured_image', serializer=ImageRenditionField('fill-1920x1080')),
+        APIField('featured_image_caption'),
+    ]
+
+    # Export fields to GraphQL
+
+    graphql_fields = [
+        GraphQLString("heading"),
+        GraphQLString("publication_date"),
+        GraphQLStreamfield("body"),
+        GraphQLString("categories"),
+        GraphQLImage("featured_image"),
+        GraphQLString("featured_image_caption")
     ]
 
     class Meta:
