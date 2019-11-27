@@ -1,12 +1,13 @@
-<div class="media document clearfix">
-    <a href="{{ value.document.url }}">
-        <i class="material-icons mx-2 display-3 text-primary">
-                save_alt
-        </i>
-    </a>
-    <div class="media-body align-self-center">
-        <h5 class="mt-0">
-            <a href="{{ value.document.url }}">
+<div class="card card-document border-0 my-2">
+    <div class="card-icon m-2 position-absolute text-primary">
+        <svg>
+            <use xlink:href="#save"></use>
+        </svg>
+    </div>
+    <div class="card-body ml-5 py-2">
+        <h5>
+
+            <a href="{{ value.document.url }}" class="stretched-link">
                 {{ value.title|default:value.document.title }}
             </a>
         </h5>

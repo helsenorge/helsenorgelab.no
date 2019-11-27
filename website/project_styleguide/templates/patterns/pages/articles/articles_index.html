@@ -16,7 +16,7 @@
             <div class="form-group row py-2">
                 <label for="category" class="col-sm-2 col-form-label">Vis kategori</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-lg" name="category" onchange="this.form.submit()">
+                    <select class="form-control form-control-lg" id=”category” name="category" onchange="this.form.submit()">
                         <option value="">Alt sammen</option>
                         {% for category in categories %}
                             <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
@@ -28,30 +28,28 @@
 
 
         {% if articles %}
+            <ul class="article-items list-unstyled py-2">
                 {% for article in articles %}
-                    <div class="article-items row py-2">
-                        <div class="col-4">
-                            <a href="{% pageurl article %}">
+                        <li class="media position-relative py-3">
                             {% if article.listing_image %}
-                                {% image article.listing_image fill-277x156 class="img-fluid" %}
+                                {% image article.listing_image fill-277x156 class="mr-2" %}
                             {% elif article.featured_image %}
-                                {% image article.featured_image fill-277x156 class="img-fluid" %}
+                                {% image article.featured_image fill-277x156 class="mr-2" %}
                             {% endif %}
-                            </a>
-                        </div>
-                        <div class="col-8">
-                            <h2 role="listitem">
-                                <a href="{% pageurl article %}">
-                                    {% firstof article.listing_title article.title %}
-                                </a>
-                            </h2>
-                            {% if article.listing_summary or article.introduction %}
-                                <p>{{ article.listing_summary|default:article.introduction }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
+                            <div class="media-body">
+                                <h2>
+                                    <a href="{% pageurl article %}" class="stretched-link">
+                                        {% firstof article.listing_title article.title %}
+                                    </a>
+                                </h2>
+                                {% if article.listing_summary or article.introduction %}
+                                    <p>{{ article.listing_summary|default:article.introduction }}</p>
+                                {% endif %}
+                            </div>
+                        </li>
+                    
                 {% endfor %}
-
+            </ul>
             {% include "patterns/molecules/pagination/pagination.html" with paginator_page=articles %}
 
         {% else %}

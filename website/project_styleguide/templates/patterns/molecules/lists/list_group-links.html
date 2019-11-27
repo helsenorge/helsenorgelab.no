@@ -11,15 +11,14 @@ Example:
 {% endcomment %}
 
 {% if linklist %}
-	<div class="list-group list-group-flush bg-transparent">
+	<ul class="list-group list-group-flush bg-transparent row">
 		{% for newsitem in linklist %}
-			<a href="{% pageurl newsitem %}" class="list-group-item list-group-item-action">
-				{{ newsitem.title }}
-			</a>
+			<li class="list-group-item list-group-item-action d-inline">
+				<a href="{% pageurl newsitem %}" class="stretched-link">
+					{{ newsitem.title }}
+				</a>
+			</li>
 		{% endfor %}
-	</div>
+		</ul>
 {% endif %}
-
-
-
 
