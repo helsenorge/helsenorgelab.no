@@ -9,6 +9,7 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString
+
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage
 

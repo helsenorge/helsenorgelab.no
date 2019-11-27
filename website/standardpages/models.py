@@ -10,6 +10,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from grapple.models import GraphQLStreamfield, GraphQLString
+
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
 

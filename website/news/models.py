@@ -14,9 +14,9 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from grapple.models import GraphQLImage, GraphQLString
 from taggit.models import TaggedItemBase
 
-from grapple.models import GraphQLImage, GraphQLString
 from website.utils.models import BasePage, RelatedPage
 
 
