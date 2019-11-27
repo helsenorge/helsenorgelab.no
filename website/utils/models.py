@@ -193,6 +193,10 @@ class BasePage(SocialFields, ListingFields, Page):
     class Meta:
         abstract = True
 
+    # This is used by the feed generator (RSS)
+    def get_absolute_url(self):
+        return self.full_url
+
     promote_panels = (
         Page.promote_panels
         + SocialFields.promote_panels
