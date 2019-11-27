@@ -7,13 +7,16 @@ from django.db.models.functions import Coalesce
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.api import APIField
 from wagtail.core.fields import RichTextField
+from wagtail.images.api.fields import ImageRenditionField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
 from taggit.models import TaggedItemBase
 
+from grapple.models import GraphQLImage, GraphQLString
 from website.utils.models import BasePage, RelatedPage
 
 
@@ -56,8 +59,10 @@ class NewsPage(BasePage):
     subpage_types = []
     parent_page_types = ['NewsIndex']
 
-    introduction = models.TextField(
-        max_length=165,
+    summary = models.TextField(
+        max_length=280,
+        null=True,
+        blank=True,
     )
     featured_image = models.ForeignKey(
         'images.CustomImage',
@@ -81,12 +86,12 @@ class NewsPage(BasePage):
     )
 
     search_fields = BasePage.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('summary'),
         index.SearchField('body')
     ]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('summary'),
         FieldPanel('body', classname="full"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
@@ -98,6 +103,21 @@ class NewsPage(BasePage):
             heading="Featured Image",
         ),
         FieldPanel('publication_date'),
+    ]
+
+    # Export fields over REST API
+    api_fields = [
+        APIField('summary'),
+        APIField('body'),
+        APIField('featured_image', serializer=ImageRenditionField('fill-1920x1080')),
+        APIField('featured_image_caption'),
+    ]
+
+    graphql_fields = [
+        GraphQLString("summary"),
+        GraphQLString("body"),
+        GraphQLImage("featured_image"),
+        GraphQLString("featured_image_caption"),
     ]
 
     class Meta:
@@ -117,10 +137,10 @@ class NewsIndex(BasePage):
     subpage_types = ['NewsPage']
     parent_page_types = ['home.HomePage']
 
-    introduction = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
 
     content_panels = BasePage.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('summary'),
     ]
 
     class Meta:
