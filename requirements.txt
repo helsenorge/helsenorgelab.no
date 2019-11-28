@@ -7,12 +7,13 @@ graphene-django>=2.6.0
 wagtail-grapple==0.4.7
 
 # Production dependencies
-whitenoise[brotli]==4.1
+whitenoise[brotli]==4.1.4
 dj-database-url==0.5.0
-raven==6.9.0
-django-redis==4.9.0
-redis==2.10.6
-django-storages[boto3]==1.7.1
+raven==6.10.0
+django-redis==4.10.0
+redis==3.3.11
+django-storages[boto3]==1.7.2
 django-referrer-policy==1.0
-scout-apm==1.3.8
-django-basic-auth-ip-whitelist==0.2.1
+django-csp==3.5
+scout-apm==2.7.0
+django-basic-auth-ip-whitelist==0.3.1
