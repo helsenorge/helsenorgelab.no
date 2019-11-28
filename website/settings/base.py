@@ -20,6 +20,13 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # https://docs.djangoproject.com/en/stable/ref/settings/#debug
 DEBUG = False
 
+# https://docs.djangoproject.com/en/dev/ref/settings/#prepend-www
+if 'PREPEND_WWW' in env:
+    PREPEND_WWW = env['PREPEND_WWW']
+
+if 'GOOGLE_TAG_MANAGER_ID' in env:
+    GOOGLE_TAG_MANAGER_ID = env['GOOGLE_TAG_MANAGER_ID']
+
 
 # Secret key is important to be kept secret. Never share it with anyone. Please
 # always set it in the environment variable and never check into the
@@ -65,6 +72,7 @@ INSTALLED_APPS = [
     'website.standardpages',
     'website.utils',
 
+    'wagtail.api.v2',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.settings',
@@ -82,9 +90,13 @@ INSTALLED_APPS = [
     'wagtail.core',
 
     'modelcluster',
+    'rest_framework',
     'taggit',
     'captcha',
     'wagtailcaptcha',
+    "grapple",
+    "graphene_django",
+    "channels",
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -117,6 +129,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
@@ -191,6 +205,17 @@ WAGTAILSEARCH_BACKENDS = {
     },
 }
 
+# Grapple Config:
+GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+GRAPPLE_APPS = {
+    "home": "",
+    "articles": "",
+    "documents": "",
+    "images": "",
+    "news": "",
+    "people": "",
+    "standardpages": "",
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
@@ -545,6 +570,31 @@ if env.get('SECURE_CONTENT_TYPE_NOSNIFF', 'true').lower().strip() == 'true':
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
+# Content Security policy settings
+# http://django-csp.readthedocs.io/en/latest/configuration.html
+if 'CSP_DEFAULT_SRC' in env:
+    MIDDLEWARE.append('csp.middleware.CSPMiddleware')
+
+    # The “special” source values of 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
+    # e.g.: CSP_DEFAULT_SRC = "'self'" Without quotes they will not work as intended.
+
+    CSP_DEFAULT_SRC = env.get('CSP_DEFAULT_SRC').split(',')
+    if 'CSP_SCRIPT_SRC' in env:
+        CSP_SCRIPT_SRC = env.get('CSP_SCRIPT_SRC').split(',')
+    if 'CSP_STYLE_SRC' in env:
+        CSP_STYLE_SRC = env.get('CSP_STYLE_SRC').split(',')
+    if 'CSP_IMG_SRC' in env:
+        CSP_IMG_SRC = env.get('CSP_IMG_SRC').split(',')
+    if 'CSP_CONNECT_SRC' in env:
+        CSP_CONNECT_SRC = env.get('CSP_CONNECT_SRC').split(',')
+    if 'CSP_FONT_SRC' in env:
+        CSP_FONT_SRC = env.get('CSP_FONT_SRC').split(',')
+    if 'CSP_BASE_URI' in env:
+        CSP_BASE_URI = env.get('CSP_BASE_URI').split(',')
+    if 'CSP_OBJECT_SRC' in env:
+        CSP_OBJECT_SRC = env.get('CSP_OBJECT_SRC').split(',')
+
+
 # Referrer-policy header settings.
 # https://django-referrer-policy.readthedocs.io/en/1.0/
 
@@ -647,4 +697,4 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # Favicon settings
 # After you add favicon.ico file, please add its path relative to the static
 # directory here so it can be served at /favicon.ico.
-# FAVICON_STATIC_PATH = 'img/favicon.ico'
+FAVICON_STATIC_PATH = 'images/favicon/favicon.ico'

@@ -8,6 +8,8 @@ from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString
+
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage
 
@@ -73,6 +75,14 @@ class PersonPage(BasePage):
         ], heading='Contact information'),
         FieldPanel('introduction'),
         StreamFieldPanel('biography')
+    ]
+
+    graphql_fields = [
+        GraphQLString("name"),
+        GraphQLString("job_title"),
+        GraphQLString("introduction"),
+        GraphQLImage("photo"),
+        GraphQLStreamfield("biography"),
     ]
 
 
