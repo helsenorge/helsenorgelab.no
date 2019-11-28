@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'website.navigation',
     'website.news',
     'website.people',
+    'website.rss',
     'website.search',
     'website.standardpages',
     'website.utils',
