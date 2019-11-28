@@ -56,8 +56,10 @@ class NewsPage(BasePage):
     subpage_types = []
     parent_page_types = ['NewsIndex']
 
-    introduction = models.TextField(
-        max_length=165,
+    summary = models.TextField(
+        max_length=280,
+        null=True,
+        blank=True,
     )
     featured_image = models.ForeignKey(
         'images.CustomImage',
@@ -81,12 +83,12 @@ class NewsPage(BasePage):
     )
 
     search_fields = BasePage.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('summary'),
         index.SearchField('body')
     ]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('summary'),
         FieldPanel('body', classname="full"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
@@ -117,10 +119,10 @@ class NewsIndex(BasePage):
     subpage_types = ['NewsPage']
     parent_page_types = ['home.HomePage']
 
-    introduction = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
 
     content_panels = BasePage.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('summary'),
     ]
 
     class Meta:
