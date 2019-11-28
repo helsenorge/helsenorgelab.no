@@ -9,7 +9,7 @@
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_ID|escapejs }}');</script>
+        })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_ID }}');</script>
     {% endif %}
 
     {# favicons #}
@@ -35,10 +35,10 @@
     <meta name="twitter:description" content="{{ page|social_text:request.site }}">
     {% if page.social_image %}
         {% image page.social_image width-1280 as social_img %}
-        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+        <meta name="twitter:image" content="{{ social_img.url }}">
     {% elif page.featured_image %}
         {% image page.featured_image width-1280 as social_img %}
-        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+        <meta name="twitter:image" content="{{ social_img.url }}">
     {% endif %}
 
     {# facebook opengraph tags #}
@@ -48,10 +48,10 @@
     <meta property="og:title" content="{{ page.title }}" />
     {% if page.social_image %}
         {% image page.social_image width-1280 as social_img %}
-        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+        <meta name="og:image" content="{{ social_img.url }}">
     {% elif page.featured_image %}
         {% image page.featured_image width-1280 as social_img %}
-        <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+        <meta name="og:image" content="{{ social_img.url }}">
     {% endif %}
     <meta property="og:description" content="{{ page|social_text:request.site }}" />
     <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
@@ -61,7 +61,7 @@
 {% block body_top %}
     {% if GOOGLE_TAG_MANAGER_ID %}
         {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Django settings #}
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID|escapejs }}"
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID }}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% endif %}
 {% endblock body_top %}
@@ -74,35 +74,35 @@
                 <a class="navbar-brand" href="{% slugurl 'home' %}">
                     helsenorgelab.no
                 </a>
-                
                 <div class="collapse navbar-collapse" id="navbarContent">
                     {% primarynav %}
                 </div>    
-                <button class="navbar-toggler text-primary border-0 ml-auto" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="material-icons align-top">
-                            reorder
-                        </i>
-                        <span class="sr-only">Meny</span>
-                    </button>
-                <button class="btn text-primary" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" aria-label="Toggle search">
-                        <i class="material-icons align-top">search</i><span class="sr-only">S&oslash;k</span>
-                    </button>    
-
-    
+                <button class="navbar-toggler text-primary border-0 ml-auto svg-icon" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                    <svg>
+                        <use xlink:href="#menu"></use>
+                    </svg>
+                    <span class="sr-only">Meny</span>
+                </button>
+                <button class="navbar-toggler text-primary border-0 d-block svg-icon" type="button" data-toggle="collapse" data-target="#headerSearch" aria-controls="headerSearch" aria-expanded="false" onclick="selectSearchBox()">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
+                    <span class="sr-only">S&oslash;k</span>
+                </button>
             </div>
         </nav>
-        <div class="collapse navbar-collapse bg-dark py-0_5" id="headerSearch">
-            <div class="container">
-                    <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
-                            <input class="input form-control mr-0_25" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                                        S&oslash;k
-                            </button>
-                        </form>
+        <div class="collapse navbar-collapse bg-dark" id="headerSearch">
+            <div class="container py-1">
+                <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
+                    <span class="sr-only">S&oslash;k p&aring; helsenorgelab.no</span>
+                    <input class="input form-control mr-0_25 rounded-pill" id="navbarSearch" type="text" placeholder="S&oslash;keord" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                    <button class="btn btn-outline-light px-1 my-2 my-sm-0 rounded-pill" type="submit">
+                                S&oslash;k
+                    </button>
+
+                </form>
             </div>
         </div>
-
-
     </header>
 {% endblock header %}
 
@@ -114,3 +114,5 @@
         </div>
     </footer>
 {% endblock footer %}
+
+   

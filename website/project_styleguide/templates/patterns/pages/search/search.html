@@ -14,27 +14,15 @@
             </h1>
             <p class="lead">
                 {% if search_query %}
-                    Vi s&oslash;kte etter &ldquo;{{ search_query }}&rdquo;
+                    {% with count=search_results.paginator.count %}
+                        {{ count }} sider funnet.
+                    </p>
+                {% endwith %}
                 {% else %}
                     S&oslash;k etter hva som helst.
                 {% endif %}
             </p>
 
-        
-            <form action="{% url 'search' %}" method="get" role="search">
-                <div class="form-row">
-                    <div class="col-sm-4 my-1">
-                        <input class="form-control form-control-lg" type="text" placeholder="Søk.." name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                    </div>
-                    <div class="col-sm-4 my-1">
-                        <button class="btn btn-primary" type="submit">
-                        <i class="material-icons">
-                            search
-                        </i>
-                        </button>
-                    </div>
-                </div>
-            </form>
 
             {% get_search_promotions search_query as search_picks %}
 
@@ -43,36 +31,40 @@
                     Fremhevede resultater
                  </p>
 
-                 <div id="search-results-featured" role="list">
+                 <ul id="search-results-featured">
                     {% for pick in search_picks %}
                         {% include "patterns/molecules/search-result/search-result.html" with result=pick.page.specific %}
                      {% endfor %}
-                 </div>
+                 </ul>
 
             {% endif %}
 
             {% if search_results %}
 
-                {% with count=search_results.paginator.count %}
-                    <p class="articles__intro">
-                        {{ count }} sider funnet.
-                    </p>
-                {% endwith %}
-
-                <div class="py-2 search-results" role="list">
+                <ul class="py-2 search-results-list p-0">
                     {% for result in search_results %}
                         {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
                     {% endfor %}
-                </div>
+                </ul>
 
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
 
             {% elif search_query and not search_picks %}
                 <div class="no-results py-3">
-                    <p class="lead">Beklager</p>
+                    <p class="lead">Beklager!</p>
                     Fant ingenting
                 </div>
             {% endif %}
+
+            <form action="{% url 'search' %}" method="get" role="search" class="form-inline">
+                <div class="form-row">
+                    <span class="sr-only">S&oslash;k p&aring; helsenorgelab.no</span>
+                    <input class="input form-control mr-0_25 rounded-pill" type="text" placeholder="S&oslash;k…" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                    <button class="btn btn-outline-dark px-1 my-2 my-sm-0 rounded-pill" type="submit">
+                        S&oslash;k
+                    </button>
+                </div>
+            </form>
 
     </div>
 
