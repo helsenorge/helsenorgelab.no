@@ -4,12 +4,14 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.api import APIField
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable
+from wagtail.images.api.fields import ImageRenditionField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-from grapple.models import GraphQLStreamfield, GraphQLString
+from grapple.models import GraphQLImage, GraphQLStreamfield, GraphQLString
 
 from website.utils.blocks import StoryBlock
 from website.utils.models import BasePage, RelatedPage
@@ -62,9 +64,19 @@ class StandardPage(BasePage):
         InlinePanel('authors', label="Authors"),
     ]
 
+    # Export fields over REST API
+    api_fields = [
+        APIField('introduction'),
+        APIField('body'),
+        APIField('featured_image', serializer=ImageRenditionField('fill-1920x1080')),
+        APIField('featured_image_caption'),
+    ]
+
     graphql_fields = [
         GraphQLString("introduction"),
         GraphQLStreamfield("body"),
+        GraphQLImage("featured_image"),
+        GraphQLString("featured_image_caption"),
     ]
 
     class Meta:
