@@ -302,6 +302,15 @@ MEDIA_ROOT = env.get('MEDIA_DIR', os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = env.get('MEDIA_URL', '/media/')
 
 
+# Add embeds for streamfield.
+if 'EMBEDLY_API_KEY' in env:
+    WAGTAILEMBEDS_FINDERS = [
+        {
+            'class': 'wagtail.embeds.finders.embedly',
+            'key': env['EMBEDLY_API_KEY'],
+        }
+    ]
+
 # AWS S3 buckets configuration
 # This is media files storage backend configuration. S3 is our preferred file
 # storage solution.
