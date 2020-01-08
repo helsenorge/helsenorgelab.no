@@ -207,6 +207,13 @@ if 'BONSAI_URL' in env:
             'URLS': [env['BONSAI_URL'].rstrip('/')],
             'INDEX': 'website',
             'ATOMIC_REBUILD': True,
+            'INDEX_SETTINGS': {
+                'settings': {
+                    'index': {
+                        'number_of_shards': 1,
+                    },
+                }
+            },
         },
     }
 else:
