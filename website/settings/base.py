@@ -209,10 +209,8 @@ WAGTAILSEARCH_BACKENDS = {
 # Grapple Config:
 GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
 GRAPPLE_APPS = {
-    "home": "",
     "articles": "",
     "documents": "",
-    "images": "",
     "news": "",
     "people": "",
     "standardpages": "",
