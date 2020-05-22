@@ -200,19 +200,36 @@ else:
 # Search
 # https://docs.wagtail.io/en/latest/topics/search/backends.html
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.contrib.postgres_search.backend',
-    },
-}
+if 'BONSAI_URL' in env:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.search.backends.elasticsearch7',
+            'URLS': [env['BONSAI_URL'].rstrip('/')],
+            'INDEX': 'website',
+            'ATOMIC_REBUILD': True,
+            'INDEX_SETTINGS': {
+                'settings': {
+                    'index': {
+                        'number_of_shards': 1,
+                        'number_of_replicas': 0
+                    },
+                }
+            },
+        },
+    }
+else:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        },
+    }
+
 
 # Grapple Config:
 GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
 GRAPPLE_APPS = {
-    "home": "",
     "articles": "",
     "documents": "",
-    "images": "",
     "news": "",
     "people": "",
     "standardpages": "",
