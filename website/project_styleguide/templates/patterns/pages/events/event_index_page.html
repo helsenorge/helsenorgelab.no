@@ -1,60 +1,58 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static %}   
 
 {% block content %}
 
-<div class="wrapper wrapper--small">
+<header class="container py-3">
+    <h1 class="display-2">{{ page.title }}</h1>
+    {% if page.introduction %}
+        <p class="lead">{{page.introduction}}</p>
+    {% endif %}
+</header>
+<section class="container pb-3">
+    {% include_block page.body %}
+</section>
 
-    <h1>{{ page.title }}</h1>
-
-    <section class="listing">
-        {% if events %}
-            {% if events.object_list.exists %}
-                <ul role="list">
-                    {% for event in events.object_list.specific %}
-                        <li>
-                            {% if event.listing_image %}
-                                <a href="{% pageurl event %}">
-                                {% image event.listing_image fill-450x300 %}
+<section class="container event-listing">
+    {% if events %}
+        {% if events.object_list.exists %}
+            <ul class="list-group list-group-flush">
+                {% for event in events.object_list.specific %}
+                    <li class="list-group-item p-2">
+                        <div>
+                            <h2>
+                                <a href="{% pageurl event %}" class="stretched-link">
+                                    {% firstof event.listing_title event.title %}
                                 </a>
-                            {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    <a href="{% pageurl event %}">
-                                        {% firstof event.listing_title event.title %}
-                                    </a>
-                                </h2>
-                                {% if event.end_date and not event.end_date == event.start_date %}
-                                    {{ event.start_time|time|default:"" }} {{ event.start_date|date }} to {{ event.end_time|time|default:"" }} {{ event.end_date|date }}
-                                {% elif event.end_time %}
-                                    {{ event.start_date|date }} {{ event.start_time|time }}&ndash;{{ event.end_time|time }}
-                                {% else %}
-                                    {{ event.start_date|date }} {{ event.start_time|time|default:"" }}
-                                {% endif %}
-                                {% if event.listing_summary or event.introduction %}
-                                    <p>{% firstof event.listing_summary event.introduction %}</p>
-                                {% endif %}
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items on this page #}
-            {% endif %}
-
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+                            </h2>
+                            <p>{% firstof event.listing_summary event.summary %}</p>
+                            <p class="text-muted mb-0">{% include "patterns/molecules/events/datetime-summary.html" %}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
 
         {% else %}
-            {# no items on any page #}
+            {# no items on this page #}
         {% endif %}
 
-        {% if show_past and upcoming_events.exists %}
-            <a href="{% pageurl page %}">View upcoming events</a>
-        {% elif past_events.exists %}
-            <a href="{% pageurl page %}?past=True">View past events</a>
-        {% endif %}
+        <section class="toggle-past py-3">
+            {% if show_past %}
+                <a href="{% pageurl page %}" class="btn btn-outline-primary">Vis kommende arrangementer</a>
+            {% else %}
+                <a href="{% pageurl page %}?past=True" class="btn btn-outline-primary">Vis tidligere arrangementer</a>
+            {% endif %}
+        </section>
 
-    </section>
+        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+
+    {% else %}
+        {# no items on any page #}
+    {% endif %}
+
+
+
+</section>
 
 </div>
 
