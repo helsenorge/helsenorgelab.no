@@ -29,13 +29,13 @@ variables:
 
 # Test if static assets can be built succesfully.
 static:
-  image: node:8-alpine
+  image: node:12-alpine
   stage: build
   before_script:
     - apk add --no-cache rsync
   script:
     - cd ./website/static_src
-    - npm install
+    - npm ci
     - npm run build:prod
   # Saving the job result as an artifact means that the files can be used by
   # other jobs.

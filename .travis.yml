@@ -44,7 +44,7 @@ install:
   - cd ./website/static_src
 
   # Install node dependencies
-  -  npm install --quiet
+  -  npm ci --quiet
 
   # Build the static files
   - npm run build:prod
