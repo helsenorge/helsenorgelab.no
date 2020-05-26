@@ -36,7 +36,7 @@ EXPOSE 8000
 # Install operating system dependencies.
 RUN apt-get update -y && \
     apt-get install -y apt-transport-https rsync && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - &&\
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - &&\
     apt-get install -y nodejs &&\
     rm -rf /var/lib/apt/lists/*
 
@@ -46,10 +46,8 @@ RUN pip install "gunicorn== 19.9.0"
 WORKDIR website/static_src
 
 # Install front-end dependencies.
-# TODO: Once new npm LTS version is released, please switch to using "npm ci"
-# instead of "npm install" - https://docs.npmjs.com/cli/ci.
 COPY ./website/static_src/package.json ./website/static_src/package-lock.json ./
-RUN npm install
+RUN npm ci
 
 # Install your app's Python requirements.
 COPY requirements.txt /

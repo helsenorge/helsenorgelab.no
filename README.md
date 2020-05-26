@@ -36,14 +36,14 @@ This will make the site available on the host machine at: http://127.0.0.1:8000/
 
 # Front-end assets
 
-To build front-end assets you will additionally need to run the following commands in the `norwegian_ehalth/static_src folder`:
+To build front-end assets you will additionally need to run the following commands in the `website/static_src` folder:
 
  ```bash
 npm install
 npm run build:prod
 ```
 
-After any change to the CSS or Javascript you will need to run the build command again, either in the vm or on your host machine. See the [Front-end tooling docs](norwegian_ehealth/norwegian_ehealth/static_src/README.md) for further details.
+After any change to the CSS or Javascript you will need to run the build command again, either in the vm or on your host machine. See the [Front-end tooling docs](website/static_src/README.md) for further details.
 
 
 ## Deployment
@@ -125,7 +125,3 @@ When you set up a server you should make sure the following scheduled tasks are 
 * `django-admin publish_scheduled_pages` - every 10 minutes or more often. This is necessary to make publishing scheduled pages work.
 * `django-admin clearsessions` - once a day (not necessary, but useful).
 * `django-admin update_index` - once a day  (not necessary, but useful to make sure search index stays intact).
-
-
-## To do
-[ ] Configure CI tests? Checkk sample config in .gitlab-ci.yml

@@ -71,6 +71,6 @@ cd $PROJECT_DIR
 EOF
 
 # Install node.js and npm
-curl -sSL https://deb.nodesource.com/setup_8.x | bash -
+curl -sSL https://deb.nodesource.com/setup_12.x | bash -
 apt-get install -y nodejs
 
