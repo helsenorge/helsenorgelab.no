@@ -1,0 +1,27 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %}
+
+This template is used by events. It summarizes the event metadata,
+and localizes to a norwegian date and time summary.
+
+Example:
+    {% include "patterns/molecules/events/datetime-summary.html" %}
+
+{% endcomment %}
+
+<span class="event-time">
+	{{ event.start_date|date:"d.m.Y " }}
+	{% if event.start_time %}
+		kl {{ event.start_time|time:"H:i" }}
+	{% endif %}
+	{% if event.end_date or event.end_time %}
+		&mdash;
+	{% endif %}
+	{% if event.end_date and not event.end_date == event.start_date %}
+		{{ event.end_date|date:"d.m.Y " }}
+	{% endif %}
+	{% if event.end_time %}
+		kl {{ event.end_time|time:"H:i" }}
+	{% endif %}
+</span>

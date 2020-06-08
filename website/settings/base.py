@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
     'website.articles',
     'website.documents',
+    'website.events',
     # 'website.forms',
     'website.home',
     'website.images',
@@ -224,12 +225,25 @@ else:
         },
     }
 
+# Grapple Config:
+GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
+GRAPPLE_APPS = {
+    "home": "",
+    "articles": "",
+    "documents": "",
+    "events": "",
+    "images": "",
+    "news": "",
+    "people": "",
+    "standardpages": "",
+}
 
 # Grapple Config:
 GRAPHENE = {"SCHEMA": "grapple.schema.schema"}
 GRAPPLE_APPS = {
     "articles": "",
     "documents": "",
+    "events": "",
     "news": "",
     "people": "",
     "standardpages": "",
