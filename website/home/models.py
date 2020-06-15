@@ -47,7 +47,7 @@ class HomePage(BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
     subpage_types = ['news.NewsIndex', 'standardpages.StandardPage', 'articles.ArticleIndex',
-                     'people.PersonIndex']
+                     'people.PersonIndex', 'events.EventIndex']
 
     hero_title = models.CharField(null=True, blank=False, max_length=80)
 

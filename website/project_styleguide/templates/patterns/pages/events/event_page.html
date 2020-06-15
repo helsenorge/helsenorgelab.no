@@ -1,36 +1,47 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+
 {% block content %}
-<section class="section section--main">
+    {% block breadcrumbs %}
+        {% include "patterns/molecules/navigation/breadcrumbs.html" with navclass="container" %}
+    {% endblock %}
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
-            {% if page.introduction %}
-                <h4>{{ page.introduction }}</h4>
-            {% endif %}
+    <section class="container">
+        <h1>{{ page.title }}</h1>
+        {% if page.summary %}
+            <p class="lead">{{ page.summary }}</p>
+        {% endif %}
+
+        <h2 class="pt-3"><span class="badge badge-info">N&aring;r</span></h2>
+        <p>
+            {% include "patterns/molecules/events/datetime-summary.html" with event=page %}
+        </p>
+
+        {% if page.location_name %}
+            <h2><span class="badge badge-info">Hvor?</span></h2>
+            <p>
+                {{ page.location }}
+            </p>
+        {% endif %}
+        
+        <div class="story-blocks pt-5">
+            {% include_block page.body %}
         </div>
-    </div>
 
-    <div class="container">
-        <p>{{ page.start_date }} {{ page.start_time|default:"" }} {{ page.end_date|default:"" }} {{ page.end_time|default:"" }}</p>
-        <p>{{ page.event_types.all|join:", " }}</p>
-        <ul>
-            <li>{{ page.street_address_1|default:"" }}</li>
-            <li>{{ page.street_address_2|default:"" }}</li>
-            <li>{{ page.city|default:"" }}</li>
-            <li>{{ page.region|default:"" }}</li>
-            <li>{{ page.postcode|default:"" }}</li>
-            <li>{{ page.country|default:"" }}</li>
-        </ul>
-    </div>
-
-    <div class="container">
-        {% include_block page.body %}
-        {% include "patterns/molecules/share/share.html" %}
-    </div>
-</section>
-{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_pages=page.related_pages.all %}
-
+    </section>
+    <section class="container section-links py-3">
+        {% if page.information_url %}
+            <a href="{{ page.information_url }}" class="btn btn-outline-primary">Mer informasjon</a>
+        {% endif %}
+        {% if page.tickets_url %}
+            <a href="{{ page.tickets_url }}" class="btn btn-outline-primary">Meld deg p&aring;</a>
+        {% endif %}
+        {% if page.program_url %}
+            <a href="{{ page.program_url }}" class="btn btn-outline-primary">Program</a>
+        {% endif %}
+        {% if page.streaming_url %}
+            <a href="{{ page.streaming_url }}" class="btn btn-outline-primary">Direktestr&oslash;mming</a>
+        {% endif %}
+    </section>
 {% endblock %}
